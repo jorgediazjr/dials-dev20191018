@@ -136,6 +136,11 @@ class Script(object):
         # flex.reflection_table.from_h5("TEST")
         reflections.as_pickle("P_TEST.pickle")
         result = flex.reflection_table.from_file("P_TEST.pickle")
+
+        reflections.as_h5("H5_test.h5")
+        res = flex.reflection_table.from_file("H5_test.h5")
+        print("JAD7: res from h5 => {}".format(res))
+
         print("JAD7: find_spots - result => {}".format(result))
         print("JAD7: find_spots - dir(result) => {}".format(dir(result)))
         print("JAD7: find_spots - result.keys() => {}".format(result.keys()))
