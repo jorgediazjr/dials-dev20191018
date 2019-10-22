@@ -76,6 +76,7 @@ class ReflectionListDecoder(H5PYDecoder):
                 print("JAD7: item => {}".format(item))
                 print("JAD7: type(item) => {}".format(type(item)))
                 print("JAD7: dir(item) => {}".format(dir(item)))
+                print("JAD7: item.values() => {}".format(item.values()))
                 data = item["data"]
                 mask = item["mask"]
                 background = item["background"]
