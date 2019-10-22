@@ -214,6 +214,7 @@ class _(object):
             if six.PY3:
                 result = pickle.load(infile, encoding="bytes")
             else:
+                print("INFILE = {}".format(infile))
                 result = pickle.load(infile)
             print("JAD7: What is going on?")
             assert isinstance(result, dials_array_family_flex_ext.reflection_table)
