@@ -134,8 +134,8 @@ class Script(object):
 
         # reflections.as_h5("TEST")
         # flex.reflection_table.from_h5("TEST")
-        reflections.as_pickle("P_TEST.pickle")
-        result = flex.reflection_table.from_file("P_TEST.pickle")
+        # reflections.as_pickle("P_TEST.pickle")
+        # result = flex.reflection_table.from_file("P_TEST.pickle")
 
         reflections.as_h5("H5_test.h5")
         res = flex.reflection_table.from_file("H5_test.h5")
