@@ -73,6 +73,9 @@ class ReflectionListDecoder(H5PYDecoder):
             name = item.attrs["flex_type"]
             if name == "shoebox":
                 flex_type = getattr(flex, name)
+                print("JAD7: item => {}".format(item))
+                print("JAD7: type(item) => {}".format(type(item)))
+                print("JAD7: dir(item) => {}".format(dir(item)))
                 data = item["data"]
                 mask = item["mask"]
                 background = item["background"]
