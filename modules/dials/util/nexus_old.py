@@ -81,9 +81,9 @@ class ReflectionListDecoder(H5PYDecoder):
                     # col[i].data = flex.double(data["%d" % i].value)
                     print("JAD7: dir(data) => {}".format(dir(data)))
                     print("JAD7: data.values() => {}".format(data.values()))
-                    col[i].data = flex.double(data["%d".format(i)])
-                    col[i].mask = flex.int(mask["%d".format(i)].value)
-                    col[i].background = flex.double(background["%d".format(i)].value)
+                    col[i].data = flex.double(data["{}".format(i)])
+                    col[i].mask = flex.int(mask["{}".format(i)].value)
+                    col[i].background = flex.double(background["{}".format(i)].value)
 
             else:
                 flex_type = getattr(flex, name)
