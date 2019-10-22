@@ -195,6 +195,7 @@ class _(object):
         )
 
         # Find the spots
+        print("JAD7: find_spots => {}".format(find_spots))
         return find_spots(experiments)
 
     @staticmethod
@@ -205,14 +206,18 @@ class _(object):
         :param filename: The pickle filename
         :return: The reflection table
         """
+        print("JAD7: WE ARE IN FROM PICKLE FUNCTION")
         if filename and hasattr(filename, "__fspath__"):
             filename = filename.__fspath__()
+        print("JAD7: filename => {}".format(filename))
         with libtbx.smart_open.for_reading(filename, "rb") as infile:
             if six.PY3:
                 result = pickle.load(infile, encoding="bytes")
             else:
                 result = pickle.load(infile)
+            print("JAD7: What is going on?")
             assert isinstance(result, dials_array_family_flex_ext.reflection_table)
+            print("JAD7: Result => {}".format(result))
             return result
 
     def as_msgpack_file(self, filename):
@@ -401,6 +406,7 @@ class _(object):
         self.clean_experiment_identifiers_map()
         handle.set_reflections(self)
         handle.close()
+        print("WROTE H5")
 
     def as_miller_array(self, experiment, intensity="sum"):
         """Return a miller array with the chosen intensities.

@@ -58,6 +58,10 @@ phil_scope = parse(
     log = 'dials.find_spots.log'
       .type = str
       .help = "The log filename"
+
+    closespots = False
+      .type = bool
+      .help = "Refines the resulting reflections by checking close spots."
   }
 
   per_image_statistics = False
@@ -127,6 +131,22 @@ class Script(object):
 
         # Loop through all the imagesets and find the strong spots
         reflections = flex.reflection_table.from_observations(experiments, params)
+
+        # reflections.as_h5("TEST")
+        # flex.reflection_table.from_h5("TEST")
+        reflections.as_pickle("P_TEST.pickle")
+        result = flex.reflection_table.from_file("P_TEST.pickle")
+        print("JAD7: find_spots - result => {}".format(result))
+        print("JAD7: find_spots - dir(result) => {}".format(dir(result)))
+        print("JAD7: find_spots - result.keys() => {}".format(result.keys()))
+        for key in result.keys():
+            print("JAD7: find_spots - result.keys()[key] => {}".format(key))
+        print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
+        print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
+        print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
+        print("JAD7: find_spots - dir(result[xyzobs.px.value]) => {}".format(dir(result['xyzobs.px.value'])))
+        print("JAD7: find_spots - str(result[xyzobs.px.value]) => {}".format(str(result['xyzobs.px.value'])))
+        #print("JAD7: find_spots - dict(result[xyzobs.px.value][0]) => {}".format(dict(result['xyzobs.px.value'][0])))
 
         # Add n_signal column - before deleting shoeboxes
         from dials.algorithms.shoebox import MaskCode
