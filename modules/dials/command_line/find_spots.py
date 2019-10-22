@@ -139,7 +139,7 @@ class Script(object):
 
         reflections.as_h5("H5_test.h5")
         res = flex.reflection_table.from_h5("H5_test.h5")
-        print("JAD7: res from h5 => {}".format(res))
+        print("JAD7: result from h5 => {}".format(res))
 
         print("JAD7: find_spots - result => {}".format(result))
         print("JAD7: find_spots - dir(result) => {}".format(dir(result)))
