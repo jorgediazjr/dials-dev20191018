@@ -45,6 +45,8 @@ def main(reflections):
     print("JAD7: close_spots ==> result[bbox].__doc__ = {}".format(result['bbox'].__doc__))
     print("JAD7: close_spots ==> result[bbox].as_int() = {}".format(result['bbox'].as_int()))
     print("JAD7: close_spots ==> dir(result[bbox].as_int()) = {}".format(dir(result['bbox'].as_int())))
+    print("JAD7: close_spots ==> dir(result[bbox].as_int().as_numpy_array()) = {}".format(dir(result['bbox'].as_int().as_numpy_array())))
+    print("JAD7: close_spots ==> result[bbox].as_int().as_numpy_array() = {}".format(dir(result['bbox'].as_int().as_numpy_array())))
 
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
     #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
