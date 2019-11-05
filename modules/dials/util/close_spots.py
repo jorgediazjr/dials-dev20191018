@@ -48,6 +48,17 @@ def main(reflections):
     print("JAD7: close_spots ==> dir(result[bbox].as_int().as_numpy_array()) = {}".format(dir(result['bbox'].as_int().as_numpy_array())))
     print("JAD7: close_spots ==> result[bbox].as_int().as_numpy_array() = {}".format(result['bbox'].as_int().as_numpy_array()))
 
+    index = 0
+    while index < len( result['bbox'].as_int().as_numpy_array() ):
+        print("{} {} {} {} {} {} {}".format(result['bbox'].as_int().as_numpy_array()[index],
+                                            result['bbox'].as_int().as_numpy_array()[index+1],
+                                            result['bbox'].as_int().as_numpy_array()[index+2],
+                                            result['bbox'].as_int().as_numpy_array()[index+3],
+                                            result['bbox'].as_int().as_numpy_array()[index+4],
+                                            result['bbox'].as_int().as_numpy_array()[index+5],
+                                            result['bbox'].as_int().as_numpy_array()[index+6])
+             )
+        index += 7 
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
     #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
     #print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
