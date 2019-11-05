@@ -43,7 +43,7 @@ def main(reflections):
     print("JAD7: close_spots ==> dir(result[bbox]) = {}".format(dir(result['bbox'])))
     print("JAD7: close_spots ==> result[bbox].__dict__ = {}".format(result['bbox'].__dict__))
     print("JAD7: close_spots ==> result[bbox].__doc__ = {}".format(result['bbox'].__doc__))
-    print("JAD7: close_spots ==> repr(result[bbox]) = {}".format(repr(result['bbox'])))
+    print("JAD7: close_spots ==> result[bbox].as_int() = {}".format(result['bbox'].as_int()))
 
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
     #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
