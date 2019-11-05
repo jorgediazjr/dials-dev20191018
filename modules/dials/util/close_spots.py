@@ -22,11 +22,24 @@ def main(reflections):
     reflections.as_pickle("P_TEST.pickle")
     result = flex.reflection_table.from_file("P_TEST.pickle")
 
-    print("JAD7: find_spots - result => {}".format(result))
-    print("JAD7: find_spots - dir(result) => {}".format(dir(result)))
-    print("JAD7: find_spots - result.keys() => {}".format(result.keys()))
+    print("JAD7: close_spots - result => {}".format(result))
+    print("JAD7: close_spots - dir(result) => {}".format(dir(result)))
+    print("JAD7: close_spots - result.keys() => {}".format(result.keys()))
     for key in result.keys():
-        print("JAD7: find_spots - result.keys()[key] => {}".format(key))
+        print("JAD7: close_spots - result.keys()[key] => {}".format(key))
+    '''
+    KEYS FROM READING IN PICKLE REFLECTIONS
+        bbox
+        flags
+        id
+        intensity.sum.value
+        intensity.sum.variance
+        panel
+        shoebox
+        xyzobs.px.value
+        xyzobs.px.variance
+    '''
+    print("JAD7: close_spots ==> result[bbox] = {}".format(result['bbox']))
 
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
     #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
