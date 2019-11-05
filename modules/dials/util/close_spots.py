@@ -58,6 +58,8 @@ def main(reflections):
                                             result['bbox'].as_int().as_numpy_array()[index+5])
              )
         index += 6 
+
+    print("JAD7: result[flags] ==> {}".format(result['flags']))
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
     #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
     #print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
