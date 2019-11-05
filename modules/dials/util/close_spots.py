@@ -70,7 +70,7 @@ def main(reflections):
 
     print("JAD7: result[flags].all() ==> {}".format(result['flags'].all()))
     print("JAD7: dir(result[flags].all()[0]) ==> {}".format(dir(result['flags'].all()[0])))
-    print("JAD7: result[flags].all()[0].__doc__ ==> {}".format(result['flags'].all()[0].__doc__))
+    print("JAD7: result[flags].all().__doc__ ==> {}".format(result['flags'].all().__doc__))
 
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
     #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
