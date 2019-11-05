@@ -50,13 +50,12 @@ def main(reflections):
 
     index = 0
     while index < len( result['bbox'].as_int().as_numpy_array() ):
-        print("{} {} {} {} {} {} {}".format(result['bbox'].as_int().as_numpy_array()[index],
+        print("{}\t{}\t{}\t{}\t{}\t{}".format(result['bbox'].as_int().as_numpy_array()[index],
                                             result['bbox'].as_int().as_numpy_array()[index+1],
                                             result['bbox'].as_int().as_numpy_array()[index+2],
                                             result['bbox'].as_int().as_numpy_array()[index+3],
                                             result['bbox'].as_int().as_numpy_array()[index+4],
-                                            result['bbox'].as_int().as_numpy_array()[index+5],
-                                            result['bbox'].as_int().as_numpy_array()[index+6])
+                                            result['bbox'].as_int().as_numpy_array()[index+5])
              )
         index += 6 
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
