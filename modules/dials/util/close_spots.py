@@ -8,11 +8,14 @@ that are found by running dials.find_spots
 '''
 
 
-
-
 def read_in_file():
     pass
 
 
 def find_close_spots():
     pass
+
+
+def main():
+    print("MADE IT HERE MAN")
+
