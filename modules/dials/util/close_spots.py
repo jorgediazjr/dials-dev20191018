@@ -17,6 +17,7 @@ def find_close_spots():
 
 
 def main(reflections):
+    from dials.array_family import flex
     print("~~~~~~~~~~~~CLOSE_SPOTS FILE~~~~~~~~~~~~")
     reflections.as_pickle("P_TEST.pickle")
     result = flex.reflection_table.from_file("P_TEST.pickle")
