@@ -61,6 +61,8 @@ def main(reflections):
 
     print("JAD7: result[flags] ==> {}".format(result['flags']))
     print("JAD7: dir(result[flags]) ==> {}".format(dir(result['flags'])))
+    print("JAD7: result[flags].accessor() ==> {}".format(result['flags'].accessor()))
+
     #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
     #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
     #print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
