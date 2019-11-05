@@ -155,7 +155,7 @@ class Script(object):
 
         if params.output.closespots:
             from dials.util import close_spots
-            close_spots.main()
+            reflections = close_spots.main(reflections)
 
         # Add n_signal column - before deleting shoeboxes
         from dials.algorithms.shoebox import MaskCode
