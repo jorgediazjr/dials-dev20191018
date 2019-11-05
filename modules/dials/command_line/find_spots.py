@@ -153,7 +153,7 @@ class Script(object):
         #print("JAD7: find_spots - str(result[xyzobs.px.value]) => {}".format(str(result['xyzobs.px.value'])))
         #print("JAD7: find_spots - dict(result[xyzobs.px.value][0]) => {}".format(dict(result['xyzobs.px.value'][0])))
 
-        if params.output.close_spots:
+        if params.output.closespots:
             from dials.util import close_spots
             close_spots.main()
 
