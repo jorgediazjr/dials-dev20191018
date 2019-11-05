@@ -137,20 +137,20 @@ class Script(object):
         # reflections.as_pickle("P_TEST.pickle")
         # result = flex.reflection_table.from_file("P_TEST.pickle")
 
-        reflections.as_h5("H5_test.h5")
-        res = flex.reflection_table.from_h5("H5_test.h5")
-        print("JAD7: result from h5 => {}".format(res))
+        #reflections.as_h5("H5_test.h5")
+        #res = flex.reflection_table.from_h5("H5_test.h5")
+        #print("JAD7: result from h5 => {}".format(res))
 
         print("JAD7: find_spots - result => {}".format(result))
         print("JAD7: find_spots - dir(result) => {}".format(dir(result)))
         print("JAD7: find_spots - result.keys() => {}".format(result.keys()))
         for key in result.keys():
             print("JAD7: find_spots - result.keys()[key] => {}".format(key))
-        print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
-        print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
-        print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
-        print("JAD7: find_spots - dir(result[xyzobs.px.value]) => {}".format(dir(result['xyzobs.px.value'])))
-        print("JAD7: find_spots - str(result[xyzobs.px.value]) => {}".format(str(result['xyzobs.px.value'])))
+        #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
+        #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
+        #print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
+        #print("JAD7: find_spots - dir(result[xyzobs.px.value]) => {}".format(dir(result['xyzobs.px.value'])))
+        #print("JAD7: find_spots - str(result[xyzobs.px.value]) => {}".format(str(result['xyzobs.px.value'])))
         #print("JAD7: find_spots - dict(result[xyzobs.px.value][0]) => {}".format(dict(result['xyzobs.px.value'][0])))
 
         if params.output.close_spots:
