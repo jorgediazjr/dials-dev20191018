@@ -9,7 +9,8 @@ that are found by running dials.find_spots
 
 
 def read_in_file():
-    pass
+    from dials.array_family import flex
+    return flex.reflection_table.from_file("strong.refl")
 
 
 def find_close_spots():
@@ -17,13 +18,14 @@ def find_close_spots():
 
 
 def main(reflections):
-    from dials.array_family import flex
     print("~~~~~~~~~~~~CLOSE_SPOTS FILE~~~~~~~~~~~~")
     # reflections.as_pickle(".pickle")
-    result = flex.reflection_table.from_file("strong.refl")
+    result = read_in_file()
 
     print("JAD7: close_spots - result => {}".format(result))
-    print("JAD7: close_spots - dir(result) => {}".format(dir(result)))
+    for item in dir(result):
+        print("JAD7: dir(result) = {}".format(item))
+
     print("JAD7: close_spots - result.keys() => {}".format(result.keys()))
     for key, value in result.items():
         print("JAD7: close_spots - result.keys()[key] => {} => value: {}\n".format(key, value))
