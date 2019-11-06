@@ -53,7 +53,15 @@ def main(reflections):
     print("JAD7: result[xyzobs.px.value] = {}".format(result['xyzobs.px.value']))
     print("JAD7: centroids = {}".format(centroids))
     print("x\t\ty\t\tz\t\tintensities")
-    # del centroids[0]
+    
+    '''
+    0   =   1343.04     1007.89     0.98        5885.0
+    1   =   1695.48     1257.23     0.99        1100.0
+    2   =   1676.59     1266.09     0.85        817.0   
+    '''
+    del centroids[0]
+    del centroids[1]
+    del centroids[2]
     
     for i in range(len(centroids)):
         print("{}\t=\t{:.2f}\t\t{:.2f}\t\t{:.2f}\t\t{}".format(i,
