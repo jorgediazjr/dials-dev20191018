@@ -61,4 +61,4 @@ def main(reflections):
     print("JAD7: intensities = {}".format(intensities))
 
     from scitbx.array_family import flex
-    flex.show(reflections)
+    flex.show(result)
