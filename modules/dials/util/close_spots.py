@@ -60,9 +60,9 @@ def main(reflections):
     2   =   1676.59     1266.09     0.85        817.0   
     '''
     del centroids[0]
-    del centroids[1]
-    del centroids[2]
-    
+    del centroids[0]
+    del centroids[0]
+
     for i in range(len(centroids)):
         print("{}\t=\t{:.2f}\t\t{:.2f}\t\t{:.2f}\t\t{}".format(i,
                                                                centroids[i][0],
