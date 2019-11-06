@@ -70,6 +70,12 @@ def main(reflections):
     del intensities[0]
     del intensities[0]
     del intensities[0]
+
+    # we must also delete this
+    del result['intensity.sum.variance'][0]
+    del result['intensity.sum.variance'][0]
+    del result['intensity.sum.variance'][0]
+    
     print("JAD7: len(centroids) = {}".format(len(centroids)))
     print("JAD7: len(intensities) = {}".format(len(intensities)))
 
