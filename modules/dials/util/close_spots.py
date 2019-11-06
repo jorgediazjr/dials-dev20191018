@@ -39,6 +39,8 @@ def main(reflections):
         xyzobs.px.value
         xyzobs.px.variance
     '''
+
+    '''
     print("JAD7: close_spots ==> result[bbox] = {}".format(result['bbox']))
     print("JAD7: close_spots ==> dir(result[bbox]) = {}".format(dir(result['bbox'])))
     print("JAD7: close_spots ==> result[bbox].__dict__ = {}".format(result['bbox'].__dict__))
@@ -59,6 +61,8 @@ def main(reflections):
              )
         index += 6 
 
+    '''
+    
     print("JAD7: result[flags] ==> {}".format(result['flags']))
     print("JAD7: dir(result[flags]) ==> {}".format(dir(result['flags'])))
     print("JAD7: result[flags].accessor() ==> {}".format(result['flags'].accessor()))
