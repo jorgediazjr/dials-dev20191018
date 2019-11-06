@@ -52,5 +52,6 @@ def main(reflections):
 
     print("JAD7: centroids = {}".format(centroids))
     for i in range(len(centroids)):
-        print("{}".format(centroids[i][0]))
+        print("{:.2f}\t{:.2f}".format(centroids[i][0],
+                                      centroids[i][1]))
     print("JAD7: intensities = {}".format(intensities))
