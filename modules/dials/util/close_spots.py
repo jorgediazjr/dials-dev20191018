@@ -51,10 +51,11 @@ def main(reflections):
     intensities = result['intensity.sum.value']
 
     print("JAD7: centroids = {}".format(centroids))
-    print("x\ty\tz")
+    print("x\t\ty\t\tz\t\tintensities")
     for i in range(len(centroids)):
-        print("{:.2f}\t{:.2f}\t{:.2f}".format(centroids[i][0],
-                                              centroids[i][1],
-                                              centroids[i][2])
+        print("{:.2f}\t\t{:.2f}\t\t{:.2f}\t\t".format(centroids[i][0],
+                                                      centroids[i][1],
+                                                      centroids[i][2],
+                                                      intensities[i])
         )
     print("JAD7: intensities = {}".format(intensities))
