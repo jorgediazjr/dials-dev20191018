@@ -75,7 +75,7 @@ def main(reflections):
     del result['intensity.sum.variance'][0]
     del result['intensity.sum.variance'][0]
     del result['intensity.sum.variance'][0]
-    
+
     print("JAD7: len(centroids) = {}".format(len(centroids)))
     print("JAD7: len(intensities) = {}".format(len(intensities)))
 
@@ -90,5 +90,5 @@ def main(reflections):
 
     result['xyzobs.px.value'] = centroids
     result['intensity.sum.value'] = intensities
-    result.as_file("strong.refl")
+    #result.as_file("strong.refl")
     
