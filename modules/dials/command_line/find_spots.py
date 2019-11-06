@@ -132,10 +132,6 @@ class Script(object):
         # Loop through all the imagesets and find the strong spots
         reflections = flex.reflection_table.from_observations(experiments, params)
 
-        if params.output.closespots:
-            from dials.util import close_spots
-            close_spots.main(reflections)
-
         # Add n_signal column - before deleting shoeboxes
         from dials.algorithms.shoebox import MaskCode
 
@@ -165,6 +161,12 @@ class Script(object):
                 len(reflections), params.output.reflections
             )
         )
+
+        # this is my portion
+        if params.output.closespots:
+            from dials.util import close_spots
+            close_spots.main(reflections)
+        # this ends my portion
 
         # Save the experiments
         if params.output.experiments:
