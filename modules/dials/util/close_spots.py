@@ -25,7 +25,6 @@ def main(reflections):
     print("JAD7: close_spots - result => {}".format(result))
     for item in dir(result):
         print("JAD7: dir(result) = {}".format(item))
-    result.plot(reflections)
 
     print("JAD7: close_spots - result.keys() => {}".format(result.keys()))
     for key, value in result.items():
