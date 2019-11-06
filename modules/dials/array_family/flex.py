@@ -16,6 +16,9 @@ import six
 import six.moves.cPickle as pickle
 from dials.algorithms.centroid import centroid_px_to_mm_panel
 
+for path in sys.path:
+    print("JAD7: dials/array_family/flex.py = {}".format(path))
+
 from dials.util import Sorry
 from scitbx import matrix
 
