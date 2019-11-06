@@ -13,6 +13,8 @@ boost.python.import_ext("scitbx_array_family_flex_ext")
 from scitbx_array_family_flex_ext import *
 import scitbx_array_family_flex_ext as ext
 
+print("JAD7: sys.path = {}".format(sys.path))
+
 import scitbx.stl.map # import dependency
 import scitbx.random
 from scitbx.random import get_random_seed, set_random_seed
