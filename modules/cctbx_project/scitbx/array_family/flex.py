@@ -13,7 +13,8 @@ boost.python.import_ext("scitbx_array_family_flex_ext")
 from scitbx_array_family_flex_ext import *
 import scitbx_array_family_flex_ext as ext
 
-print("JAD7: sys.path = {}".format(sys.path))
+for path in sys.path:
+  print("JAD7: path in sys.path = {}".format(path))
 
 import scitbx.stl.map # import dependency
 import scitbx.random
