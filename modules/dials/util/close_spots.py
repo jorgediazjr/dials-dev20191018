@@ -26,7 +26,7 @@ def main(reflections):
     print("JAD7: close_spots - dir(result) => {}".format(dir(result)))
     print("JAD7: close_spots - result.keys() => {}".format(result.keys()))
     for key, value in result.items():
-        print("JAD7: close_spots - result.keys()[key] => {} => value: {}".format(key, value))
+        print("JAD7: close_spots - result.keys()[key] => {} => value: {}\n".format(key, value))
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
         bbox
