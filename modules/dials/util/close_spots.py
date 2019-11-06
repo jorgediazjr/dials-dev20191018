@@ -27,6 +27,7 @@ def main(reflections):
     print("JAD7: close_spots - result.keys() => {}".format(result.keys()))
     for key, value in result.items():
         print("JAD7: close_spots - result.keys()[key] => {} => value: {}\n".format(key, value))
+    
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
         bbox
@@ -63,6 +64,7 @@ def main(reflections):
 
     '''
 
+    '''
     print("JAD7: result[flags] ==> {}".format(result['flags']))
     print("JAD7: dir(result[flags]) ==> {}".format(dir(result['flags'])))
     print("JAD7: result[flags].accessor() ==> {}".format(result['flags'].accessor()))
@@ -75,12 +77,14 @@ def main(reflections):
     print("JAD7: result[flags].all() ==> {}".format(result['flags'].all()))
     print("JAD7: dir(result[flags].all()[0]) ==> {}".format(dir(result['flags'].all()[0])))
     print("JAD7: result[flags].all().__doc__ ==> {}".format(result['flags'].all().__doc__))
+    '''
 
-    #print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
-    #print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
-    #print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
-    #print("JAD7: find_spots - dir(result[xyzobs.px.value]) => {}".format(dir(result['xyzobs.px.value'])))
-    #print("JAD7: find_spots - str(result[xyzobs.px.value]) => {}".format(str(result['xyzobs.px.value'])))
-    #print("JAD7: find_spots - dict(result[xyzobs.px.value][0]) => {}".format(dict(result['xyzobs.px.value'][0])))
-
+    '''
+    print("JAD7: find_spots - result.flags() => {}".format(result.flags()))
+    print("JAD7: find_spots - dict(result) => {}".format(dict(result)))
+    print("JAD7: find_spots - result[xyzobs.px.value] => {}".format(result['xyzobs.px.value']))
+    print("JAD7: find_spots - dir(result[xyzobs.px.value]) => {}".format(dir(result['xyzobs.px.value'])))
+    print("JAD7: find_spots - str(result[xyzobs.px.value]) => {}".format(str(result['xyzobs.px.value'])))
+    print("JAD7: find_spots - dict(result[xyzobs.px.value][0]) => {}".format(dict(result['xyzobs.px.value'][0])))
+    '''
 
