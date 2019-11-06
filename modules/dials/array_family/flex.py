@@ -6,6 +6,7 @@ import copy
 import logging
 import operator
 import os
+import sys
 
 import boost.python
 import cctbx.array_family.flex
