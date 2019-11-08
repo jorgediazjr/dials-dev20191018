@@ -14,6 +14,7 @@ def read_in_file():
 
 
 def get_x_y_pairs(result):
+    print("JAD7: In get_xy_pairs()")
     xy_pairs = {}
     centroids = result['xyzobs.px.value']
 
@@ -36,6 +37,7 @@ def main(reflections):
     print("~~~~~~~~~~~~CLOSE_SPOTS FILE~~~~~~~~~~~~")
     result = read_in_file()
     x_y_pairs = get_x_y_pairs(result)
+    print("JAD7: Finished get_xy_pairs()")
 
     print("JAD7: close_spots - result => {}".format(result))
     for item in dir(result):
