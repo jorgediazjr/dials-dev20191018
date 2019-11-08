@@ -130,6 +130,7 @@ def main(reflections):
     ordered_pairs = add_index_to_pairs(ordered_pairs)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
 
+    import collections
     closest_pairs = collections.OrderedDict(sorted(closest_pairs.items()))
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
