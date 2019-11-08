@@ -287,7 +287,7 @@ namespace dials { namespace af {
         size = it->second.apply_visitor(visitor);
         for (++it; it != end(); ++it) {
           if (it->second.apply_visitor(visitor) != size) {
-            using std::cout
+            using namespace std;
             cout << "Size is " << size << endl;
             throw DIALS_ERROR("Column sizes are inconsistent");
           }
