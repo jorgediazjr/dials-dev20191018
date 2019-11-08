@@ -1147,5 +1147,6 @@ def flatten_experiments(filename_object_list):
 
     result = ExperimentList()
     for o in filename_object_list:
+        print(o.data)
         result.extend(o.data)
     return result
