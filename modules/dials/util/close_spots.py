@@ -60,27 +60,10 @@ def main(reflections):
     2   =   1676.59     1266.09     0.85        817.0   
     '''
 
+    print("JAD7: result.nrows() = {}".format(result.nrows()))
     print("JAD7: result.ncols() = {}".format(result.ncols()))
-
     print("JAD7: len(centroids) = {}".format(len(centroids)))
     print("JAD7: len(intensities) = {}".format(len(intensities)))
-    del centroids[0]
-    del centroids[0]
-    del centroids[0]
-    print("JAD7: len(centroids) = {}".format(len(centroids)))
-    print("JAD7: len(intensities) = {}".format(len(intensities)))
-    del intensities[0]
-    del intensities[0]
-    del intensities[0]
-
-    # we must also delete this
-    del result['intensity.sum.variance'][0]
-    del result['intensity.sum.variance'][0]
-    del result['intensity.sum.variance'][0]
-
-    print("JAD7: len(centroids) = {}".format(len(centroids)))
-    print("JAD7: len(intensities) = {}".format(len(intensities)))
-
 
     for i in range(len(centroids)):
         print("{}\t=\t{:.2f}\t\t{:.2f}\t\t{:.2f}\t\t{}".format(i,
@@ -91,6 +74,6 @@ def main(reflections):
         )
 
     result['xyzobs.px.value'] = centroids
-    result['intensity.sum.value'] = intensities
+    #result['intensity.sum.value'] = intensities
     #result.as_file("strong.refl")
     
