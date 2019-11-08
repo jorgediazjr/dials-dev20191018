@@ -30,6 +30,7 @@ def get_x_y_pairs(result):
 
 
 def order_xy_pairs(xy_pairs):
+    import collections
     return collections.OrderedDict(sorted(xy_pairs.items()))
 
 
@@ -87,7 +88,7 @@ def main(reflections):
     ordered_pairs = order_xy_pairs(x_y_pairs)
     ordered_pairs = add_index_to_pairs(ordered_pairs)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
-    
+
 
 
 
