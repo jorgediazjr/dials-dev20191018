@@ -131,7 +131,7 @@ def main(reflections):
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
 
     for i in closest_pairs:
-        print("{:.2f} <=> {}".format(i, closest_pairs[i]))
+        print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
     print("JAD7: close_spots - result => {}".format(result))
     for item in dir(result):
