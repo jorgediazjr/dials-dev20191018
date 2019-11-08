@@ -132,6 +132,7 @@ def main(reflections):
 
     import collections
     closest_pairs = collections.OrderedDict(sorted(closest_pairs.items()))
+    print("JAD7: Number of close spots = {}".format(len(closest_pairs)))
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
