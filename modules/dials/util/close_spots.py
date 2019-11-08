@@ -41,6 +41,46 @@ def add_index_to_pairs(ordered_pairs):
     return new_dict
 
 
+def find_distance(p, q):
+    dist = math.sqrt(((p[0] - q[0])*(p[0] - q[0])) +
+                     ((p[1] - q[1])*(p[1] - q[1])))
+    return dist
+
+
+def units_distance(p, q):
+    a = 1600
+    b = 1600
+    rad_0 = 50
+    rad_1 = 200
+    rad_2 = 600
+    rad_3 = 1000
+    rad_4 = 1400
+    rad_5 = 1800
+    point_1 = ((p[0] - a) * (p[1] - b))
+    point_2 = ((q[0] - a) * (q[1] - b))
+    if (point_1 < rad_0 * rad_0) and (point_2 < rad_0 * rad_0):
+        return 0.5
+    elif((point_1 > rad_0 * rad_0) and (point_2 > rad_0 * rad_0) and
+         (point_1 < rad_1 * rad_1) and (point_2 < rad_1 * rad_1)):
+        return 0.6
+    elif((point_1 > rad_1 * rad_1) and (point_2 > rad_1 * rad_1) and
+         (point_1 < rad_2 * rad_2) and (point_2 > rad_2 * rad_2)):
+        return 0.7
+    elif((point_1 > rad_2 * rad_2) and (point_2 > rad_2 * rad_2) and
+         (point_1 < rad_3 * rad_3) and (point_2 < rad_3 * rad_3)):
+        return 0.8
+    elif((point_1 > rad_3 * rad_3) and (point_2 > rad_3 * rad_3) and
+         (point_1 < rad_4 * rad_4) and (point_2 < rad_4 * rad_4)):
+        return 0.9
+    elif((point_1 > rad_4 * rad_4) and (point_2 > rad_4 * rad_4) and
+         (point_1 < rad_5 * rad_5) and (point_2 < rad_5 * rad_5)):
+        return 1.0
+    elif((point_1 > rad_5 * rad_5) and (point_2 > rad_5 * rad_5)):
+        return 1.1
+    else:
+        return 0.5
+
+
 def euclidean_distance(ordered_pairs, distance=0.5):
     close_pairs = []        # these are pairs of points that are close together
     closest_pairs = dict()  # this has x,y values that are closest
@@ -88,8 +128,6 @@ def main(reflections):
     ordered_pairs = order_xy_pairs(x_y_pairs)
     ordered_pairs = add_index_to_pairs(ordered_pairs)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
-
-
 
 
 
