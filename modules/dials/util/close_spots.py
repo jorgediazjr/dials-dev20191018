@@ -130,10 +130,8 @@ def main(reflections):
     ordered_pairs = add_index_to_pairs(ordered_pairs)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
 
-
-
-
-
+    for i in closest_pairs:
+        print(i)
 
     print("JAD7: close_spots - result => {}".format(result))
     for item in dir(result):
@@ -158,6 +156,7 @@ def main(reflections):
     centroids = result['xyzobs.px.value']
     intensities = result['intensity.sum.value']
 
+    '''
     print("JAD7: centroids = {}".format(centroids))
     print("JAD7: intensities = {}".format(intensities))
     print("JAD7: result.nrows() = {}".format(result.nrows()))
@@ -173,4 +172,4 @@ def main(reflections):
                                                                centroids[i][2],
                                                                intensities[i])
         )
-    
+    '''
