@@ -60,6 +60,8 @@ def main(reflections):
     2   =   1676.59     1266.09     0.85        817.0   
     '''
 
+    print("JAD7: result.ncols() = {}".format(result.ncols()))
+
     print("JAD7: len(centroids) = {}".format(len(centroids)))
     print("JAD7: len(intensities) = {}".format(len(intensities)))
     del centroids[0]
