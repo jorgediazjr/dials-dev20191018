@@ -1791,6 +1791,11 @@ class SpotSettingsPanel(wx.Panel):
         self.indexed.SetValue(self.settings.show_indexed)
         grid.Add(self.indexed, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
+        # JAD7 Close spots points
+        self.show_close_spots = wx.CheckBox(self, -1, "Show close spots")
+        self.show_close_spots.SetValue(self.settings.show_close_spots)
+        grid.Add(self.show_close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+
         # Integration shoeboxes only
         self.integrated = wx.CheckBox(self, -1, "Integrated only")
         self.integrated.SetValue(self.settings.show_integrated)
