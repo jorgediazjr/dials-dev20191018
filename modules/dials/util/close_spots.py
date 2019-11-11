@@ -13,20 +13,21 @@ def read_in_file():
     return flex.reflection_table.from_file("strong.refl")
 
 
-def get_x_y_pairs(result):
+def get_x_y_z_coords(result):
     print("JAD7: In get_xy_pairs()")
-    xy_pairs = {}
+    xyz_pairs = {}
     centroids = result['xyzobs.px.value']
 
     for i in range(len(centroids)):
         x = centroids[i][0]
         y = centroids[i][1]
+        z = centroids[i][2]
         if x in xy_pairs:
-            xy_pairs[x].append(y)
+            xyz_pairs[x].append([y, z])
             continue
-        xy_pairs[x] = [y]
+        xyz_pairs[x] = [y, z]
 
-    return xy_pairs
+    return xyz_pairs
 
 
 def order_xy_pairs(xy_pairs):
@@ -123,8 +124,7 @@ def find_close_spots(x_y_pairs):
 def main(reflections):
     print("~~~~~~~~~~~~CLOSE_SPOTS FILE~~~~~~~~~~~~")
     result = read_in_file()
-    x_y_pairs = get_x_y_pairs(result)
-    print("JAD7: Finished get_xy_pairs()")
+    x_y_pairs = get_x_y_z_coords(result)
 
     ordered_pairs = order_xy_pairs(x_y_pairs)
     ordered_pairs = add_index_to_pairs(ordered_pairs)
