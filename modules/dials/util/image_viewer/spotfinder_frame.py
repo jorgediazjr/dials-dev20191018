@@ -960,7 +960,6 @@ class SpotFrame(XrayFrame):
         if self.settings.show_dials_spotfinder_spots:
             spotfinder_data = self.get_spotfinder_data()
             shoebox_data = spotfinder_data.shoebox_data
-            print("shoebox data = {}".format(shoebox_data))  # JAD7
             all_pix_data = spotfinder_data.all_pix_data
             all_foreground_circles = spotfinder_data.all_foreground_circles
             ctr_mass_data = spotfinder_data.ctr_mass_data
