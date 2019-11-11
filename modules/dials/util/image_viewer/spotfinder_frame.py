@@ -1964,7 +1964,7 @@ class SpotSettingsPanel(wx.Panel):
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.indexed)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.integrated)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.show_basis_vectors)
-        self.Bind(wc.EVT_CHECKBOX, self.OnUpdate, self.show_close_spots) # JAD7
+        self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.show_close_spots) # JAD7
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdateShowMask, self.show_mask)
 
         self.Bind(wx.EVT_UPDATE_UI, self.UpdateZoomCtrl)
