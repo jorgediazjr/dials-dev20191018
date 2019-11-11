@@ -1387,7 +1387,8 @@ class SpotFrame(XrayFrame):
                             (((x1_, y0_), (x0_, y0_)), my_attrs),
                         ]
                         shoebox_data.extend(lines)
-                        print("JAD7: shoebox_data = {}".format(shoebox_data))
+                        for data in shoebox_data:
+                            print("JAD7: shoebox_data = {}".format(data))
                         self.show_shoebox_timer.stop()
 
                     if (
