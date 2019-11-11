@@ -98,24 +98,21 @@ def euclidean_distance(ordered_pairs, distance=0.5):
             while current < len(ordered_pairs):
                 if current != index:
                     x2 = list(ordered_pairs[current].keys())[0]
-                    print("x2 = {}".format(x2))
-                    print("ordered_pairs[current][x2] = {}".format(ordered_pairs[current][x2]))
-                    for _y in ordered_pairs[current][x2]:
-                        print("_y = {}".format(_y))
-                        exit(0)
-                        y2 = _y[0]
-                        point_b = [x2, y2]
-                        dist = find_distance(point_a, point_b)
-                        distance = units_distance(point_a, point_b)
-                        if dist <= distance:
-                            pair = [point_a, point_b]
-                            print("{}\t<-- {:.2f} -->\t{}\tWITHIN {}".format(point_a, dist, point_b, distance))
-                            close_pairs.append(pair)
-                            closest_pairs[point_b[0]] = [point_b[1]]
-                            # save the midpoints of the close pairs
-                            midpoint_x = (point_a[0] + point_b[0]) / 2
-                            midpoint_y = (point_a[1] + point_b[1]) / 2
-                            midpoints[midpoint_x] = midpoint_y
+                    y2 = ordered_pairs[current][x2][0]
+                    print("x2 = {} , y2 = {}".format(x2, y2))
+                    exit(0)
+                    point_b = [x2, y2]
+                    dist = find_distance(point_a, point_b)
+                    distance = units_distance(point_a, point_b)
+                    if dist <= distance:
+                        pair = [point_a, point_b]
+                        print("{}\t<-- {:.2f} -->\t{}\tWITHIN {}".format(point_a, dist, point_b, distance))
+                        close_pairs.append(pair)
+                        closest_pairs[point_b[0]] = [point_b[1]]
+                        # save the midpoints of the close pairs
+                        midpoint_x = (point_a[0] + point_b[0]) / 2
+                        midpoint_y = (point_a[1] + point_b[1]) / 2
+                        midpoints[midpoint_x] = midpoint_y
                     current += 1
                 else:
                     current += 1
