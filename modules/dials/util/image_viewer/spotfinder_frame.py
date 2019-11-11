@@ -1956,7 +1956,7 @@ class SpotSettingsPanel(wx.Panel):
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.ice_rings_ctrl)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.center_ctrl)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.ctr_mass)
-        self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.max_pix)
+        #self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.max_pix)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.all_pix)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.shoebox)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.predictions)
