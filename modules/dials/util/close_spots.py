@@ -92,14 +92,14 @@ def euclidean_distance(ordered_pairs, distance=0.5):
             #for y_coord in ordered_pairs[index][x_coord]:
             x1 = x_coord
             y1 = ordered_pairs[index][x_coord][0]
-            print("y1 = {}".format(y1))
+            print("x1 = {} , y1 = {}".format(x1, y1))
             point_a = [x1, y1]
             current = 0
             while current < len(ordered_pairs):
                 if current != index:
                     x2 = list(ordered_pairs[current].keys())[0]
                     print("x2 = {}".format(x2))
-                    exit(0)
+                    print("ordered_pairs[current][x2] = {}".format(ordered_pairs[current][x2]))
                     for _y in ordered_pairs[current][x2]:
                         print("_y = {}".format(_y))
                         exit(0)
