@@ -2,7 +2,6 @@ from __future__ import absolute_import, division, print_function
 
 import hashlib
 import six
-import sys
 
 import boost.optional # import dependency
 import boost.std_pair # import dependency
@@ -12,9 +11,6 @@ from six.moves import zip
 boost.python.import_ext("scitbx_array_family_flex_ext")
 from scitbx_array_family_flex_ext import *
 import scitbx_array_family_flex_ext as ext
-
-for path in sys.path:
-  print("JAD7: path in sys.path = {}".format(path))
 
 import scitbx.stl.map # import dependency
 import scitbx.random
