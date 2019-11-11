@@ -89,36 +89,36 @@ def euclidean_distance(ordered_pairs, distance=0.5):
     for index in ordered_pairs:
         for x_coord in ordered_pairs[index]:
             print("ordered_pairs[index][x_coord] = {}".format(ordered_pairs[index][x_coord]))
-            exit(0)
-            for y_coord in ordered_pairs[index][x_coord]:
-                x1 = x_coord
-                print("y_coord = {}".format(y_coord))
-                exit(0)
-                y1 = y_coord[0]
-                point_a = [x1, y1]
-                current = 0
-                while current < len(ordered_pairs):
-                    if current != index:
-                        x2 = list(ordered_pairs[current].keys())[0]
-                        for _y in ordered_pairs[current][x2]:
-                            print("_y = {}".format(_y))
-                            exit(0)
-                            y2 = _y[0]
-                            point_b = [x2, y2]
-                            dist = find_distance(point_a, point_b)
-                            distance = units_distance(point_a, point_b)
-                            if dist <= distance:
-                                pair = [point_a, point_b]
-                                print("{}\t<-- {:.2f} -->\t{}\tWITHIN {}".format(point_a, dist, point_b, distance))
-                                close_pairs.append(pair)
-                                closest_pairs[point_b[0]] = [point_b[1]]
-                                # save the midpoints of the close pairs
-                                midpoint_x = (point_a[0] + point_b[0]) / 2
-                                midpoint_y = (point_a[1] + point_b[1]) / 2
-                                midpoints[midpoint_x] = midpoint_y
-                        current += 1
-                    else:
-                        current += 1
+            #for y_coord in ordered_pairs[index][x_coord]:
+            x1 = x_coord
+            y1 = ordered_pairs[index][x_coord][0]
+            print("y_coord = {}".format(y_coord))
+            point_a = [x1, y1]
+            current = 0
+            while current < len(ordered_pairs):
+                if current != index:
+                    x2 = list(ordered_pairs[current].keys())[0]
+                    print("x2 = {}".format(x2))
+                    exit(0)
+                    for _y in ordered_pairs[current][x2]:
+                        print("_y = {}".format(_y))
+                        exit(0)
+                        y2 = _y[0]
+                        point_b = [x2, y2]
+                        dist = find_distance(point_a, point_b)
+                        distance = units_distance(point_a, point_b)
+                        if dist <= distance:
+                            pair = [point_a, point_b]
+                            print("{}\t<-- {:.2f} -->\t{}\tWITHIN {}".format(point_a, dist, point_b, distance))
+                            close_pairs.append(pair)
+                            closest_pairs[point_b[0]] = [point_b[1]]
+                            # save the midpoints of the close pairs
+                            midpoint_x = (point_a[0] + point_b[0]) / 2
+                            midpoint_y = (point_a[1] + point_b[1]) / 2
+                            midpoints[midpoint_x] = midpoint_y
+                    current += 1
+                else:
+                    current += 1
     return close_pairs, midpoints, closest_pairs
 
 
