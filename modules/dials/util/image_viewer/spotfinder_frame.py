@@ -1092,6 +1092,7 @@ class SpotFrame(XrayFrame):
                 self.draw_all_pix_timer.stop()
             if self.settings.show_shoebox and len(shoebox_data):
                 self.draw_shoebox_timer.start()
+                ("JAD7: shoebox data = {}".format(shoebox_data))
                 self.shoebox_layer = self.pyslip.AddPolygonLayer(
                     shoebox_data,
                     map_rel=True,
