@@ -125,10 +125,13 @@ def main(reflections):
     result = read_in_file()
     xyz_coords = get_xyz_coords(result)
 
-    ordered_pairs = order_dictionary(xyz_coords)
-    ordered_pairs = add_index_to_pairs(ordered_pairs)
+    ordered_points = order_dictionary(xyz_coords)
+    for x in ordered_points:
+        print("{} => {}".format(x, ordered_points[x]))
+
+    ordered_points = add_index_to_pairs(ordered_points)
     exit(0)
-    close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
+    close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_points)
 
     closest_pairs = order_dictionary(closest_pairs)
     print("JAD7: Number of close spots = {}".format(len(closest_pairs)))
