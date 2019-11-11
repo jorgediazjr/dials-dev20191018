@@ -90,14 +90,14 @@ def euclidean_distance(ordered_pairs, distance=0.5):
         for x_coord in ordered_pairs[index]:
             for y_coord in ordered_pairs[index][x_coord]:
                 x1 = x_coord
-                y1 = y_coord
+                y1 = y_coord[0]
                 point_a = [x1, y1]
                 current = 0
                 while current < len(ordered_pairs):
                     if current != index:
                         x2 = list(ordered_pairs[current].keys())[0]
                         for _y in ordered_pairs[current][x2]:
-                            y2 = _y
+                            y2 = _y[0]
                             point_b = [x2, y2]
                             dist = find_distance(point_a, point_b)
                             distance = units_distance(point_a, point_b)
@@ -115,28 +115,20 @@ def euclidean_distance(ordered_pairs, distance=0.5):
                         current += 1
     return close_pairs, midpoints, closest_pairs
 
-def find_close_spots(x_y_pairs):
-
-    pass
-
 
 def main(reflections):
-    print("~~~~~~~~~~~~CLOSE_SPOTS FILE~~~~~~~~~~~~")
     result = read_in_file()
     xyz_coords = get_xyz_coords(result)
 
     ordered_points = order_dictionary(xyz_coords)
-    for x in ordered_points:
-        print("{} => {}".format(x, ordered_points[x]))
 
     ordered_points = add_index_to_pairs(ordered_points)
-    for index in ordered_points:
-        for x in ordered_points[index]:
-            print("{}: {} => {}".format(index, x, ordered_points[index][x]))
-    exit(0)
+    
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_points)
 
     closest_pairs = order_dictionary(closest_pairs)
+
+    exit(0)
     print("JAD7: Number of close spots = {}".format(len(closest_pairs)))
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
