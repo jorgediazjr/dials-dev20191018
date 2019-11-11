@@ -108,6 +108,7 @@ class SpotFrame(XrayFrame):
 
         self.show_all_pix_timer = time_log("show_all_pix")
         self.show_shoebox_timer = time_log("show_shoebox")
+        self.show_close_spots_timer = time_log("show_close_spots") # JAD7
         self.show_max_pix_timer = time_log("show_max_pix")
         self.show_ctr_mass_timer = time_log("show_ctr_mass")
         self.draw_all_pix_timer = time_log("draw_all_pix")
@@ -958,6 +959,7 @@ class SpotFrame(XrayFrame):
         if self.settings.show_dials_spotfinder_spots:
             spotfinder_data = self.get_spotfinder_data()
             shoebox_data = spotfinder_data.shoebox_data
+            print("shoebox data = {}".format(shoebox_data))  # JAD7
             all_pix_data = spotfinder_data.all_pix_data
             all_foreground_circles = spotfinder_data.all_foreground_circles
             ctr_mass_data = spotfinder_data.ctr_mass_data
@@ -1675,6 +1677,7 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.min_local = self.params.min_local
         self.settings.gain = self.params.gain
         self.settings.find_spots_phil = "find_spots.phil"
+        self.settings.close_spots = self.params.close_spots # JAD7: J. DIAZ ADDED THIS LINE
         self._sizer = wx.BoxSizer(wx.VERTICAL)
         s = self._sizer
         self.SetSizer(self._sizer)
