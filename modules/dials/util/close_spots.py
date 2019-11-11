@@ -130,17 +130,6 @@ def main(reflections):
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
-    print("JAD7: close_spots - result => {}".format(result))
-    for item in dir(result):
-        print("JAD7: dir(result) = {}".format(item))
-
-    print("JAD7: close_spots - result.keys() => {}".format(result.keys()))
-    for key, value in result.items():
-        print("JAD7: close_spots - result.keys()[key] => {} => value: {}\n".format(key, value))
-
-    print("JAD7: close_spots - reflections.keys() => {}".format(reflections.keys()))
-    for key, value in reflections.items():
-        print("JAD7: close_spots - reflections.keys()[key] => {} => value: {}\n".format(key, value))
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
         bbox
@@ -153,23 +142,4 @@ def main(reflections):
         xyzobs.px.value
         xyzobs.px.variance
     '''
-    centroids = result['xyzobs.px.value']
-    intensities = result['intensity.sum.value']
-
-    '''
-    print("JAD7: centroids = {}".format(centroids))
-    print("JAD7: intensities = {}".format(intensities))
-    print("JAD7: result.nrows() = {}".format(result.nrows()))
-    print("JAD7: result.ncols() = {}".format(result.ncols()))
-    print("JAD7: len(centroids) = {}".format(len(centroids)))
-    print("JAD7: len(intensities) = {}".format(len(intensities)))
-
-    print("x\t\ty\t\tz\t\tintensities")
-    for i in range(len(centroids)):
-        print("{}\t=\t{:.2f}\t\t{:.2f}\t\t{:.2f}\t\t{}".format(i,
-                                                               centroids[i][0],
-                                                               centroids[i][1],
-                                                               centroids[i][2],
-                                                               intensities[i])
-        )
-    '''
+    
