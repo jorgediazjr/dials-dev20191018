@@ -116,6 +116,7 @@ def euclidean_distance(ordered_pairs, distance=0.5):
 
 def main(reflections):
     result = read_in_file()
+
     xyz_coords = get_xyz_coords(result)
 
     ordered_points = order_dictionary(xyz_coords)
@@ -130,7 +131,7 @@ def main(reflections):
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
-    reflections['yaya'] = 'yayay'
+    reflections['yaya'] = ['yayay']
 
     print("reflections.keys = {}".format(reflections.keys()))
     '''
