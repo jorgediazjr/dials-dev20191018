@@ -748,6 +748,7 @@ class SpotFinder(object):
         # Loop through all the imagesets and find the strong spots
         reflections = flex.reflection_table()
         print("reflections = {}".format(reflections))
+        print("dir(reflections) = {}".format(dir(reflections)))
         print("reflections.keys() = {}".format(reflections.keys()))
         print("dir(reflections.keys() ) = {}".format(dir(reflections.keys())))
         print("dict(reflections.keys()) = {}".format(dict(reflections.keys())))
