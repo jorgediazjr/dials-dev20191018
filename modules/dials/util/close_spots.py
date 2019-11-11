@@ -14,7 +14,6 @@ def read_in_file():
 
 
 def get_xyz_coords(result):
-    print("JAD7: In get_xy_pairs()")
     xyz_coords = {}
     centroids = result['xyzobs.px.value']
 
@@ -126,8 +125,8 @@ def main(reflections):
     result = read_in_file()
     xyz_coords = get_xyz_coords(result)
 
-    exit(0)
     ordered_pairs = order_xyz_coords(xyz_coords)
+    exit(0)
     ordered_pairs = add_index_to_pairs(ordered_pairs)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
 
