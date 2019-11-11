@@ -140,6 +140,7 @@ class Script(object):
 
         # Delete the shoeboxes
         if not params.output.shoeboxes:
+            print("deleting shoeboxes")
             del reflections["shoebox"]
 
         # ascii spot count per image plot
