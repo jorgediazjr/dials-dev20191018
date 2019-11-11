@@ -13,7 +13,7 @@ def read_in_file():
     return flex.reflection_table.from_file("strong.refl")
 
 
-def get_x_y_z_coords(result):
+def get_xyz_coords(result):
     print("JAD7: In get_xy_pairs()")
     xyz_pairs = {}
     centroids = result['xyzobs.px.value']
@@ -30,9 +30,9 @@ def get_x_y_z_coords(result):
     return xyz_pairs
 
 
-def order_xy_pairs(xy_pairs):
+def order_xyz_coords(xyz_coords):
     import collections
-    return collections.OrderedDict(sorted(xy_pairs.items()))
+    return collections.OrderedDict(sorted(xyz_coords.items()))
 
 
 def add_index_to_pairs(ordered_pairs):
@@ -124,9 +124,10 @@ def find_close_spots(x_y_pairs):
 def main(reflections):
     print("~~~~~~~~~~~~CLOSE_SPOTS FILE~~~~~~~~~~~~")
     result = read_in_file()
-    x_y_pairs = get_x_y_z_coords(result)
+    xyz_coords = get_xyz_coords(result)
 
-    ordered_pairs = order_xy_pairs(x_y_pairs)
+    exit(0)
+    ordered_pairs = order_xyz_coords(xyz_coords)
     ordered_pairs = add_index_to_pairs(ordered_pairs)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
 
