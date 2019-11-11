@@ -90,6 +90,8 @@ def euclidean_distance(ordered_pairs, distance=0.5):
         for x_coord in ordered_pairs[index]:
             for y_coord in ordered_pairs[index][x_coord]:
                 x1 = x_coord
+                print("y_coord = {}".format(y_coord))
+                exit(0)
                 y1 = y_coord[0]
                 point_a = [x1, y1]
                 current = 0
