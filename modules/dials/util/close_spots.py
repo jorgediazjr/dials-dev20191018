@@ -97,6 +97,8 @@ def euclidean_distance(ordered_pairs, distance=0.5):
                     if current != index:
                         x2 = list(ordered_pairs[current].keys())[0]
                         for _y in ordered_pairs[current][x2]:
+                            print("_y = {}".format(_y))
+                            exit(0)
                             y2 = _y[0]
                             point_b = [x2, y2]
                             dist = find_distance(point_a, point_b)
