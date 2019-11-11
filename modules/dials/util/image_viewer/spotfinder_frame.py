@@ -1680,7 +1680,7 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.find_spots_phil = "find_spots.phil"
         print("self.params = {}".format(self.params)) # JAD7
         print("dir(PARAM) = {}".format(dir(self.params))) # JAD7
-        print("self.params.close_spots = {}".format(self.params.close_spots))
+        print("self.params.close_spots = {}".format(self.params.show_close_spots))
         #self.settings.close_spots = self.params.close_spots # JAD7
         self._sizer = wx.BoxSizer(wx.VERTICAL)
         s = self._sizer
