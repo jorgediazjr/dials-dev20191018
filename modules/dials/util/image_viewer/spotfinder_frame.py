@@ -1678,8 +1678,7 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.min_local = self.params.min_local
         self.settings.gain = self.params.gain
         self.settings.find_spots_phil = "find_spots.phil"
-        for param in self.params:
-            print("PARAM = {}".format(param)) # JAD7
+        print("dir(PARAM) = {}".format(dir(self.params))) # JAD7
         # self.settings.close_spots = self.params.close_spots # JAD7: J. DIAZ ADDED THIS LINE
         self._sizer = wx.BoxSizer(wx.VERTICAL)
         s = self._sizer
