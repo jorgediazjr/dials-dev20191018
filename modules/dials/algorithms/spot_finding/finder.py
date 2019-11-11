@@ -749,6 +749,7 @@ class SpotFinder(object):
         reflections = flex.reflection_table()
         print("reflections = {}".format(reflections))
         print("dir(reflections) = {}".format(dir(reflections)))
+        print("reflections.items() = {}".format(reflections.items()))
         print("reflections.keys() = {}".format(reflections.keys()))
         print("dir(reflections.keys() ) = {}".format(dir(reflections.keys())))
         print("dict(reflections.keys()) = {}".format(dict(reflections.keys())))
