@@ -29,9 +29,9 @@ def get_xyz_coords(result):
     return xyz_coords
 
 
-def order_xyz_coords(xyz_coords):
+def order_dictionary(dictionary):
     import collections
-    return collections.OrderedDict(sorted(xyz_coords.items()))
+    return collections.OrderedDict(sorted(dictionary.items()))
 
 
 def add_index_to_pairs(ordered_pairs):
@@ -125,13 +125,12 @@ def main(reflections):
     result = read_in_file()
     xyz_coords = get_xyz_coords(result)
 
-    ordered_pairs = order_xyz_coords(xyz_coords)
-    exit(0)
+    ordered_pairs = order_dictionary(xyz_coords)
     ordered_pairs = add_index_to_pairs(ordered_pairs)
+    exit(0)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_pairs)
 
-    import collections
-    closest_pairs = collections.OrderedDict(sorted(closest_pairs.items()))
+    closest_pairs = order_dictionary(closest_pairs)
     print("JAD7: Number of close spots = {}".format(len(closest_pairs)))
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
