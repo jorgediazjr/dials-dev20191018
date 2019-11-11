@@ -15,19 +15,19 @@ def read_in_file():
 
 def get_xyz_coords(result):
     print("JAD7: In get_xy_pairs()")
-    xyz_pairs = {}
+    xyz_coords = {}
     centroids = result['xyzobs.px.value']
 
     for i in range(len(centroids)):
         x = centroids[i][0]
         y = centroids[i][1]
         z = centroids[i][2]
-        if x in xy_pairs:
-            xyz_pairs[x].append([y, z])
+        if x in coords:
+            xyz_coords[x].append([y, z])
             continue
-        xyz_pairs[x] = [y, z]
+        xyz_coords[x] = [y, z]
 
-    return xyz_pairs
+    return xyz_coords
 
 
 def order_xyz_coords(xyz_coords):
