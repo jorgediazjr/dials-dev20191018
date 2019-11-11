@@ -92,6 +92,7 @@ class SpotFrame(XrayFrame):
         self.viewer.frames = self.imagesets
         self.dials_spotfinder_layers = []
         self.shoebox_layer = None
+        self.clsoe_spots = None # JAD7
         self.ctr_mass_layer = None
         self.max_pix_layer = None
         self.predictions_layer = None
@@ -1677,7 +1678,8 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.min_local = self.params.min_local
         self.settings.gain = self.params.gain
         self.settings.find_spots_phil = "find_spots.phil"
-        self.settings.close_spots = self.params.close_spots # JAD7: J. DIAZ ADDED THIS LINE
+        print("self.params = {}".format(self.params)) # JAD7
+        # self.settings.close_spots = self.params.close_spots # JAD7: J. DIAZ ADDED THIS LINE
         self._sizer = wx.BoxSizer(wx.VERTICAL)
         s = self._sizer
         self.SetSizer(self._sizer)
