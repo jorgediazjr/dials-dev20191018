@@ -130,6 +130,9 @@ def main(reflections):
         print("{} => {}".format(x, ordered_points[x]))
 
     ordered_points = add_index_to_pairs(ordered_points)
+    for index in ordered_points:
+        for x in ordered_points[index]:
+            print("{}: {} => {}".format(index, x, ordered_points[index][x]))
     exit(0)
     close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_points)
 
