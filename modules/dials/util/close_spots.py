@@ -130,6 +130,9 @@ def main(reflections):
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
+    reflections['yaya'] = 'yayay'
+
+    print("reflections.keys = {}".format(reflections.keys()))
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
         bbox
