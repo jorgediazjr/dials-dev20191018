@@ -88,6 +88,8 @@ def euclidean_distance(ordered_pairs, distance=0.5):
     midpoints = dict()      # the midpoints between the close pairs
     for index in ordered_pairs:
         for x_coord in ordered_pairs[index]:
+            print("ordered_pairs[index][x_coord] = {}".format(ordered_pairs[index][x_coord]))
+            exit(0)
             for y_coord in ordered_pairs[index][x_coord]:
                 x1 = x_coord
                 print("y_coord = {}".format(y_coord))
