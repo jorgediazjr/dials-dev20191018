@@ -1652,6 +1652,9 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.brightness = self.params.brightness
         self.settings.color_scheme = self.params.color_scheme
         self.settings.show_spotfinder_spots = False
+        print("self.params = {}".format(self.params)) # JAD7
+        print("dir(PARAM) = {}".format(dir(self.params))) # JAD7
+        self.settings.show_close_spots = self.params.show_close_spots # JAD7
         self.settings.show_dials_spotfinder_spots = True
         self.settings.show_resolution_rings = self.params.show_resolution_rings
         self.settings.untrusted = self.params.masking.untrusted
@@ -1678,10 +1681,6 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.min_local = self.params.min_local
         self.settings.gain = self.params.gain
         self.settings.find_spots_phil = "find_spots.phil"
-        print("self.params = {}".format(self.params)) # JAD7
-        print("dir(PARAM) = {}".format(dir(self.params))) # JAD7
-        print("self.params.close_spots = {}".format(self.params.show_close_spots))
-        #self.settings.close_spots = self.params.close_spots # JAD7
         self._sizer = wx.BoxSizer(wx.VERTICAL)
         s = self._sizer
         self.SetSizer(self._sizer)
