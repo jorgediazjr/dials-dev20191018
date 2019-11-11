@@ -1274,6 +1274,8 @@ class SpotFrame(XrayFrame):
 
         for ref_list_id, ref_list in enumerate(self.reflections):
 
+            print("ref_list = {}".format(ref_list))
+            
             # If we have more than one imageset, then we could be on the wrong one
             if not self.have_one_imageset:
                 exp_filter = self.__get_imageset_filter(ref_list, imageset)
@@ -1995,7 +1997,7 @@ class SpotSettingsPanel(wx.Panel):
             self.settings.show_max_pix = self.max_pix.GetValue()
             self.settings.show_all_pix = self.all_pix.GetValue()
             self.settings.show_shoebox = self.shoebox.GetValue()
-            self.settings.show_close_spots = self.show_close_spots.GetValue()
+            self.settings.show_close_spots = self.show_close_spots.GetValue() # JAD7
             self.settings.show_indexed = self.indexed.GetValue()
             self.settings.show_integrated = self.integrated.GetValue()
             self.settings.show_predictions = self.predictions.GetValue()
