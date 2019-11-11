@@ -1274,8 +1274,8 @@ class SpotFrame(XrayFrame):
 
         for ref_list_id, ref_list in enumerate(self.reflections):
 
-            print("ref_list = {}".format(ref_list))
-            
+            print("ref_list[0] = {}".format(ref_list[0]))
+
             # If we have more than one imageset, then we could be on the wrong one
             if not self.have_one_imageset:
                 exp_filter = self.__get_imageset_filter(ref_list, imageset)
