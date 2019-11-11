@@ -100,7 +100,6 @@ def euclidean_distance(ordered_pairs, distance=0.5):
                     x2 = list(ordered_pairs[current].keys())[0]
                     y2 = ordered_pairs[current][x2][0]
                     print("x2 = {} , y2 = {}".format(x2, y2))
-                    exit(0)
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b)
@@ -131,7 +130,6 @@ def main(reflections):
 
     closest_pairs = order_dictionary(closest_pairs)
 
-    exit(0)
     print("JAD7: Number of close spots = {}".format(len(closest_pairs)))
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
