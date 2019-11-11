@@ -206,19 +206,14 @@ class _(object):
         :param filename: The pickle filename
         :return: The reflection table
         """
-        print("JAD7: WE ARE IN FROM PICKLE FUNCTION")
         if filename and hasattr(filename, "__fspath__"):
             filename = filename.__fspath__()
-        print("JAD7: filename => {}".format(filename))
         with libtbx.smart_open.for_reading(filename, "rb") as infile:
             if six.PY3:
                 result = pickle.load(infile, encoding="bytes")
             else:
-                print("INFILE = {}".format(infile))
                 result = pickle.load(infile)
-            print("JAD7: What is going on?")
             assert isinstance(result, dials_array_family_flex_ext.reflection_table)
-            print("JAD7: Result => {}".format(result))
             return result
 
     def as_msgpack_file(self, filename):
