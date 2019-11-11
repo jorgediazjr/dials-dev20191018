@@ -749,6 +749,7 @@ class SpotFinder(object):
         reflections = flex.reflection_table()
         print("reflections.keys() = {}".format(reflections.keys()))
         print("dir(reflections.keys() ) = {}".format(dir(reflections.keys())))
+        print("reflections.keys().next() = {}".format(reflections.keys().next()))
         for i, experiment in enumerate(experiments):
 
             imageset = experiment.imageset
