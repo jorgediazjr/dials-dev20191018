@@ -22,7 +22,7 @@ def get_xyz_coords(result):
         x = centroids[i][0]
         y = centroids[i][1]
         z = centroids[i][2]
-        if x in coords:
+        if x in xyz_coords:
             xyz_coords[x].append([y, z])
             continue
         xyz_coords[x] = [y, z]
