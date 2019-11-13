@@ -134,6 +134,7 @@ def main(reflections):
     from scitbx.array_family import flex
     print("dir(flex) = {}".format(dir(flex)))
     vec3 = flex.vec3_double([(0.0, 0.0, 0.0)])
+    print("reflections.nrows() = {}".format(reflections.nrows()))
     reflections['close'] = vec3
 
     print("reflections.keys = {}".format(reflections.keys()))
