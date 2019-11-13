@@ -118,7 +118,7 @@ def save_spots_in_vec3(close_points):
     
     def flatten_closest_points(close_points):
         points = []
-        for i in closest_points:
+        for i in close_points:
             points.append(i[0])
             points.append(i[1])
         return points
