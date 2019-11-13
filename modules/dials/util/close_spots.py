@@ -116,7 +116,7 @@ def euclidean_distance(ordered_points, distance=0.5):
 
 def save_spots_in_vec3(closest_pairs):
     pass
-    
+
 
 def main(reflections):
     result = read_in_file()
@@ -135,7 +135,7 @@ def main(reflections):
     for i in closest_points:
         print("{:.2f} <=> {:.2f}".format(i, closest_points[i][0]))
 
-'''
+    '''
     from scitbx.array_family import flex
     print("dir(flex) = {}".format(dir(flex)))
     vec3 = flex.vec3_double([(0.0, 0.0, 0.0)])
