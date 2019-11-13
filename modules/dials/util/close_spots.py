@@ -141,6 +141,7 @@ def main(reflections):
     for i in closest_points:
         print("{:.2f} <=> {:.2f}".format(i, closest_points[i][0]))
 
+    print("JAD7: Number of close spots = {}".format(len(close_points)))
     for i in close_points:
         print("{}".format(i))
 
