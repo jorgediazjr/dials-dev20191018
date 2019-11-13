@@ -82,28 +82,28 @@ def units_distance(p, q):
         return 0.5
 
 
-def euclidean_distance(ordered_pairs, distance=0.5):
-    close_pairs = []        # these are pairs of points that are close together
-    closest_pairs = dict()  # this has x,y values that are closest
+def euclidean_distance(ordered_points, distance=0.5):
+    close_points = []        # these are pairs of points that are close together
+    closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
-    for index in ordered_pairs:
-        for x_coord in ordered_pairs[index]:
+    for index in ordered_points:
+        for x_coord in ordered_points[index]:
             x1 = x_coord
-            y1 = ordered_pairs[index][x_coord][0]
+            y1 = ordered_points[index][x_coord][0]
             point_a = [x1, y1]
             current = 0
-            while current < len(ordered_pairs):
+            while current < len(ordered_points):
                 if current != index:
-                    x2 = list(ordered_pairs[current].keys())[0]
-                    y2 = ordered_pairs[current][x2][0]
+                    x2 = list(ordered_points[current].keys())[0]
+                    y2 = ordered_points[current][x2][0]
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b)
                     if dist <= distance:
                         pair = [point_a, point_b]
                         print("{}\t<-- {:.2f} -->\t{}\tWITHIN {}".format(point_a, dist, point_b, distance))
-                        close_pairs.append(pair)
-                        closest_pairs[point_b[0]] = [point_b[1]]
+                        close_points.append(pair)
+                        closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
                         midpoint_x = (point_a[0] + point_b[0]) / 2
                         midpoint_y = (point_a[1] + point_b[1]) / 2
@@ -111,8 +111,11 @@ def euclidean_distance(ordered_pairs, distance=0.5):
                     current += 1
                 else:
                     current += 1
-    return close_pairs, midpoints, closest_pairs
+    return close_points, midpoints, closest_points
 
+
+def save_spots_in_vec3(closest_pairs):
+    for pair in closest
 
 def main(reflections):
     result = read_in_file()
@@ -123,23 +126,27 @@ def main(reflections):
 
     ordered_points = add_index_to_pairs(ordered_points)
     
-    close_pairs, midpoints, closest_pairs = euclidean_distance(ordered_points)
+    close_points, midpoints, closest_points = euclidean_distance(ordered_points)
 
-    closest_pairs = order_dictionary(closest_pairs)
+    closest_points = order_dictionary(closest_points)
 
-    print("JAD7: Number of close spots = {}".format(len(closest_pairs)))
-    for i in closest_pairs:
-        print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
+    print("JAD7: Number of close spots = {}".format(len(closest_points)))
+    for i in closest_points:
+        print("{:.2f} <=> {:.2f}".format(i, closest_points[i][0]))
 
+'''
     from scitbx.array_family import flex
     print("dir(flex) = {}".format(dir(flex)))
     vec3 = flex.vec3_double([(0.0, 0.0, 0.0)])
     print("dir(vec3) = {}".format(dir(vec3)))
-    
+
     print("reflections.nrows() = {}".format(reflections.nrows()))
     reflections['close'] = vec3
 
     print("reflections.keys = {}".format(reflections.keys()))
+
+    '''
+    
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
         bbox
