@@ -115,7 +115,7 @@ def euclidean_distance(ordered_points, distance=0.5):
 
 
 def save_spots_in_vec3(close_points):
-    
+    from scitbx.array_family import flex
     def flatten_closest_points(close_points):
         points = []
         for i in close_points:
@@ -126,6 +126,8 @@ def save_spots_in_vec3(close_points):
     close_points = flatten_closest_points(close_points)
     print("JAD7: Number of close spots = {}".format(len(close_points)))
     print(close_points)
+
+    vec2 = flex.vec2_double()
     
 
 
