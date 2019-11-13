@@ -130,7 +130,7 @@ def main(reflections):
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
-    reflections['hello'] = flex.reflection_table.vec3(0.0, 0.0, 0.0)
+    reflections['hello'] = flex.vec3_double(0.0, 0.0, 0.0)
 
     print("reflections.keys = {}".format(reflections.keys()))
     '''
