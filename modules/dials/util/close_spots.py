@@ -131,6 +131,10 @@ def save_spots_in_vec3(close_points):
 
     for point in close_points:
         vec2.append(point)
+
+    print("printing from vec2")
+    for i in vec2:
+        print(i)
     
 
 
