@@ -128,6 +128,9 @@ def save_spots_in_vec3(close_points):
     print(close_points)
 
     vec2 = flex.vec2_double()
+
+    for point in close_points:
+        vec2.append(point)
     
 
 
