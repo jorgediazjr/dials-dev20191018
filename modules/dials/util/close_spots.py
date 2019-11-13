@@ -114,8 +114,14 @@ def euclidean_distance(ordered_points, distance=0.5):
     return close_points, midpoints, closest_points
 
 
-def save_spots_in_vec3(closest_pairs):
-    pass
+def save_spots_in_vec3(closest_points):
+    
+    def flatten_closest_points(closest_points):
+        points = []
+        for i in closest_points:
+            points.append(i)
+            points.append(closest_points[i][0])
+    
 
 
 def main(reflections):
@@ -134,6 +140,9 @@ def main(reflections):
     print("JAD7: Number of close spots = {}".format(len(closest_points)))
     for i in closest_points:
         print("{:.2f} <=> {:.2f}".format(i, closest_points[i][0]))
+
+    for i in close_points:
+        print("{}".format(i))
 
     '''
     from scitbx.array_family import flex
