@@ -115,7 +115,8 @@ def euclidean_distance(ordered_points, distance=0.5):
 
 
 def save_spots_in_vec3(closest_pairs):
-    for pair in closest
+    pass
+    
 
 def main(reflections):
     result = read_in_file()
@@ -146,7 +147,7 @@ def main(reflections):
     print("reflections.keys = {}".format(reflections.keys()))
 
     '''
-    
+
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
         bbox
