@@ -133,7 +133,7 @@ def main(reflections):
 
     from scitbx.array_family import flex
     print("dir(flex) = {}".format(dir(flex)))
-    reflections['hello'] = flex.vec3(0.0, 0.0, 0.0)
+    reflections['hello'] = flex.vec3_double(0.0, 0.0, 0.0)
 
     print("reflections.keys = {}".format(reflections.keys()))
     '''
