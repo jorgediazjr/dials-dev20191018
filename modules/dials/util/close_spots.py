@@ -124,6 +124,7 @@ def save_spots_in_vec3(close_points):
         return points
 
     close_points = flatten_closest_points(close_points)
+    print("JAD7: Number of close spots = {}".format(len(close_points)))
     print(close_points)
     
 
@@ -145,9 +146,7 @@ def main(reflections):
     for i in closest_points:
         print("{:.2f} <=> {:.2f}".format(i, closest_points[i][0]))
 
-    print("JAD7: Number of close spots = {}".format(len(close_points)))
-    for i in close_points:
-        print("{}".format(i))
+    save_spots_in_vec3(close_points)
 
     '''
     from scitbx.array_family import flex
