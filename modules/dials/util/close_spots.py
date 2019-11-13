@@ -6,10 +6,10 @@ are close to each other from the reflections
 that are found by running dials.find_spots
 
 '''
-from dials.array_family import flex
-from scitbx.array_family import flex
+
 
 def read_in_file():
+    from dials.array_family import flex
     return flex.reflection_table.from_file("strong.refl")
 
 
@@ -131,6 +131,7 @@ def main(reflections):
     for i in closest_pairs:
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
+    from scitbx.array_family import flex
     reflections['hello'] = flex.vec3(0.0, 0.0, 0.0)
 
     print("reflections.keys = {}".format(reflections.keys()))
