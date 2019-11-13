@@ -114,13 +114,17 @@ def euclidean_distance(ordered_points, distance=0.5):
     return close_points, midpoints, closest_points
 
 
-def save_spots_in_vec3(closest_points):
+def save_spots_in_vec3(close_points):
     
-    def flatten_closest_points(closest_points):
+    def flatten_closest_points(close_points):
         points = []
         for i in closest_points:
-            points.append(i)
-            points.append(closest_points[i][0])
+            points.append(i[0])
+            points.append(i[1])
+        return points
+
+    close_points = flatten_closest_points(close_points)
+    print(close_points)
     
 
 
