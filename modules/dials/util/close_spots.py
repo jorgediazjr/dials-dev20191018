@@ -132,6 +132,7 @@ def main(reflections):
         print("{:.2f} <=> {:.2f}".format(i, closest_pairs[i][0]))
 
     from scitbx.array_family import flex
+    print("dir(flex) = {}".format(dir(flex)))
     reflections['hello'] = flex.vec3(0.0, 0.0, 0.0)
 
     print("reflections.keys = {}".format(reflections.keys()))
