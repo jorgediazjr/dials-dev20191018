@@ -388,6 +388,7 @@ namespace dials { namespace af { namespace boost_python { namespace flex_table_s
                       const typename T::key_type &key,
                       const af::const_ref<U> &data) {
     self.erase(key);
+    std::cout << data.size() << endl;
     DIALS_ASSERT(self.ncols() == 0 || data.size() == self.nrows());
     self.resize(data.size());
     af::shared<U> column = self[key];
