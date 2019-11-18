@@ -162,6 +162,8 @@ def main(reflections):
 
     reflections['close'] = close_vec2
 
+    print("reflections['close'] = {}".format(reflections['close']))
+
     '''
     from scitbx.array_family import flex
     vec3 = flex.vec3_double([(0.0, 0.0, 0.0)])
