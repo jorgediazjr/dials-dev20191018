@@ -1152,7 +1152,8 @@ class SpotFrame(XrayFrame):
                     colour="#F62817",
                     update=False,
                 )
-            if self.show_close_spots and len(close_spots):
+            # JAD7 added this here
+            if self.settings.show_close_spots and len(close_spots):
                 self.show_close_spots_timer.start()
                 self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
@@ -1164,6 +1165,7 @@ class SpotFrame(XrayFrame):
                     update=False,
                     )
                 self.show_close_spots_timer.stop()
+            # JAD7 ended this here
 
         self.sum_images()
         # if self.params.sum_images == 1:
