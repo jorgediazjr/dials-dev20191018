@@ -132,6 +132,10 @@ def save_spots_in_vec2(close_points):
     return close_vec2
 
 
+def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
+    print("len(reflections) = {} and len(close_vec2) = {}".format(len(reflections, len(close_vec2))))
+
+
 def main(reflections):
     result = read_in_file()
 
@@ -148,8 +152,9 @@ def main(reflections):
     close_vec2 = save_spots_in_vec2(close_points)
 
     print("dir(close_vec2) = {}".format(dir(close_vec2)))
+    make_vec2_same_num_rows_for_reflections(close_vec2, reflections)
 
-    reflections['close'] = close_vec2
+    #reflections['close'] = close_vec2
 
     '''
     from scitbx.array_family import flex
