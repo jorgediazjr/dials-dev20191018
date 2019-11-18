@@ -2031,7 +2031,7 @@ class SpotSettingsPanel(wx.Panel):
             self.settings.show_max_pix = self.max_pix.GetValue()
             self.settings.show_all_pix = self.all_pix.GetValue()
             self.settings.show_shoebox = self.shoebox.GetValue()
-            self.settings.show_close_spots = self.show_close_spots.GetValue() # JAD7
+            self.settings.show_close_spots = self.close_spots.GetValue() # JAD7
             print("self.settings.show_close_spots = {}".format(self.settings.show_close_spots)) # jAD7
             self.settings.show_indexed = self.indexed.GetValue()
             self.settings.show_integrated = self.integrated.GetValue()
