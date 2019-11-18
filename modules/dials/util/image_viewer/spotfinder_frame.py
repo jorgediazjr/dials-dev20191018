@@ -1160,13 +1160,13 @@ class SpotFrame(XrayFrame):
                     print("CLOSE = {}".format(c_spot))
                 self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
-                    color="pink",
+                    color="brown",
                     name="<close_spot_layer>",
                     radius=2,
                     renderer=self.pyslip.LightweightDrawPointLayer,
                     show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
                     update=False,
-                    )
+                )
                 self.show_close_spots_timer.stop()
             # JAD7 ended this here
 
@@ -1525,10 +1525,13 @@ class SpotFrame(XrayFrame):
                                 )
             # JAD7 THIS IS WHAT I ADDED
             if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+                print("XYPXCLOSE IN REFLIST")
                 self.show_close_spots_timer.start()
                 close_spots = ref_list['xy.px.close']
                 for close_spot in close_spots:
-                    if close_spot[0] is not float('-inf'):
+                    print("close_spot[0] = {}".format(close_spot[0]))
+                    if close_spot[0] is not (-float(0)):
+                        print("close_spot is good = {}".format(close_spot))
                         close_spot_data.append(close_spot)
                 self.show_close_spots_timer.stop()
             # AND IT ENDS HERE - JAD7
