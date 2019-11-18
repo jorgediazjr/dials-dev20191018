@@ -1106,7 +1106,7 @@ class SpotFrame(XrayFrame):
                     color="brown",
                     name="<close_spot_layer>",
                     radius=2,
-                    renderer=self.pyslip.LightweightDrawPointLayer2,
+                    renderer=self.pyslip.LightweightDrawPointLayer,
                     show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
                     update=False,
                 )
@@ -1828,9 +1828,9 @@ class SpotSettingsPanel(wx.Panel):
         grid.Add(self.indexed, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
         # JAD7 Close spots points
-        self.show_close_spots = wx.CheckBox(self, -1, "Show close spots")        #JAD7
-        self.show_close_spots.SetValue(self.settings.show_close_spots)           #JAD7
-        grid.Add(self.show_close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5) #JAD7
+        self.close_spots = wx.CheckBox(self, -1, "Show close spots")        #JAD7
+        self.close_spots.SetValue(self.settings.show_close_spots)           #JAD7
+        grid.Add(self.close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5) #JAD7
 
         # Integration shoeboxes only
         self.integrated = wx.CheckBox(self, -1, "Integrated only")
@@ -2000,7 +2000,7 @@ class SpotSettingsPanel(wx.Panel):
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.indexed)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.integrated)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.show_basis_vectors)
-        self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.show_close_spots) # JAD7
+        self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.close_spots) # JAD7
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdateShowMask, self.show_mask)
 
         self.Bind(wx.EVT_UPDATE_UI, self.UpdateZoomCtrl)
@@ -2090,7 +2090,7 @@ class SpotSettingsPanel(wx.Panel):
             self.max_pix,
             self.all_pix,
             self.shoebox,
-            self.show_close_spots, #JAD7
+            self.close_spots, #JAD7
             self.predictions,
             self.miller_indices,
             self.show_mask,
