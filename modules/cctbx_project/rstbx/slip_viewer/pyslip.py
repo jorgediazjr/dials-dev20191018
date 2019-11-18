@@ -862,7 +862,6 @@ class PySlip(_BufferedCanvas):
                          'offset_y'   Y offset
                          'data'       point data object
         """
-        print("Points = {}".format(points))
         # get global values
         default_placement = kwargs.get('placement',
                                        self.DefaultPointPlacement)

@@ -1102,7 +1102,7 @@ class SpotFrame(XrayFrame):
                 self.show_close_spots_timer.start()
                 print("We are inside the update for adding point layer")
                 self.close_spots_layer = self.pyslip.AddPointLayer(
-                    close_spot_data,
+                    #close_spot_data,
                     color="brown",
                     name="<close_spot_layer>",
                     radius=10,
