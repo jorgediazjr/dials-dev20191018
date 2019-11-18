@@ -140,7 +140,6 @@ class Script(object):
 
         # Delete the shoeboxes
         if not params.output.shoeboxes:
-            print("deleting shoeboxes")
             del reflections["shoebox"]
 
         # ascii spot count per image plot
@@ -166,7 +165,7 @@ class Script(object):
         # this is my portion
         if params.output.closespots:
             from dials.util import close_spots
-            close_spots.main(reflections)
+            reflections = close_spots.main(reflections)
         # this ends my portion
 
         # Save the experiments

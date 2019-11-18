@@ -156,23 +156,12 @@ def main(reflections):
     closest_points = order_dictionary(closest_points)
 
     close_vec2 = save_spots_in_vec2(close_points)
-
-    print("dir(close_vec2) = {}".format(dir(close_vec2)))
+    
     close_vec2 = make_vec2_same_num_rows_for_reflections(close_vec2, reflections)
 
-    reflections['close'] = close_vec2
+    reflections['xy.px.close'] = close_vec2
 
-    for close_spot in reflections['close']:
-        print("reflections['close'] = {}".format(close_spot))
-
-    '''
-    from scitbx.array_family import flex
-    vec3 = flex.vec3_double([(0.0, 0.0, 0.0)])
-
-    print("reflections.nrows() = {}".format(reflections.nrows()))
-    reflections['close'] = vec3
-
-    '''
+    return reflections
 
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
