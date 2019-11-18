@@ -1097,6 +1097,20 @@ class SpotFrame(XrayFrame):
                         )
                     print("len of all pix data[0] = {}".format(len(all_pix_data[0])))
                 self.draw_all_pix_timer.stop()
+            # JAD7 added this here
+            if self.settings.show_close_spots and len(close_spot_data):
+                self.show_close_spots_timer.start()
+                self.close_spots_layer = self.pyslip.AddPointLayer(
+                    close_spot_data,
+                    color="brown",
+                    name="<close_spot_layer>",
+                    radius=2,
+                    renderer=self.pyslip.LightweightDrawPointLayer2,
+                    show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
+                    update=False,
+                )
+                self.show_close_spots_timer.stop()
+            # JAD7 ended this here
             if self.settings.show_shoebox and len(shoebox_data):
                 self.draw_shoebox_timer.start()
                 self.shoebox_layer = self.pyslip.AddPolygonLayer(
@@ -1153,20 +1167,6 @@ class SpotFrame(XrayFrame):
                     colour="#F62817",
                     update=False,
                 )
-            # JAD7 added this here
-            if self.settings.show_close_spots and len(close_spot_data):
-                self.show_close_spots_timer.start()
-                self.close_spots_layer = self.pyslip.AddPointLayer(
-                    close_spot_data,
-                    color="brown",
-                    name="<close_spot_layer>",
-                    radius=2,
-                    renderer=self.pyslip.LightweightDrawPointLayer2,
-                    show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
-                    update=False,
-                )
-                self.show_close_spots_timer.stop()
-            # JAD7 ended this here
 
         self.sum_images()
         # if self.params.sum_images == 1:
@@ -1294,6 +1294,7 @@ class SpotFrame(XrayFrame):
 
         for ref_list_id, ref_list in enumerate(self.reflections):
 
+            print("ref_list = {}".format(ref_list))
             print("ref_list[0] = {}".format(ref_list[0])) #JAD7
             print("ref_list[0][xyzobs.px.value] = {}".format(ref_list[0]['xyzobs.px.value'])) #JAD7
 
@@ -1521,16 +1522,16 @@ class SpotFrame(XrayFrame):
                                         },
                                     )
                                 )
-            # JAD7 THIS IS WHAT I ADDED
-            if 'xy.px.close' in ref_list and self.settings.show_close_spots:
-                self.show_close_spots_timer.start()
-                close_spots = ref_list['xy.px.close']
-                for close_spot in close_spots:
-                    if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                        close_spot_data.append(close_spot)
-                self.show_close_spots_timer.stop()
-                print("close_spot_data = {}".format(close_spot_data))
-            # AND IT ENDS HERE - JAD7
+        # JAD7 THIS IS WHAT I ADDED
+        if 'xy.px.close' in self.reflections and self.settings.show_close_spots:
+            self.show_close_spots_timer.start()
+            close_spots = self.reflections['xy.px.close']
+            for close_spot in close_spots:
+                if close_spot[0] != 0.0 and close_spot[1] != 0.0:
+                    close_spot_data.append(close_spot)
+            self.show_close_spots_timer.stop()
+            print("close_spot_data = {}".format(close_spot_data))
+        # AND IT ENDS HERE - JAD7
 
 
         if len(overlapped_data) > 0:
