@@ -153,6 +153,12 @@ class Script(object):
                 logger.info("\nHistogram of per-image spot count for imageset %i:" % i)
                 logger.info(ascii_plot)
 
+        # this is my portion
+        if params.output.closespots:
+            from dials.util import close_spots
+            reflections = close_spots.main(reflections)
+        # this ends my portion
+
         # Save the reflections to file
         logger.info("\n" + "-" * 80)
         reflections.as_file(params.output.reflections)
@@ -161,12 +167,6 @@ class Script(object):
                 len(reflections), params.output.reflections
             )
         )
-
-        # this is my portion
-        if params.output.closespots:
-            from dials.util import close_spots
-            reflections = close_spots.main(reflections)
-        # this ends my portion
 
         # Save the experiments
         if params.output.experiments:
