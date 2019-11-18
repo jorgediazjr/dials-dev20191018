@@ -133,6 +133,10 @@ def save_spots_in_vec2(close_points):
 
 
 def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
+    close_vec_len = len(close_vec2)
+    reflections_len = len(reflections)
+    while close_vec_len < reflections_len:
+        close_vec_len.append([float('-inf'), float('-inf')])
     print("len(reflections) = {} and len(close_vec2) = {}".format(len(reflections), len(close_vec2)))
 
 
