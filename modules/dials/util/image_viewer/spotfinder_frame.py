@@ -1155,6 +1155,7 @@ class SpotFrame(XrayFrame):
             # JAD7 added this here
             if self.settings.show_close_spots and len(close_spot_data):
                 self.show_close_spots_timer.start()
+                print("HELLO" * 7)
                 self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
                     color="pink",
