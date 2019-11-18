@@ -1157,7 +1157,7 @@ class SpotFrame(XrayFrame):
                 self.show_close_spots_timer.start()
                 self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
-                    color="yellow",
+                    color="pink",
                     name="<close_spot_layer>",
                     radius=2,
                     renderer=self.pyslip.LightweightDrawPointLayer,
