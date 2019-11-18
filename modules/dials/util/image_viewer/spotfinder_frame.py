@@ -1095,7 +1095,7 @@ class SpotFrame(XrayFrame):
                                 update=False,
                             )
                         )
-                    print("len of all pix data = {}".format(len(all_pix_data)))
+                    print("len of all pix data[0] = {}".format(len(all_pix_data[0])))
                 self.draw_all_pix_timer.stop()
             if self.settings.show_shoebox and len(shoebox_data):
                 self.draw_shoebox_timer.start()
