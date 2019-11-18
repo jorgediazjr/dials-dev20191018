@@ -968,6 +968,7 @@ class SpotFrame(XrayFrame):
             miller_indices_data = spotfinder_data.miller_indices_data
             vector_data = spotfinder_data.vector_data
             vector_text_data = spotfinder_data.vector_text_data
+            close_spot_data = spotfinder_data.close_spot_data
             if len(self.dials_spotfinder_layers) > 0:
                 for layer in self.dials_spotfinder_layers:
                     self.pyslip.DeleteLayer(layer, update=False)
@@ -1148,6 +1149,10 @@ class SpotFrame(XrayFrame):
                     colour="#F62817",
                     update=False,
                 )
+            if self.show_close_spots and len(close_spots):
+                self.show_close_spots_timer.start()
+
+                self.show_close_spots_timer.stop()
 
         self.sum_images()
         # if self.params.sum_images == 1:
@@ -1253,6 +1258,7 @@ class SpotFrame(XrayFrame):
         miller_indices_data = []
         vector_data = []
         vector_text_data = []
+        close_spot_data = [] #JAD7
         detector = self.pyslip.tiles.raw_image.get_detector()
         scan = self.pyslip.tiles.raw_image.get_scan()
         to_degrees = 180 / math.pi
@@ -1274,8 +1280,8 @@ class SpotFrame(XrayFrame):
 
         for ref_list_id, ref_list in enumerate(self.reflections):
 
-            print("ref_list[0] = {}".format(ref_list[0]))
-            print("ref_list[0][xyzobs.px.value] = {}".format(ref_list[0]['xyzobs.px.value']))
+            print("ref_list[0] = {}".format(ref_list[0])) #JAD7
+            print("ref_list[0][xyzobs.px.value] = {}".format(ref_list[0]['xyzobs.px.value'])) #JAD7
 
             # If we have more than one imageset, then we could be on the wrong one
             if not self.have_one_imageset:
@@ -1591,6 +1597,7 @@ class SpotFrame(XrayFrame):
             miller_indices_data=miller_indices_data,
             vector_data=vector_data,
             vector_text_data=vector_text_data,
+            close_spot_data=close_spot_data #JAD7
         )
 
     def get_detector(self):
@@ -2056,7 +2063,7 @@ class SpotSettingsPanel(wx.Panel):
             self.max_pix,
             self.all_pix,
             self.shoebox,
-            self.show_close_spots,
+            self.show_close_spots, #JAD7
             self.predictions,
             self.miller_indices,
             self.show_mask,

@@ -101,7 +101,7 @@ def euclidean_distance(ordered_points, distance=0.5):
                     distance = units_distance(point_a, point_b)
                     if dist <= distance:
                         pair = [point_a, point_b]
-                        print("{}\t<-- {:.2f} -->\t{}\tWITHIN {}".format(point_a, dist, point_b, distance))
+                        print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
                         close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
@@ -114,8 +114,10 @@ def euclidean_distance(ordered_points, distance=0.5):
     return close_points, midpoints, closest_points
 
 
-def save_spots_in_vec3(close_points):
+def save_spots_in_vec2(close_points):
     from scitbx.array_family import flex
+    close_vec2 = flex.vec2_double()
+
     def flatten_closest_points(close_points):
         points = []
         for i in close_points:
@@ -124,18 +126,10 @@ def save_spots_in_vec3(close_points):
         return points
 
     close_points = flatten_closest_points(close_points)
-    print("JAD7: Number of close spots = {}".format(len(close_points)))
-    print(close_points)
-
-    vec2 = flex.vec2_double()
 
     for point in close_points:
-        vec2.append(point)
-
-    print("printing from vec2")
-    for i in vec2:
-        print(i)
-    
+        close_vec2.append(point)
+    return close_vec2
 
 
 def main(reflections):
@@ -151,22 +145,16 @@ def main(reflections):
 
     closest_points = order_dictionary(closest_points)
 
-    print("JAD7: Number of close spots = {}".format(len(closest_points)))
-    for i in closest_points:
-        print("{:.2f} <=> {:.2f}".format(i, closest_points[i][0]))
-
-    save_spots_in_vec3(close_points)
+    close_vec2 = save_spots_in_vec2(close_points)
+    
+    reflections['close'] = close_vec2
 
     '''
     from scitbx.array_family import flex
-    print("dir(flex) = {}".format(dir(flex)))
     vec3 = flex.vec3_double([(0.0, 0.0, 0.0)])
-    print("dir(vec3) = {}".format(dir(vec3)))
 
     print("reflections.nrows() = {}".format(reflections.nrows()))
     reflections['close'] = vec3
-
-    print("reflections.keys = {}".format(reflections.keys()))
 
     '''
 
