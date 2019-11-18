@@ -1530,7 +1530,7 @@ class SpotFrame(XrayFrame):
                 close_spots = ref_list['xy.px.close']
                 for close_spot in close_spots:
                     print("close_spot[0] = {}".format(close_spot[0]))
-                    if close_spot[0] is not (-float(0)):
+                    if close_spot[0] != 0.0 and close_spot[1] != 0.0:
                         print("close_spot is good = {}".format(close_spot))
                         close_spot_data.append(close_spot)
                 self.show_close_spots_timer.stop()
