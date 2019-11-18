@@ -92,7 +92,7 @@ class SpotFrame(XrayFrame):
         self.viewer.frames = self.imagesets
         self.dials_spotfinder_layers = []
         self.shoebox_layer = None
-        self.close_spots = None # JAD7
+        self.close_spots_layer = None # JAD7
         self.ctr_mass_layer = None
         self.max_pix_layer = None
         self.predictions_layer = None
@@ -1000,6 +1000,9 @@ class SpotFrame(XrayFrame):
             if self._resolution_text_layer is not None:
                 self.pyslip.DeleteLayer(self._resolution_text_layer, update=False)
                 self._resolution_text_layer = None
+            if self.close_spots_layer is not None:                                 #JAD7
+                self.pyslip.DeleteLayer(self.close_spots_layer, update=False)      #JAD7
+                self.close_spots_layer = None                                      #JAD7
 
             if self.settings.show_miller_indices and len(miller_indices_data):
                 self.miller_indices_layer = self.pyslip.AddTextLayer(
@@ -1151,7 +1154,15 @@ class SpotFrame(XrayFrame):
                 )
             if self.show_close_spots and len(close_spots):
                 self.show_close_spots_timer.start()
-
+                self.close_spots_layer = self.pyslip.AddPointLayer(
+                    close_spot_data,
+                    color="yellow",
+                    name="<close_spot_layer>",
+                    radius=2,
+                    renderer=self.pyslip.LightweightDrawPointLayer,
+                    show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
+                    update=False,
+                    )
                 self.show_close_spots_timer.stop()
 
         self.sum_images()
@@ -1507,6 +1518,15 @@ class SpotFrame(XrayFrame):
                                         },
                                     )
                                 )
+            # JAD7 THIS IS WHAT I ADDED
+            if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+                self.show_close_spots_timer.start()
+                close_spots = ref_list['xy.px.close']
+                for close_spot in close_spots:
+                    close_spot_data.append(close_spot)
+                self.show_close_spots_timer.stop()
+            # AND IT ENDS HERE - JAD7
+
 
         if len(overlapped_data) > 0:
             # show overlapped pixels in a different color
@@ -1802,9 +1822,9 @@ class SpotSettingsPanel(wx.Panel):
         grid.Add(self.indexed, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
         # JAD7 Close spots points
-        self.show_close_spots = wx.CheckBox(self, -1, "Show close spots")
-        self.show_close_spots.SetValue(self.settings.show_close_spots)
-        grid.Add(self.show_close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+        self.show_close_spots = wx.CheckBox(self, -1, "Show close spots")        #JAD7
+        self.show_close_spots.SetValue(self.settings.show_close_spots)           #JAD7
+        grid.Add(self.show_close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5) #JAD7
 
         # Integration shoeboxes only
         self.integrated = wx.CheckBox(self, -1, "Integrated only")
