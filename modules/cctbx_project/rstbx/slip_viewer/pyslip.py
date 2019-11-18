@@ -899,6 +899,7 @@ class PySlip(_BufferedCanvas):
 
             draw_data.append((x, y, placement.lower(),
                               radius, colour, offset_x, offset_y, data))
+            print("draw data = {}".format(draw_data)) # JAD7
 
         return self.AddLayer(kwargs.get("renderer",self.DrawPointLayer), draw_data, map_rel,
                              visible=visible, show_levels=show_levels,

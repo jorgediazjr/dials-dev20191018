@@ -1098,8 +1098,9 @@ class SpotFrame(XrayFrame):
                     print("len of all pix data[0] = {}".format(len(all_pix_data[0])))
                 self.draw_all_pix_timer.stop()
             # JAD7 added this here
-            if self.settings.show_close_spots and len(close_spot_data) > 1:
+            if self.settings.show_close_spots and len(close_spot_data) > 0:
                 self.show_close_spots_timer.start()
+                print("We are inside the update for adding point layer")
                 self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
                     color="brown",
