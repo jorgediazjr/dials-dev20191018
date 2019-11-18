@@ -147,7 +147,7 @@ def main(reflections):
 
     close_vec2 = save_spots_in_vec2(close_points)
 
-    print("dir(close_vec2) = {}".format(dir(close_vec2))
+    print("dir(close_vec2) = {}".format(dir(close_vec2)))
 
     reflections['close'] = close_vec2
 
