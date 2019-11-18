@@ -1122,6 +1122,7 @@ class SpotFrame(XrayFrame):
                 self.draw_ctr_mass_timer.stop()
             if self.settings.show_max_pix and len(max_pix_data):
                 self.draw_max_pix_timer.start()
+                print("max_pix_data = {}".format(max_pix_data))
                 self.max_pix_layer = self.pyslip.AddPointLayer(
                     max_pix_data,
                     color="pink",
@@ -1155,15 +1156,12 @@ class SpotFrame(XrayFrame):
             # JAD7 added this here
             if self.settings.show_close_spots and len(close_spot_data):
                 self.show_close_spots_timer.start()
-                print("HELLO " * 7)
-                for c_spot in close_spot_data:
-                    print("CLOSE = {}".format(c_spot))
                 self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
                     color="brown",
                     name="<close_spot_layer>",
                     radius=2,
-                    renderer=self.pyslip.LightweightDrawPointLayer,
+                    renderer=self.pyslip.LightweightDrawPointLayer2,
                     show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
                     update=False,
                 )
