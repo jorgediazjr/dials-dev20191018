@@ -136,7 +136,7 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     close_vec_len = len(close_vec2)
     reflections_len = len(reflections)
     while close_vec_len < reflections_len:
-        close_vec2.append([float('-inf'), float('-inf')])
+        close_vec2.append([float(-0), float(-0)])
         close_vec_len += 1
     print("len(reflections) = {} and len(close_vec2) = {}".format(len(reflections), len(close_vec2)))
     return close_vec2
@@ -156,11 +156,13 @@ def main(reflections):
     closest_points = order_dictionary(closest_points)
 
     close_vec2 = save_spots_in_vec2(close_points)
-    
+
     close_vec2 = make_vec2_same_num_rows_for_reflections(close_vec2, reflections)
 
     reflections['xy.px.close'] = close_vec2
 
+    for close in close_vec2:
+        print("CLOSE = {}".format(close))
     return reflections
 
     '''
