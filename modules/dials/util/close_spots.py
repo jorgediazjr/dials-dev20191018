@@ -137,6 +137,7 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     reflections_len = len(reflections)
     while close_vec_len < reflections_len:
         close_vec2.append([float('-inf'), float('-inf')])
+        close_vec_len += 1
     print("len(reflections) = {} and len(close_vec2) = {}".format(len(reflections), len(close_vec2)))
 
 
