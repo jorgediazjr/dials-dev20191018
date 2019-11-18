@@ -162,7 +162,8 @@ def main(reflections):
 
     reflections['close'] = close_vec2
 
-    print("reflections['close'] = {}".format(reflections['close']))
+    for close_spot in reflections['close']:
+        print("reflections['close'] = {}".format(close_spot))
 
     '''
     from scitbx.array_family import flex
