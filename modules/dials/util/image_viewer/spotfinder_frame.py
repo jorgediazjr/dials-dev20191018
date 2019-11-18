@@ -1525,7 +1525,8 @@ class SpotFrame(XrayFrame):
                 self.show_close_spots_timer.start()
                 close_spots = ref_list['xy.px.close']
                 for close_spot in close_spots:
-                    close_spot_data.append(close_spot)
+                    if close_spot[0] is not float('-inf'):
+                        close_spot_data.append(close_spot)
                 self.show_close_spots_timer.stop()
             # AND IT ENDS HERE - JAD7
 
