@@ -1095,6 +1095,7 @@ class SpotFrame(XrayFrame):
                                 update=False,
                             )
                         )
+                    print("len of all pix data = {}".format(len(all_pix_data)))
                 self.draw_all_pix_timer.stop()
             if self.settings.show_shoebox and len(shoebox_data):
                 self.draw_shoebox_timer.start()
@@ -1122,7 +1123,6 @@ class SpotFrame(XrayFrame):
                 self.draw_ctr_mass_timer.stop()
             if self.settings.show_max_pix and len(max_pix_data):
                 self.draw_max_pix_timer.start()
-                print("max_pix_data = {}".format(max_pix_data))
                 self.max_pix_layer = self.pyslip.AddPointLayer(
                     max_pix_data,
                     color="pink",
