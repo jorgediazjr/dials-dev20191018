@@ -146,7 +146,9 @@ def main(reflections):
     closest_points = order_dictionary(closest_points)
 
     close_vec2 = save_spots_in_vec2(close_points)
-    
+
+    print("close_vec2.nrows() = {}".format(close_vec2.nrows()))
+
     reflections['close'] = close_vec2
 
     '''
