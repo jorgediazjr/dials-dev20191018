@@ -1087,7 +1087,7 @@ class SpotFrame(XrayFrame):
                         self.dials_spotfinder_layers.append(
                             self.pyslip.AddPointLayer(
                                 all_pix_data[list(all_pix_data.keys())[0]],
-                                color="brown",
+                                color="green",
                                 name="<all_pix_layer>",
                                 radius=2,
                                 renderer=self.pyslip.LightweightDrawPointLayer2,
@@ -1105,8 +1105,7 @@ class SpotFrame(XrayFrame):
                     close_spot_data,
                     color="brown",
                     name="<close_spot_layer>",
-                    radius=2,
-                    renderer=self.pyslip.LightweightDrawPointLayer,
+                    radius=10,
                     show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
                     update=False,
                 )
