@@ -1533,6 +1533,7 @@ class SpotFrame(XrayFrame):
             print("close_spot_data = {}".format(close_spot_data))
         # AND IT ENDS HERE - JAD7
 
+        print("close_spot_data = {}".format(close_spot_data))
 
         if len(overlapped_data) > 0:
             # show overlapped pixels in a different color
