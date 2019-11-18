@@ -1525,15 +1525,13 @@ class SpotFrame(XrayFrame):
                                 )
             # JAD7 THIS IS WHAT I ADDED
             if 'xy.px.close' in ref_list and self.settings.show_close_spots:
-                print("XYPXCLOSE IN REFLIST")
                 self.show_close_spots_timer.start()
                 close_spots = ref_list['xy.px.close']
                 for close_spot in close_spots:
-                    print("close_spot[0] = {}".format(close_spot[0]))
                     if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                        print("close_spot is good = {}".format(close_spot))
                         close_spot_data.append(close_spot)
                 self.show_close_spots_timer.stop()
+                print("close_spot_data = {}".format(close_spot_data))
             # AND IT ENDS HERE - JAD7
 
 
