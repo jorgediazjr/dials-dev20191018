@@ -1097,8 +1097,8 @@ class SpotFrame(XrayFrame):
                         )
                     print("len of all pix data[0] = {}".format(len(all_pix_data[0])))
                 self.draw_all_pix_timer.stop()
-            # JAD7 added this here
-            if self.settings.show_close_spots and len(close_spot_data) > 0:
+            # JAD7 added this below
+            if self.settings.show_close_spots and len(close_spot_data):
                 self.show_close_spots_timer.start()
                 print("We are inside the update for adding point layer")
                 self.close_spots_layer = self.pyslip.AddPointLayer(
@@ -1110,7 +1110,7 @@ class SpotFrame(XrayFrame):
                     update=False,
                 )
                 self.show_close_spots_timer.stop()
-            # JAD7 ended this here
+            # JAD7 ended this above
             if self.settings.show_shoebox and len(shoebox_data):
                 self.draw_shoebox_timer.start()
                 self.shoebox_layer = self.pyslip.AddPolygonLayer(
@@ -1526,6 +1526,7 @@ class SpotFrame(XrayFrame):
             if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 close_spots = ref_list['xy.px.close']
+                print("close_spots in ref_list = {}".format(close_spots))
                 for close_spot in close_spots:
                     if close_spot[0] != 0.0 and close_spot[1] != 0.0:
                         close_spot_data.append(close_spot)
