@@ -1095,7 +1095,7 @@ class SpotFrame(XrayFrame):
                                 update=False,
                             )
                         )
-                    print("len of all pix data[0] = {}".format(len(all_pix_data[0])))
+                    print("len of all pix data = {}".format(len(all_pix_data)))
                 self.draw_all_pix_timer.stop()
             # JAD7 added this below
             if self.settings.show_close_spots and len(close_spot_data):
@@ -1255,6 +1255,7 @@ class SpotFrame(XrayFrame):
                 )
             return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
 
+        close_spot_dict = {"width": 2, "color": "6D00C1": "closed": False}
         shoebox_dict = {"width": 2, "color": "#0000FFA0", "closed": False}
         ctr_mass_dict = {"width": 2, "color": "#FF0000", "closed": False}
         vector_dict = {"width": 4, "color": "#F62817", "closed": False}
@@ -1459,6 +1460,32 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
+                    # JAD7 THIS IS WHAT I ADDED
+                    if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+                        self.show_close_spots_timer.start()
+                        close_spots = ref_list['xy.px.close']
+                        print("close_spots in ref_list = {}".format(close_spots))
+                        for close_spot in close_spots:
+                            if close_spot[0] != 0.0 and close_spot[1] != 0.0:
+                                x, y = map_coords(
+                                        close_spot[0], close_spot[1], reflection["panel"]
+                                )
+                                xm1, ym1 = map_coords(
+                                        close_spot[0] - 1, close_spot[1] - 1, reflection["panel"]
+                                )
+                                xp1, yp1 = map_coords(
+                                        close_spot[0] + 1, close_spot[1] + 1, reflection["panel"]
+                                )
+                                lines = [
+                                    (((x, ym1), (x, yp1)), close_spot_dict),
+                                    (((xm1, y), (xp1, y)), close_spot_dict),
+                                ]
+                                close_spot.extend(lines)
+                                #close_spot_data.append(close_spot)
+                                print("Close spot inside the get_spotfinder_data() = {}".format(close_spot))
+                        self.show_close_spots_timer.stop()
+                    # AND IT ENDS HERE - JAD7
+
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
                 or (self.settings.show_miller_indices and "miller_index" in ref_list)
@@ -1522,18 +1549,6 @@ class SpotFrame(XrayFrame):
                                         },
                                     )
                                 )
-            # JAD7 THIS IS WHAT I ADDED
-            if 'xy.px.close' in ref_list and self.settings.show_close_spots:
-                self.show_close_spots_timer.start()
-                close_spots = ref_list['xy.px.close']
-                print("close_spots in ref_list = {}".format(close_spots))
-                for close_spot in close_spots:
-                    if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                        close_spot_data.append(close_spot)
-                        print("Close spot inside the get_spotfinder_data() = {}".format(close_spot))
-                self.show_close_spots_timer.stop()
-                print("close_spot_data = {}".format(close_spot_data))
-            # AND IT ENDS HERE - JAD7
 
         if len(overlapped_data) > 0:
             # show overlapped pixels in a different color
