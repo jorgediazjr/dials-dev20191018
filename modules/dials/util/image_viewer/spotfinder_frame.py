@@ -1549,8 +1549,11 @@ class SpotFrame(XrayFrame):
                                     )
                                 )
 
-        print("Ctr mass data = {}".format(ctr_mass_data))
-        
+        for ctr_mass in ctr_mass_data:
+            print("Ctr mass = {}".format(ctr_mass))
+        for close_spot in close_spot_data:
+            print("Close spot = {}".format(close_spot))
+
         if len(overlapped_data) > 0:
             # show overlapped pixels in a different color
             all_pix_data[max(all_pix_data.keys()) + 1] = overlapped_data
