@@ -1482,7 +1482,6 @@ class SpotFrame(XrayFrame):
                                 ]
                                 close_spot_data.extend(lines)
                                 #close_spot_data.append(close_spot)
-                        print("Close spot data inside the get_spotfinder_data() = {}".format(close_spot_data))
                         self.show_close_spots_timer.stop()
                     # AND IT ENDS HERE - JAD7
 
