@@ -1480,7 +1480,7 @@ class SpotFrame(XrayFrame):
                                     (((x, ym1), (x, yp1)), close_spot_dict),
                                     (((xm1, y), (xp1, y)), close_spot_dict),
                                 ]
-                                close_spot.extend(lines)
+                                close_spot_data.extend(lines)
                                 #close_spot_data.append(close_spot)
                                 print("Close spot inside the get_spotfinder_data() = {}".format(close_spot))
                         self.show_close_spots_timer.stop()
