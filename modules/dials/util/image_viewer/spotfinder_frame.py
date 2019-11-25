@@ -1460,31 +1460,6 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
-                    # JAD7 THIS IS WHAT I ADDED
-                    if 'xy.px.close' in ref_list and self.settings.show_close_spots:
-                        self.show_close_spots_timer.start()
-                        close_spots = ref_list['xy.px.close']
-                        print("close_spots in ref_list = {}".format(close_spots))
-                        for close_spot in close_spots:
-                            if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                                x, y = map_coords(
-                                        close_spot[0], close_spot[1], reflection["panel"]
-                                )
-                                xm1, ym1 = map_coords(
-                                        close_spot[0] - 1, close_spot[1] - 1, reflection["panel"]
-                                )
-                                xp1, yp1 = map_coords(
-                                        close_spot[0] + 1, close_spot[1] + 1, reflection["panel"]
-                                )
-                                lines = [
-                                    (((x, ym1), (x, yp1)), close_spot_dict),
-                                    (((xm1, y), (xp1, y)), close_spot_dict),
-                                ]
-                                close_spot_data.extend(lines)
-                                #close_spot_data.append(close_spot)
-                        self.show_close_spots_timer.stop()
-                    # AND IT ENDS HERE - JAD7
-
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
                 or (self.settings.show_miller_indices and "miller_index" in ref_list)
@@ -1548,6 +1523,30 @@ class SpotFrame(XrayFrame):
                                         },
                                     )
                                 )
+            # JAD7 THIS IS WHAT I ADDED
+            if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+                self.show_close_spots_timer.start()
+                close_spots = ref_list['xy.px.close']
+                print("close_spots in ref_list = {}".format(close_spots))
+                for close_spot in close_spots:
+                    if close_spot[0] != 0.0 and close_spot[1] != 0.0:
+                        x, y = map_coords(
+                                close_spot[0], close_spot[1], self.reflections["panel"]
+                        )
+                        xm1, ym1 = map_coords(
+                                close_spot[0] - 1, close_spot[1] - 1, self.reflections["panel"]
+                        )
+                        xp1, yp1 = map_coords(
+                                close_spot[0] + 1, close_spot[1] + 1, self.reflections["panel"]
+                        )
+                        lines = [
+                            (((x, ym1), (x, yp1)), close_spot_dict),
+                            (((xm1, y), (xp1, y)), close_spot_dict),
+                        ]
+                        close_spot_data.extend(lines)
+                        #close_spot_data.append(close_spot)
+                self.show_close_spots_timer.stop()
+            # AND IT ENDS HERE - JAD7
 
         for ctr_mass in ctr_mass_data:
             print("Ctr mass = {}".format(ctr_mass))
