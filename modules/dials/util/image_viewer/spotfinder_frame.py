@@ -1331,6 +1331,7 @@ class SpotFrame(XrayFrame):
                 bbox_sel = ~((i_frame >= z1) | ((i_frame + n) < z0))
                 selected = ref_list.select(bbox_sel)
                 for reflection in selected.rows():
+                    print("selected.rows() = {}".format(selected.rows()))
                     x0, x1, y0, y1, z0, z1 = reflection["bbox"]
                     panel = reflection["panel"]
                     nx = x1 - x0  # size of reflection box in x-direction
@@ -1466,6 +1467,7 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
+                    # JAD 7 put this here
                     if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                         self.show_close_spots_timer.start()
                         close_spot = reflection['xy.px.close']
@@ -1492,7 +1494,7 @@ class SpotFrame(XrayFrame):
                             close_spot_data.extend(lines)
                             #close_spot_data.append(close_spot)
                         self.show_close_spots_timer.stop()
-
+                    # JAD 7 ended this here
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
