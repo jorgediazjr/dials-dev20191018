@@ -1250,12 +1250,11 @@ class SpotFrame(XrayFrame):
         strong_code = MaskCode.Valid | MaskCode.Strong
 
         def map_coords(x, y, p):
-            print("In map_coords.\nx={} | y={} | p={}".format(x, y, p))
+            #print("In map_coords.\nx={} | y={} | p={}".format(x, y, p))
             if len(self.pyslip.tiles.raw_image.get_detector()) > 1:
                 y, x = self.pyslip.tiles.flex_image.tile_readout_to_picture(
                     p, y - 0.5, x - 0.5
                 )
-            print("In map_coords.\nx={} | y={} | p={}".format(x, y, p))
             return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
 
         close_spot_dict = {"width": 2, "color": "#7F00FF", "closed": False}
