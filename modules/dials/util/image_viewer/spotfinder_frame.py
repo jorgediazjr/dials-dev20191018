@@ -1326,14 +1326,11 @@ class SpotFrame(XrayFrame):
             if "bbox" in ref_list:
                 print("We are inside because bbox in ref_list")
                 bbox = ref_list["bbox"]
-                print("bbox = {}".format(bbox))
                 x0, x1, y0, y1, z0, z1 = bbox.parts()
                 # ticket #107
                 n = self.params.sum_images - 1
                 bbox_sel = ~((i_frame >= z1) | ((i_frame + n) < z0))
-                print("bbox_sel = {}".format(bbox_sel))
                 selected = ref_list.select(bbox_sel)
-                print("selected = {}".format(selected))
                 index = 0
                 for reflection in selected.rows():
                     print("selected.rows() = {}".format(selected.rows()))
@@ -1502,6 +1499,10 @@ class SpotFrame(XrayFrame):
                             #close_spot_data.append(close_spot)
                         self.show_close_spots_timer.stop()
                     # JAD 7 ended this here
+                for i, reflection in enumerate(selected.rows()):
+                    print("{}: reflection is {}".format(i, reflection))
+
+
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
