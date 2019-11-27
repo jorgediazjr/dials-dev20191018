@@ -1500,7 +1500,7 @@ class SpotFrame(XrayFrame):
                         self.show_close_spots_timer.stop()
                     # JAD 7 ended this here
                 for i, reflection in enumerate(selected.rows()):
-                    print("{}: reflection is {}".format(i, reflection))
+                    print("\n{}: reflection is {}\n".format(i, reflection))
 
 
 
