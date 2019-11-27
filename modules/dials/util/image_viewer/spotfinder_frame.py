@@ -1471,13 +1471,16 @@ class SpotFrame(XrayFrame):
                         if close_spot[0] != 0.0 and close_spot[1] != 0.0:
                             print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
                             x, y = map_coords(
-                                close_spot[0], close_spot[1], 0 # ref_list["panel"]
+                                # close_spot[0], close_spot[1], 0 # ref_list["panel"]
+                                centroid[0], centroid[1], reflection["panel"]
                             )
                             xm1, ym1 = map_coords(
-                                close_spot[0] - 1, close_spot[1] - 1, 0 # ref_list["panel"]
+                                # close_spot[0] - 1, close_spot[1] - 1, 0 # ref_list["panel"]
+                                centroid[0] - 1, centroid[1] - 1, reflection["panel"]
                             )
                             xp1, yp1 = map_coords(
-                                close_spot[0] + 1, close_spot[1] + 1, 0 # ref_list["panel"]
+                                # close_spot[0] + 1, close_spot[1] + 1, 0 # ref_list["panel"]
+                                centroid[0] + 1, centroid[1] + 1, reflection["panel"]
                             )
                             lines = [
                                 (((x, ym1), (x, yp1)), close_spot_dict),
