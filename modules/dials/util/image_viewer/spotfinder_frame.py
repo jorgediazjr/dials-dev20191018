@@ -1461,6 +1461,7 @@ class SpotFrame(XrayFrame):
                                 (((x, ym1), (x, yp1)), ctr_mass_dict),
                                 (((xm1, y), (xp1, y)), ctr_mass_dict),
                             ]
+                            print("Lines after processing centroid = {}".format(lines))
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
