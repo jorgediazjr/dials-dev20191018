@@ -1330,9 +1330,11 @@ class SpotFrame(XrayFrame):
                 n = self.params.sum_images - 1
                 bbox_sel = ~((i_frame >= z1) | ((i_frame + n) < z0))
                 selected = ref_list.select(bbox_sel)
+                index = 0
                 for reflection in selected.rows():
                     print("selected.rows() = {}".format(selected.rows()))
-                    print("len(selected.rows()) = {}".format(len(selected.rows())))
+                    print("index = {}".format(index))
+                    index += 1
                     x0, x1, y0, y1, z0, z1 = reflection["bbox"]
                     panel = reflection["panel"]
                     nx = x1 - x0  # size of reflection box in x-direction
