@@ -1465,6 +1465,32 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
+                    if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+                        self.show_close_spots_timer.start()
+                        close_spot = ref_list['xy.px.close']
+                        print("close_spots in ref_list = {}".format(close_spot))
+                        print("Len of close spots = {}".format(len(close_spot)))
+                        if close_spot[0] != 0.0 and close_spot[1] != 0.0:
+                            print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
+                            x, y = map_coords(
+                                    close_spot[0], close_spot[1], 0 # ref_list["panel"]
+                            )
+                            xm1, ym1 = map_coords(
+                                    close_spot[0] - 1, close_spot[1] - 1, 0 # ref_list["panel"]
+                            )
+                            xp1, yp1 = map_coords(
+                                    close_spot[0] + 1, close_spot[1] + 1, 0 # ref_list["panel"]
+                            )
+                            lines = [
+                                (((x, ym1), (x, yp1)), close_spot_dict),
+                                (((xm1, y), (xp1, y)), close_spot_dict),
+                            ]
+                            print("Close lines after = {}\n".format(lines))
+                            close_spot_data.extend(lines)
+                            #close_spot_data.append(close_spot)
+                        self.show_close_spots_timer.stop()
+
+
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
                 or (self.settings.show_miller_indices and "miller_index" in ref_list)
@@ -1528,6 +1554,7 @@ class SpotFrame(XrayFrame):
                                         },
                                     )
                                 )
+            '''
             # JAD7 THIS IS WHAT I ADDED
             print("ref_list[panel] = {}".format(ref_list['panel']))
             if 'xy.px.close' in ref_list and self.settings.show_close_spots:
@@ -1556,6 +1583,7 @@ class SpotFrame(XrayFrame):
                         #close_spot_data.append(close_spot)
                 self.show_close_spots_timer.stop()
             # AND IT ENDS HERE - JAD7
+            '''
 
         for i, ctr_mass in enumerate(ctr_mass_data):
             print("{}: Ctr mass = {}".format(i, ctr_mass))
