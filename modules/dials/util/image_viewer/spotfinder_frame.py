@@ -1448,6 +1448,7 @@ class SpotFrame(XrayFrame):
                             i_frame + self.params.sum_images
                         ):
                             print("reflection[panel] = {}".format(reflection["panel"]))
+                            print("Centroid in ctr mass = {}".format(centroid))
                             x, y = map_coords(
                                 centroid[0], centroid[1], reflection["panel"]
                             )
