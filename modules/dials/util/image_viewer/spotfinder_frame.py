@@ -1524,6 +1524,7 @@ class SpotFrame(XrayFrame):
                                     )
                                 )
             # JAD7 THIS IS WHAT I ADDED
+            print("ref_list[panel] = {}".format(ref_list['panel']))
             if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 close_spots = ref_list['xy.px.close']
