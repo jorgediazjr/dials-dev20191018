@@ -1332,6 +1332,7 @@ class SpotFrame(XrayFrame):
                 selected = ref_list.select(bbox_sel)
                 for reflection in selected.rows():
                     print("selected.rows() = {}".format(selected.rows()))
+                    print("len(selected.rows()) = {}".format(len(selected.rows())))
                     x0, x1, y0, y1, z0, z1 = reflection["bbox"]
                     panel = reflection["panel"]
                     nx = x1 - x0  # size of reflection box in x-direction
