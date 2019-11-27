@@ -1444,6 +1444,7 @@ class SpotFrame(XrayFrame):
                         if centroid[2] >= i_frame and centroid[2] <= (
                             i_frame + self.params.sum_images
                         ):
+                            print("reflection[panel] = {}".format(reflection["panel"]))
                             x, y = map_coords(
                                 centroid[0], centroid[1], reflection["panel"]
                             )
