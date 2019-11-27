@@ -1326,6 +1326,7 @@ class SpotFrame(XrayFrame):
             if "bbox" in ref_list:
                 print("We are inside because bbox in ref_list")
                 bbox = ref_list["bbox"]
+                print("bbox = {}".format(bbox))
                 x0, x1, y0, y1, z0, z1 = bbox.parts()
                 # ticket #107
                 n = self.params.sum_images - 1
