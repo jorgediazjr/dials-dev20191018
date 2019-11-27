@@ -1256,7 +1256,7 @@ class SpotFrame(XrayFrame):
                 )
             return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
 
-        close_spot_dict = {"width": 2, "color": "7F00FF", "closed": False}
+        close_spot_dict = {"width": 2, "color": "#7F00FF", "closed": False}
         shoebox_dict = {"width": 2, "color": "#0000FFA0", "closed": False}
         ctr_mass_dict = {"width": 2, "color": "#FF0000", "closed": False}
         vector_dict = {"width": 4, "color": "#F62817", "closed": False}
