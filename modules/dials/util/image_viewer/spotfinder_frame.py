@@ -1446,7 +1446,7 @@ class SpotFrame(XrayFrame):
                         if centroid[2] >= i_frame and centroid[2] <= (
                             i_frame + self.params.sum_images
                         ):
-                            print("reflection[panel] = {}".format(reflection["panel"]))
+                            print("\nreflection[panel] = {}".format(reflection["panel"]))
                             print("Centroid in ctr mass = {}".format(centroid))
                             x, y = map_coords(
                                 centroid[0], centroid[1], reflection["panel"]
@@ -1461,7 +1461,7 @@ class SpotFrame(XrayFrame):
                                 (((x, ym1), (x, yp1)), ctr_mass_dict),
                                 (((xm1, y), (xp1, y)), ctr_mass_dict),
                             ]
-                            print("Lines after processing centroid = {}".format(lines))
+                            print("Lines after processing centroid = {}\n".format(lines))
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
@@ -1555,8 +1555,8 @@ class SpotFrame(XrayFrame):
                 self.show_close_spots_timer.stop()
             # AND IT ENDS HERE - JAD7
 
-        for ctr_mass in ctr_mass_data:
-            print("Ctr mass = {}".format(ctr_mass))
+        for i, ctr_mass in enumerate(ctr_mass_data):
+            print("{}: Ctr mass = {}".format(i, ctr_mass))
         for i, close_spot in enumerate(close_spot_data):
             print("{}: Close spot = {}".format(i, close_spot))
 
