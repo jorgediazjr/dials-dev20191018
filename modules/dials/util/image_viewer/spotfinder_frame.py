@@ -1533,13 +1533,13 @@ class SpotFrame(XrayFrame):
                 for close_spot in close_spots:
                     if close_spot[0] != 0.0 and close_spot[1] != 0.0:
                         x, y = map_coords(
-                                close_spot[0], close_spot[1], ref_list["panel"]
+                                close_spot[0], close_spot[1], 0 # ref_list["panel"]
                         )
                         xm1, ym1 = map_coords(
-                                close_spot[0] - 1, close_spot[1] - 1, ref_list["panel"]
+                                close_spot[0] - 1, close_spot[1] - 1, 0 # ref_list["panel"]
                         )
                         xp1, yp1 = map_coords(
-                                close_spot[0] + 1, close_spot[1] + 1, ref_list["panel"]
+                                close_spot[0] + 1, close_spot[1] + 1, 0 # ref_list["panel"]
                         )
                         lines = [
                             (((x, ym1), (x, yp1)), close_spot_dict),
