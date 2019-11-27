@@ -1333,6 +1333,7 @@ class SpotFrame(XrayFrame):
                 bbox_sel = ~((i_frame >= z1) | ((i_frame + n) < z0))
                 print("bbox_sel = {}".format(bbox_sel))
                 selected = ref_list.select(bbox_sel)
+                print("selected = {}".format(selected))
                 index = 0
                 for reflection in selected.rows():
                     print("selected.rows() = {}".format(selected.rows()))
