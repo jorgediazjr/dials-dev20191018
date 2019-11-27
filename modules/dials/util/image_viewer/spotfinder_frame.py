@@ -1297,6 +1297,7 @@ class SpotFrame(XrayFrame):
 
         for ref_list_id, ref_list in enumerate(self.reflections):
 
+            print("REF LIST ID # = {}".format(ref_list_id))
             print("ref_list = {}".format(ref_list))
             print("ref_list[0] = {}".format(ref_list[0])) #JAD7
             print("ref_list[0][xyzobs.px.value] = {}".format(ref_list[0]['xyzobs.px.value'])) #JAD7
