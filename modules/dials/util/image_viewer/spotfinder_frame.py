@@ -1101,12 +1101,13 @@ class SpotFrame(XrayFrame):
             if self.settings.show_close_spots and len(close_spot_data):
                 self.show_close_spots_timer.start()
                 print("We are inside the update for adding point layer")
-                self.close_spots_layer = self.pyslip.AddPointLayer(
+                self.close_spots_layer = self.pyslip.AddPolygonLayer(
                     close_spot_data,
-                    color="brown",
-                    name="<close_spot_layer>",
-                    radius=10,
+                    map_rel=True,
+                    visible=True,
                     show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
+                    selectable=False,
+                    name="<close_spot_layer>",
                     update=False,
                 )
                 self.show_close_spots_timer.stop()
