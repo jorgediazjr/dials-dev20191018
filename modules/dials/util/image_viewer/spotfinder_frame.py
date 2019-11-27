@@ -1537,7 +1537,7 @@ class SpotFrame(XrayFrame):
                 print("Len of close spots = {}".format(len(close_spots)))
                 for close_spot in close_spots:
                     if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                        print("Centroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
+                        print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
                         x, y = map_coords(
                                 close_spot[0], close_spot[1], 0 # ref_list["panel"]
                         )
@@ -1551,6 +1551,7 @@ class SpotFrame(XrayFrame):
                             (((x, ym1), (x, yp1)), close_spot_dict),
                             (((xm1, y), (xp1, y)), close_spot_dict),
                         ]
+                        print("Close lines after = {}\n".format(lines))
                         close_spot_data.extend(lines)
                         #close_spot_data.append(close_spot)
                 self.show_close_spots_timer.stop()
