@@ -1250,10 +1250,12 @@ class SpotFrame(XrayFrame):
         strong_code = MaskCode.Valid | MaskCode.Strong
 
         def map_coords(x, y, p):
+            print("In map_coords.\nx={} | y={} | p={}".format(x, y, p))
             if len(self.pyslip.tiles.raw_image.get_detector()) > 1:
                 y, x = self.pyslip.tiles.flex_image.tile_readout_to_picture(
                     p, y - 0.5, x - 0.5
                 )
+            print("In map_coords.\nx={} | y={} | p={}".format(x, y, p))
             return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
 
         close_spot_dict = {"width": 2, "color": "#7F00FF", "closed": False}
@@ -1534,7 +1536,6 @@ class SpotFrame(XrayFrame):
                 print("Len of close spots = {}".format(len(close_spots)))
                 for close_spot in close_spots:
                     if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                        '''
                         x, y = map_coords(
                                 close_spot[0], close_spot[1], 0 # ref_list["panel"]
                         )
@@ -1544,10 +1545,6 @@ class SpotFrame(XrayFrame):
                         xp1, yp1 = map_coords(
                                 close_spot[0] + 1, close_spot[1] + 1, 0 # ref_list["panel"]
                         )
-                        '''
-                        x, y = close_spot[0], close_spot[1]
-                        xm1, ym1 = close_spot[0] - 1, close_spot[1] - 1
-                        xp1, yp1 = close_spot[0] + 1, close_spot[1] + 1
                         lines = [
                             (((x, ym1), (x, yp1)), close_spot_dict),
                             (((xm1, y), (xp1, y)), close_spot_dict),
