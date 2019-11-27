@@ -1323,6 +1323,7 @@ class SpotFrame(XrayFrame):
             if len(ref_list) == 0:
                 continue
 
+            print("ref_list.items() = {}".format(ref_list.items()))
             if "bbox" in ref_list:
                 bbox = ref_list["bbox"]
                 x0, x1, y0, y1, z0, z1 = bbox.parts()
