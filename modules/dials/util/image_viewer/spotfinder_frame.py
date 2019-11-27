@@ -1531,6 +1531,7 @@ class SpotFrame(XrayFrame):
                 self.show_close_spots_timer.start()
                 close_spots = ref_list['xy.px.close']
                 print("close_spots in ref_list = {}".format(close_spots))
+                print("Len of close spots = {}".format(len(close_spots)))
                 for close_spot in close_spots:
                     if close_spot[0] != 0.0 and close_spot[1] != 0.0:
                         x, y = map_coords(
