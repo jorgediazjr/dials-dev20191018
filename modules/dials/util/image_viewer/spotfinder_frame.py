@@ -1331,6 +1331,7 @@ class SpotFrame(XrayFrame):
                 # ticket #107
                 n = self.params.sum_images - 1
                 bbox_sel = ~((i_frame >= z1) | ((i_frame + n) < z0))
+                print("bbox_sel = {}".format(bbox_sel))
                 selected = ref_list.select(bbox_sel)
                 index = 0
                 for reflection in selected.rows():
