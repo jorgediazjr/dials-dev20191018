@@ -1469,6 +1469,7 @@ class SpotFrame(XrayFrame):
                     if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                         self.show_close_spots_timer.start()
                         close_spot = reflection['xy.px.close']
+                        centroid = reflection['xyzobs.px.value']
                         if close_spot[0] != 0.0 and close_spot[1] != 0.0:
                             print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
                             x, y = map_coords(
