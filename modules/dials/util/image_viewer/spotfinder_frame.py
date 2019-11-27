@@ -1467,7 +1467,7 @@ class SpotFrame(XrayFrame):
 
                     if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                         self.show_close_spots_timer.start()
-                        close_spot = ref_list['xy.px.close']
+                        close_spot = reflection['xy.px.close']
                         print("close_spots in ref_list = {}".format(close_spot))
                         print("Len of close spots = {}".format(len(close_spot)))
                         if close_spot[0] != 0.0 and close_spot[1] != 0.0:
