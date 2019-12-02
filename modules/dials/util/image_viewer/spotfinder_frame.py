@@ -1472,12 +1472,11 @@ class SpotFrame(XrayFrame):
                             print("Lines after processing centroid = {}\n".format(lines))
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
-
+            # JAD 7 put this here
             if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 for i, reflection in enumerate(selected.rows()):
                     print("\n{}: reflection is {}\n".format(i, reflection))
-                    # JAD 7 put this here
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
                 from dials.util import close_spots
@@ -1499,7 +1498,7 @@ class SpotFrame(XrayFrame):
                     ]
                     close_spot_data.extend(lines)
                 self.show_close_spots_timer.stop()
-
+            # JAD 7 ended this here
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
@@ -1564,11 +1563,6 @@ class SpotFrame(XrayFrame):
                                         },
                                     )
                                 )
-
-        for i, ctr_mass in enumerate(ctr_mass_data):
-            print("{}: Ctr mass = {}".format(i, ctr_mass))
-        for i, close_spot in enumerate(close_spot_data):
-            print("{}: Close spot = {}".format(i, close_spot))
 
         if len(overlapped_data) > 0:
             # show overlapped pixels in a different color
