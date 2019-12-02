@@ -1275,8 +1275,9 @@ class SpotFrame(XrayFrame):
         miller_indices_data = []
         vector_data = []
         vector_text_data = []
-        close_spot_data = [] #JAD7
+        close_spot_data = [] # JAD7
         reflections_data = {} # JAD7
+        reflections_data['xyzobs.px.value'] = [] # JAD7
         detector = self.pyslip.tiles.raw_image.get_detector()
         scan = self.pyslip.tiles.raw_image.get_scan()
         to_degrees = 180 / math.pi
@@ -1501,7 +1502,6 @@ class SpotFrame(XrayFrame):
             for i, reflection in enumerate(selected.rows()):
                 print("\n{}: reflection is {}\n".format(i, reflection))
                 # JAD 7 put this here
-                reflections_data['xyzobs.px.value'] = []
                 reflections_data['xyzobs.px.value'].append(reflection)
                 '''
                 if 'xy.px.close' in ref_list and self.settings.show_close_spots:
