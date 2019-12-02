@@ -1502,7 +1502,7 @@ class SpotFrame(XrayFrame):
             for i, reflection in enumerate(selected.rows()):
                 print("\n{}: reflection is {}\n".format(i, reflection))
                 # JAD 7 put this here
-                reflections_data['xyzobs.px.value'].append(reflection)
+                reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
                 '''
                 if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                     self.show_close_spots_timer.start()
@@ -1528,6 +1528,9 @@ class SpotFrame(XrayFrame):
                 '''
             for i, ref in enumerate(reflections_data['xyzobs.px.value']):
                 print("{}: ref = {}".format(i, ref))
+
+            from dials.util.close_spots import get_xyz_coords
+            res = get_xyz_coords(reflections_data)
 
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
