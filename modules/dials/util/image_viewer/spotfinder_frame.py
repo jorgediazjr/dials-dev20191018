@@ -1526,8 +1526,8 @@ class SpotFrame(XrayFrame):
                     close_spot_data.extend(lines)
                     self.show_close_spots_timer.stop()
                 '''
-            for i in reflections_data['xyzobs.px.value']:
-                print("Test = {}".format(i))
+            for i, ref in enumerate(reflections_data['xyzobs.px.value']):
+                print("{}: ref = {}".format(i, ref))
 
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
