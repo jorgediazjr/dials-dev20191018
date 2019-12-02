@@ -60,29 +60,29 @@ def units_distance(p, q):
     point_1 = ((p[0] - a) * (p[1] - b))
     point_2 = ((q[0] - a) * (q[1] - b))
     if (point_1 < rad_0 * rad_0) and (point_2 < rad_0 * rad_0):
-        return 15
+        return 10
     elif((point_1 > rad_0 * rad_0) and (point_2 > rad_0 * rad_0) and
          (point_1 < rad_1 * rad_1) and (point_2 < rad_1 * rad_1)):
-        return 20
+        return 15
     elif((point_1 > rad_1 * rad_1) and (point_2 > rad_1 * rad_1) and
          (point_1 < rad_2 * rad_2) and (point_2 > rad_2 * rad_2)):
-        return 25
+        return 20
     elif((point_1 > rad_2 * rad_2) and (point_2 > rad_2 * rad_2) and
          (point_1 < rad_3 * rad_3) and (point_2 < rad_3 * rad_3)):
-        return 30
+        return 25
     elif((point_1 > rad_3 * rad_3) and (point_2 > rad_3 * rad_3) and
          (point_1 < rad_4 * rad_4) and (point_2 < rad_4 * rad_4)):
-        return 35
+        return 30
     elif((point_1 > rad_4 * rad_4) and (point_2 > rad_4 * rad_4) and
          (point_1 < rad_5 * rad_5) and (point_2 < rad_5 * rad_5)):
-        return 40
+        return 35
     elif((point_1 > rad_5 * rad_5) and (point_2 > rad_5 * rad_5)):
-        return 50
+        return 40
     else:
-        return 15
+        return 10
 
 
-def euclidean_distance(ordered_points, distance=15):
+def euclidean_distance(ordered_points, distance=10):
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
