@@ -1507,10 +1507,11 @@ class SpotFrame(XrayFrame):
             for i, ref in enumerate(reflections_data['xyzobs.px.value']):
                 print("{}: ref = {}".format(i, ref))
 
-            from dials.util.close_spots import get_xyz_coords
+            from dials.util.close_spots import get_xyz_coords, order_dictionary
             res = get_xyz_coords(reflections_data)
 
-            print("res = {}".format(res))
+            ord_res = order_dictionary(res)
+
 
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
