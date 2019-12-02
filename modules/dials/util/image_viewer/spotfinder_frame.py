@@ -1498,19 +1498,32 @@ class SpotFrame(XrayFrame):
                         self.show_close_spots_timer.stop()
                     # JAD 7 ended this here
                     '''
+            if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+                self.show_close_spots_timer.start()
+                for i, reflection in enumerate(selected.rows()):
+                    print("\n{}: reflection is {}\n".format(i, reflection))
+                    # JAD 7 put this here
+                    reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
-            for i, reflection in enumerate(selected.rows()):
-                print("\n{}: reflection is {}\n".format(i, reflection))
-                # JAD 7 put this here
-                reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
-                
-            for i, ref in enumerate(reflections_data['xyzobs.px.value']):
-                print("{}: ref = {}".format(i, ref))
+                from dials.util import close_spots
+                closest_points = close_spots.main(reflections_data)
 
-            from dials.util import close_spots
-            closest_points = close_spots.main(reflections_data)
-            print("LEN OF CLOSEST PTS = {}".format(len(closest_points)))
-
+                for centroid in closest_points:
+                    x, y = map_coords(
+                            centroid[0], centroid[1], 0 # reflection["panel"]
+                    )
+                    xm1, ym1 = map_coords(
+                        centroid[0] - 1, centroid[1] - 1, 0 #reflection["panel"]
+                    )
+                    xp1, yp1 = map_coords(
+                        centroid[0] + 1, centroid[1] + 1, 0 #reflection["panel"]
+                    )
+                    lines = [
+                        (((x, ym1), (x, yp1)), close_spot_dict),
+                        (((xm1, y), (xp1, y)), close_spot_dict),
+                    ]
+                    close_spot_data.extend(lines)
+                self.show_close_spots_timer.stop()
 
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
