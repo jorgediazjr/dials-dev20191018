@@ -48,7 +48,7 @@ def find_distance(p, q):
     return dist
 
 
-def units_distance(p, q):
+def units_distance(p, q, distance):
     a = 1600
     b = 1600
     rad_0 = 50
@@ -60,29 +60,29 @@ def units_distance(p, q):
     point_1 = ((p[0] - a) * (p[1] - b))
     point_2 = ((q[0] - a) * (q[1] - b))
     if (point_1 < rad_0 * rad_0) and (point_2 < rad_0 * rad_0):
-        return 10
+        return distance
     elif((point_1 > rad_0 * rad_0) and (point_2 > rad_0 * rad_0) and
          (point_1 < rad_1 * rad_1) and (point_2 < rad_1 * rad_1)):
-        return 15
+        return distance + 5
     elif((point_1 > rad_1 * rad_1) and (point_2 > rad_1 * rad_1) and
          (point_1 < rad_2 * rad_2) and (point_2 > rad_2 * rad_2)):
-        return 20
+        return distance + 10
     elif((point_1 > rad_2 * rad_2) and (point_2 > rad_2 * rad_2) and
          (point_1 < rad_3 * rad_3) and (point_2 < rad_3 * rad_3)):
-        return 25
+        return distance + 15
     elif((point_1 > rad_3 * rad_3) and (point_2 > rad_3 * rad_3) and
          (point_1 < rad_4 * rad_4) and (point_2 < rad_4 * rad_4)):
-        return 30
+        return distance + 20
     elif((point_1 > rad_4 * rad_4) and (point_2 > rad_4 * rad_4) and
          (point_1 < rad_5 * rad_5) and (point_2 < rad_5 * rad_5)):
-        return 35
+        return distance + 25
     elif((point_1 > rad_5 * rad_5) and (point_2 > rad_5 * rad_5)):
-        return 40
+        return distance + 30
     else:
-        return 10
+        return distance
 
 
-def euclidean_distance(ordered_points, distance=10):
+def euclidean_distance(ordered_points, distance=5):
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
@@ -98,7 +98,7 @@ def euclidean_distance(ordered_points, distance=10):
                     y2 = ordered_points[current][x2][0]
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
-                    distance = units_distance(point_a, point_b)
+                    distance = units_distance(point_a, point_b, distance)
                     # print below is helpful too see what is the avg value for distance
                     # print("dist = {}".format(dist))
                     if dist <= distance:
