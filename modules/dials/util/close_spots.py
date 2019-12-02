@@ -111,6 +111,7 @@ def euclidean_distance(ordered_points, distance=0.5):
                     current += 1
                 else:
                     current += 1
+    print("len of closest points = {}".format(len(closest_points)))
     return close_points, midpoints, closest_points
 
 
