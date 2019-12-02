@@ -144,9 +144,9 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
 
 
 def main(reflections):
-    result = read_in_file()
+    # result = read_in_file()
 
-    xyz_coords = get_xyz_coords(result)
+    xyz_coords = get_xyz_coords(reflections)
 
     ordered_points = order_dictionary(xyz_coords)
 
@@ -156,13 +156,14 @@ def main(reflections):
 
     closest_points = order_dictionary(closest_points)
 
-    close_vec2 = save_spots_in_vec2(close_points)
+    # close_vec2 = save_spots_in_vec2(close_points)
 
-    close_vec2 = make_vec2_same_num_rows_for_reflections(close_vec2, reflections)
+    #close_vec2 = make_vec2_same_num_rows_for_reflections(close_vec2, reflections)
 
-    reflections['xy.px.close'] = close_vec2
+    #reflections['xy.px.close'] = close_vec2
 
-    return reflections
+    #return reflections
+    return closest_points
 
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS

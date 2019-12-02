@@ -1508,13 +1508,8 @@ class SpotFrame(XrayFrame):
                 print("{}: ref = {}".format(i, ref))
 
             from dials.util import close_spots
-            res = close_spots.get_xyz_coords(reflections_data)
-
-            ord_res = close_spots.order_dictionary(res)
-            ord_res = close_spots.add_index_to_pairs(ord_res)
-            print("ord res = {}".format(ord_res))
-            close_points, midpoints, closest_points = close_spots.euclidean_distance(ord_res)
-            print("LEN OF CLOSEST POINTS = {}".format(len(closest_points)))
+            closest_points = close_spots.main(reflections_data)
+            print("LEN OF CLOSEST PTS = {}".format(len(closest_points)))
 
 
 
