@@ -1512,7 +1512,8 @@ class SpotFrame(XrayFrame):
 
             ord_res = close_spots.order_dictionary(res)
             ord_res = close_spots.add_index_to_pairs(ord_res)
-            
+            _, _, closest_points = close_spots.euclidean_distance(ord_res)
+            print("LEN OF CLOSEST POINTS = {}".format(len(closest_points)))
 
 
 
