@@ -82,7 +82,7 @@ def units_distance(p, q, distance):
         return distance
 
 
-def euclidean_distance(ordered_points, distance=5):
+def euclidean_distance(ordered_points, distance=7):
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
