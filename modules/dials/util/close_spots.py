@@ -164,7 +164,8 @@ def main(reflections):
     #reflections['xy.px.close'] = close_vec2
 
     #return reflections
-    print("close_vec2 = {}".format(close_vec2))
+    for close in close_vec2:
+        print("close_v2 = {}".format(close))
     return close_vec2
 
     '''
