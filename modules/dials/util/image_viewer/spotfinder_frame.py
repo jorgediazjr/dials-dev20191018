@@ -1473,7 +1473,7 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
             # JAD 7 put this here
-            if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+            if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 for i, reflection in enumerate(selected.rows()):
                     print("\n{}: reflection is {}\n".format(i, reflection))
