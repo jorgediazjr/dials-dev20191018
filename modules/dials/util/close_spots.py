@@ -115,16 +115,17 @@ def euclidean_distance(ordered_points, distance=0.5):
     return close_points, midpoints, closest_points
 
 
-def save_spots_in_vec2(close_points):
-    from scitbx.array_family import flex
-    close_vec2 = flex.vec2_double()
-
-    def flatten_closest_points(close_points):
+def flatten_closest_points(close_points):
         points = []
         for i in close_points:
             points.append(i[0])
             points.append(i[1])
         return points
+
+
+def save_spots_in_vec2(close_points):
+    from scitbx.array_family import flex
+    close_vec2 = flex.vec2_double()
 
     close_points = flatten_closest_points(close_points)
 
@@ -156,14 +157,14 @@ def main(reflections):
 
     closest_points = order_dictionary(closest_points)
 
-    # close_vec2 = save_spots_in_vec2(close_points)
+    close_vec2 = save_spots_in_vec2(close_points)
 
     #close_vec2 = make_vec2_same_num_rows_for_reflections(close_vec2, reflections)
 
     #reflections['xy.px.close'] = close_vec2
 
     #return reflections
-    return closest_points
+    return close_vec2
 
     '''
     KEYS FROM READING IN PICKLE REFLECTIONS
