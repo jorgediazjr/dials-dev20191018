@@ -1471,6 +1471,7 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
+                    '''
                     # JAD 7 put this here
                     if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                         self.show_close_spots_timer.start()
@@ -1494,8 +1495,32 @@ class SpotFrame(XrayFrame):
                         close_spot_data.extend(lines)
                         self.show_close_spots_timer.stop()
                     # JAD 7 ended this here
+                    '''
+
             for i, reflection in enumerate(selected.rows()):
                 print("\n{}: reflection is {}\n".format(i, reflection))
+                # JAD 7 put this here
+                if 'xy.px.close' in ref_list and self.settings.show_close_spots:
+                    self.show_close_spots_timer.start()
+                    close_spot = reflection['xy.px.close']
+                    centroid = reflection['xyzobs.px.value']
+                    print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
+                    x, y = map_coords(
+                        centroid[0], centroid[1], reflection["panel"]
+                    )
+                    xm1, ym1 = map_coords(
+                        centroid[0] - 1, centroid[1] - 1, reflection["panel"]
+                    )
+                    xp1, yp1 = map_coords(
+                        centroid[0] + 1, centroid[1] + 1, reflection["panel"]
+                    )
+                    lines = [
+                        (((x, ym1), (x, yp1)), close_spot_dict),
+                        (((xm1, y), (xp1, y)), close_spot_dict),
+                    ]
+                    print("Close lines after = {}\n".format(lines))
+                    close_spot_data.extend(lines)
+                    self.show_close_spots_timer.stop()
 
 
 
