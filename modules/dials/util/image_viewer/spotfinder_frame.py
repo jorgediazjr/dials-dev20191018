@@ -1507,10 +1507,12 @@ class SpotFrame(XrayFrame):
             for i, ref in enumerate(reflections_data['xyzobs.px.value']):
                 print("{}: ref = {}".format(i, ref))
 
-            from dials.util.close_spots import get_xyz_coords, order_dictionary
-            res = get_xyz_coords(reflections_data)
+            from dials.util import close_spots
+            res = close_spots.get_xyz_coords(reflections_data)
 
-            ord_res = order_dictionary(res)
+            ord_res = close_spots.order_dictionary(res)
+            ord_res = close_spots.add_index_to_pairs(ord_res)
+            
 
 
 
