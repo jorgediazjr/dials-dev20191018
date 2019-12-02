@@ -1257,7 +1257,7 @@ class SpotFrame(XrayFrame):
                 )
             return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
 
-        close_spot_dict = {"width": 2, "color": "#FFA500", "closed": False}
+        close_spot_dict = {"width": 2, "color": "#FF7124", "closed": False}
         shoebox_dict = {"width": 2, "color": "#0000FFA0", "closed": False}
         ctr_mass_dict = {"width": 2, "color": "#FF0000", "closed": False}
         vector_dict = {"width": 4, "color": "#F62817", "closed": False}
@@ -1473,31 +1473,6 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
 
-                    '''
-                    # JAD 7 put this here
-                    if 'xy.px.close' in ref_list and self.settings.show_close_spots:
-                        self.show_close_spots_timer.start()
-                        close_spot = reflection['xy.px.close']
-                        centroid = reflection['xyzobs.px.value']
-                        print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
-                        x, y = map_coords(
-                            centroid[0], centroid[1], reflection["panel"]
-                        )
-                        xm1, ym1 = map_coords(
-                            centroid[0] - 1, centroid[1] - 1, reflection["panel"]
-                        )
-                        xp1, yp1 = map_coords(
-                            centroid[0] + 1, centroid[1] + 1, reflection["panel"]
-                        )
-                        lines = [
-                            (((x, ym1), (x, yp1)), close_spot_dict),
-                            (((xm1, y), (xp1, y)), close_spot_dict),
-                        ]
-                        print("Close lines after = {}\n".format(lines))
-                        close_spot_data.extend(lines)
-                        self.show_close_spots_timer.stop()
-                    # JAD 7 ended this here
-                    '''
             if 'xy.px.close' in ref_list and self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 for i, reflection in enumerate(selected.rows()):
@@ -1589,36 +1564,6 @@ class SpotFrame(XrayFrame):
                                         },
                                     )
                                 )
-            '''
-            # JAD7 THIS IS WHAT I ADDED
-            print("ref_list[panel] = {}".format(ref_list['panel']))
-            if 'xy.px.close' in ref_list and self.settings.show_close_spots:
-                self.show_close_spots_timer.start()
-                close_spots = ref_list['xy.px.close']
-                print("close_spots in ref_list = {}".format(close_spots))
-                print("Len of close spots = {}".format(len(close_spots)))
-                for close_spot in close_spots:
-                    if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                        print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
-                        x, y = map_coords(
-                                close_spot[0], close_spot[1], 0 # ref_list["panel"]
-                        )
-                        xm1, ym1 = map_coords(
-                                close_spot[0] - 1, close_spot[1] - 1, 0 # ref_list["panel"]
-                        )
-                        xp1, yp1 = map_coords(
-                                close_spot[0] + 1, close_spot[1] + 1, 0 # ref_list["panel"]
-                        )
-                        lines = [
-                            (((x, ym1), (x, yp1)), close_spot_dict),
-                            (((xm1, y), (xp1, y)), close_spot_dict),
-                        ]
-                        print("Close lines after = {}\n".format(lines))
-                        close_spot_data.extend(lines)
-                        #close_spot_data.append(close_spot)
-                self.show_close_spots_timer.stop()
-            # AND IT ENDS HERE - JAD7
-            '''
 
         for i, ctr_mass in enumerate(ctr_mass_data):
             print("{}: Ctr mass = {}".format(i, ctr_mass))
