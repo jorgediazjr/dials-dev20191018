@@ -98,6 +98,7 @@ def euclidean_distance(ordered_points, distance=0.5):
                     x2 = list(ordered_points[current].keys())[0]
                     y2 = ordered_points[current][x2][0]
                     point_b = [x2, y2]
+                    print("point b = {}".format(point_b))
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b)
                     if dist <= distance:
