@@ -1476,27 +1476,22 @@ class SpotFrame(XrayFrame):
                         self.show_close_spots_timer.start()
                         close_spot = reflection['xy.px.close']
                         centroid = reflection['xyzobs.px.value']
-                        if close_spot[0] != 0.0 and close_spot[1] != 0.0:
-                            print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
-                            x, y = map_coords(
-                                # close_spot[0], close_spot[1], 0 # ref_list["panel"]
-                                centroid[0], centroid[1], reflection["panel"]
-                            )
-                            xm1, ym1 = map_coords(
-                                # close_spot[0] - 1, close_spot[1] - 1, 0 # ref_list["panel"]
-                                centroid[0] - 1, centroid[1] - 1, reflection["panel"]
-                            )
-                            xp1, yp1 = map_coords(
-                                # close_spot[0] + 1, close_spot[1] + 1, 0 # ref_list["panel"]
-                                centroid[0] + 1, centroid[1] + 1, reflection["panel"]
-                            )
-                            lines = [
-                                (((x, ym1), (x, yp1)), close_spot_dict),
-                                (((xm1, y), (xp1, y)), close_spot_dict),
-                            ]
-                            print("Close lines after = {}\n".format(lines))
-                            close_spot_data.extend(lines)
-                            #close_spot_data.append(close_spot)
+                        print("\nCentroid close spot before: x = {}, y = {}".format(close_spot[0], close_spot[1]))
+                        x, y = map_coords(
+                            centroid[0], centroid[1], reflection["panel"]
+                        )
+                        xm1, ym1 = map_coords(
+                            centroid[0] - 1, centroid[1] - 1, reflection["panel"]
+                        )
+                        xp1, yp1 = map_coords(
+                            centroid[0] + 1, centroid[1] + 1, reflection["panel"]
+                        )
+                        lines = [
+                            (((x, ym1), (x, yp1)), close_spot_dict),
+                            (((xm1, y), (xp1, y)), close_spot_dict),
+                        ]
+                        print("Close lines after = {}\n".format(lines))
+                        close_spot_data.extend(lines)
                         self.show_close_spots_timer.stop()
                     # JAD 7 ended this here
             for i, reflection in enumerate(selected.rows()):
