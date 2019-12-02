@@ -86,12 +86,12 @@ def euclidean_distance(ordered_points, distance=0.5):
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
-    print("ordered points = {}".format(ordered_points))
     for index in ordered_points:
         for x_coord in ordered_points[index]:
             x1 = x_coord
             y1 = ordered_points[index][x_coord][0]
             point_a = [x1, y1]
+            print("points a = {}".format(point_a))
             current = 0
             while current < len(ordered_points):
                 if current != index:
