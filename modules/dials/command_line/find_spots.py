@@ -58,10 +58,6 @@ phil_scope = parse(
     log = 'dials.find_spots.log'
       .type = str
       .help = "The log filename"
-
-    closespots = False
-      .type = bool
-      .help = "Refines the resulting reflections by checking close spots."
   }
 
   per_image_statistics = False
@@ -73,6 +69,12 @@ phil_scope = parse(
     process_includes=True,
 )
 
+'''
+closespots = False
+      .type = bool
+      .help = "Refines the resulting reflections by checking close spots."
+
+'''
 
 class Script(object):
     """A class for running the script."""
@@ -152,12 +154,6 @@ class Script(object):
             if len(ascii_plot):
                 logger.info("\nHistogram of per-image spot count for imageset %i:" % i)
                 logger.info(ascii_plot)
-
-        # this is my portion
-        if params.output.closespots:
-            from dials.util import close_spots
-            reflections = close_spots.main(reflections)
-        # this ends my portion
 
         # Save the reflections to file
         logger.info("\n" + "-" * 80)

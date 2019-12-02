@@ -60,29 +60,29 @@ def units_distance(p, q):
     point_1 = ((p[0] - a) * (p[1] - b))
     point_2 = ((q[0] - a) * (q[1] - b))
     if (point_1 < rad_0 * rad_0) and (point_2 < rad_0 * rad_0):
-        return 0.5
+        return 15
     elif((point_1 > rad_0 * rad_0) and (point_2 > rad_0 * rad_0) and
          (point_1 < rad_1 * rad_1) and (point_2 < rad_1 * rad_1)):
-        return 0.6
+        return 20
     elif((point_1 > rad_1 * rad_1) and (point_2 > rad_1 * rad_1) and
          (point_1 < rad_2 * rad_2) and (point_2 > rad_2 * rad_2)):
-        return 0.7
+        return 25
     elif((point_1 > rad_2 * rad_2) and (point_2 > rad_2 * rad_2) and
          (point_1 < rad_3 * rad_3) and (point_2 < rad_3 * rad_3)):
-        return 0.8
+        return 30
     elif((point_1 > rad_3 * rad_3) and (point_2 > rad_3 * rad_3) and
          (point_1 < rad_4 * rad_4) and (point_2 < rad_4 * rad_4)):
-        return 0.9
+        return 35
     elif((point_1 > rad_4 * rad_4) and (point_2 > rad_4 * rad_4) and
          (point_1 < rad_5 * rad_5) and (point_2 < rad_5 * rad_5)):
-        return 1.0
+        return 40
     elif((point_1 > rad_5 * rad_5) and (point_2 > rad_5 * rad_5)):
-        return 1.1
+        return 50
     else:
-        return 0.5
+        return 15
 
 
-def euclidean_distance(ordered_points, distance=0.5):
+def euclidean_distance(ordered_points, distance=15):
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
@@ -99,10 +99,11 @@ def euclidean_distance(ordered_points, distance=0.5):
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b)
-                    # print("dist = {}".format(dist)) helpful too see what is the avg value for distance
-                    if dist <= 15:
+                    # print below is helpful too see what is the avg value for distance
+                    # print("dist = {}".format(dist))
+                    if dist <= distance:
                         pair = [point_a, point_b]
-                        print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, 15))
+                        print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
                         close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
@@ -145,8 +146,6 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
 
 
 def main(reflections):
-    # result = read_in_file()
-
     xyz_coords = get_xyz_coords(reflections)
 
     ordered_points = order_dictionary(xyz_coords)
@@ -159,13 +158,9 @@ def main(reflections):
 
     close_vec2 = save_spots_in_vec2(close_points)
 
-    #close_vec2 = make_vec2_same_num_rows_for_reflections(close_vec2, reflections)
-
-    #reflections['xy.px.close'] = close_vec2
-
+    #reflections['xy.px.close'] = close_vec2 this is an ex. of creating a new key->value pair
     #return reflections
-    for close in close_vec2:
-        print("close_v2 = {}".format(close))
+
     return close_vec2
 
     '''
