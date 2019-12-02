@@ -100,9 +100,9 @@ def euclidean_distance(ordered_points, distance=0.5):
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b)
                     # print("dist = {}".format(dist)) helpful too see what is the avg value for distance
-                    if dist <= 20:
+                    if dist <= 15:
                         pair = [point_a, point_b]
-                        print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
+                        print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, 15))
                         close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
