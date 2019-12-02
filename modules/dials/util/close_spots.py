@@ -101,7 +101,7 @@ def euclidean_distance(ordered_points, distance=0.5):
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b)
                     print("dist = {}".format(dist))
-                    if dist <= distance:
+                    if dist <= 200:
                         print("DIST = {}".format(dist))
                         pair = [point_a, point_b]
                         print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
