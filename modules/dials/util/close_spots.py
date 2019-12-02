@@ -91,7 +91,6 @@ def euclidean_distance(ordered_points, distance=0.5):
             x1 = x_coord
             y1 = ordered_points[index][x_coord][0]
             point_a = [x1, y1]
-            print("points a = {}".format(point_a))
             current = 0
             while current < len(ordered_points):
                 if current != index:
@@ -100,9 +99,8 @@ def euclidean_distance(ordered_points, distance=0.5):
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b)
-                    print("dist = {}".format(dist))
+                    # print("dist = {}".format(dist)) helpful too see what is the avg value for distance
                     if dist <= 200:
-                        print("DIST = {}".format(dist))
                         pair = [point_a, point_b]
                         print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
                         close_points.append(pair)
@@ -114,7 +112,6 @@ def euclidean_distance(ordered_points, distance=0.5):
                     current += 1
                     continue
                 current += 1
-    print("len of closest points = {}".format(len(closest_points)))
     return close_points, midpoints, closest_points
 
 
