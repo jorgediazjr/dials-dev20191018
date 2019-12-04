@@ -83,7 +83,6 @@ def units_distance(p, q, distance):
 
 
 def euclidean_distance(ordered_points, distance=7):
-    print("INSIDE EUCLIDEAN DISTANCE WHERE DISTANCE = {}".format(distance))
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
@@ -100,7 +99,6 @@ def euclidean_distance(ordered_points, distance=7):
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
                     new_distance = units_distance(point_a, point_b, distance)
-                    print("Distance after calling function = {}".format(new_distance))
                     # print below is helpful too see what is the avg value for distance
                     # print("dist = {}".format(dist))
                     if dist <= new_distance:
