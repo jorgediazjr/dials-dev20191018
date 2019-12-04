@@ -1,9 +1,11 @@
 '''
-Jorge Diaz
+Jorge A. Diaz Jr
 
 This small program is to find spots that
 are close to each other from the reflections
 that are found by running dials.find_spots
+and is used by dials.image_viewer
+    - a checkbox allows the user to see any of the close spots
 
 '''
 
@@ -103,8 +105,8 @@ def euclidean_distance(ordered_points, distance=7):
                     # print("dist = {}".format(dist))
                     if dist <= distance:
                         pair = [point_a, point_b]
-                        print("({:.2f},{:.2f})\t<-\t{:.2f}\t->\t({:.2f},{:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
-                                                                                    point_b[0], point_b[1], distance))
+                        print("({:.2f}, {:.2f})\t<-\t{:.2f}\t->\t({:.2f}, {:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
+                                                                                                      point_b[0], point_b[1], distance))
                         close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs

@@ -194,8 +194,6 @@ class _(object):
             experiments=experiments, params=params
         )
 
-        # Find the spots
-        print("JAD7: find_spots => {}".format(find_spots))
         return find_spots(experiments)
 
     @staticmethod

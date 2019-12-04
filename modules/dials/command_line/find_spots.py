@@ -69,12 +69,6 @@ phil_scope = parse(
     process_includes=True,
 )
 
-'''
-closespots = False
-      .type = bool
-      .help = "Refines the resulting reflections by checking close spots."
-
-'''
 
 class Script(object):
     """A class for running the script."""
