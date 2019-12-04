@@ -145,7 +145,7 @@ def save_spots_in_vec2(close_points):
             continue
         close_vec2.append(point)
         print("point = {}".format(point))
-
+    print("Number of spots: {}".format(len(close_vec2)))
     return close_vec2
 
 
