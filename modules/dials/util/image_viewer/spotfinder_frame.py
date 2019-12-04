@@ -114,6 +114,7 @@ class SpotFrame(XrayFrame):
         self.show_ctr_mass_timer = time_log("show_ctr_mass")
         self.draw_all_pix_timer = time_log("draw_all_pix")
         self.draw_shoebox_timer = time_log("draw_shoebox")
+        self.draw_close_spots_timer = time_log("draw_close_spots") # JAD
         self.draw_max_pix_timer = time_log("draw_max_pix")
         self.draw_ctr_mass_timer = time_log("draw_ctr_mass_pix")
 
@@ -1134,17 +1135,21 @@ class SpotFrame(XrayFrame):
                 self.draw_max_pix_timer.stop()
             # JAD added this below
             if self.settings.show_close_spots and len(close_spot_data):
-                self.show_close_spots_timer.start()
-                self.close_spots_layer = self.pyslip.AddPolygonLayer(
+                self.draw_close_spots_timer.start()
+                # self.close_spots_layer = self.pyslip.AddPolygonLayer(
+                self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
-                    map_rel=True,
-                    visible=True,
+                    #map_rel=True,
+                    #visible=True,
+                    #selectable=False,
+                    color="orange",
+                    radius=2,
+                    renderer=self.pyslip.LightweightDrawPointLayer,
                     show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
-                    selectable=False,
                     name="<close_spot_layer>",
                     update=False,
                 )
-                self.show_close_spots_timer.stop()
+                self.draw_close_spots_timer.stop()
             # JAD ended this above
             if len(vector_data) and len(vector_text_data):
                 self.vector_layer = self.pyslip.AddPolygonLayer(
@@ -1473,19 +1478,20 @@ class SpotFrame(XrayFrame):
 
                 for centroid in closest_points:
                     x, y = map_coords(
-                            centroid[0], centroid[1], 0 # reflection["panel"]
+                            centroid[0], centroid[1], 0
                     )
                     xm1, ym1 = map_coords(
-                        centroid[0] - 1, centroid[1] - 1, 0 #reflection["panel"]
+                        centroid[0] - 1, centroid[1] - 1, 0
                     )
                     xp1, yp1 = map_coords(
-                        centroid[0] + 1, centroid[1] + 1, 0 #reflection["panel"]
+                        centroid[0] + 1, centroid[1] + 1, 0
                     )
                     lines = [
                         (((x, ym1), (x, yp1)), close_spot_dict),
                         (((xm1, y), (xp1, y)), close_spot_dict),
                     ]
-                    close_spot_data.extend(lines)
+                    # close_spot_data.extend(lines)
+                    close_spot_data.append((x,y))
                 print("time taken for close spots: {:.2f}ms\n\n".format((time.time() - start_time) * 1000))
                 self.show_close_spots_timer.stop()
             # JAD ended this here
