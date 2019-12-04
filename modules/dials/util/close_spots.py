@@ -145,7 +145,6 @@ def save_spots_in_vec2(close_points):
             continue
         close_vec2.append(point)
         print("point = {}".format(point))
-    print("Number of spots: {}".format(len(close_vec2)))
     return close_vec2
 
 
@@ -174,7 +173,7 @@ def main(reflections, dist=None):
     closest_points = order_dictionary(closest_points)
 
     close_vec2 = save_spots_in_vec2(close_points)
-
+    print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
     #reflections['xy.px.close'] = close_vec2 this is an ex. of creating a new key->value pair
     #return reflections
 
