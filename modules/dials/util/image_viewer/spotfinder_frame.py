@@ -1465,7 +1465,7 @@ class SpotFrame(XrayFrame):
                 import time
                 start_time = time.time()
                 for i, reflection in enumerate(selected.rows()):
-                    print("\n{}: reflection is {}\n".format(i, reflection))
+                    # print("\n{}: reflection is {}\n".format(i, reflection))
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
                 from dials.util import close_spots

@@ -138,13 +138,12 @@ def save_spots_in_vec2(close_points):
 
     close_points = flatten_closest_points(close_points)
 
-    for point in close_points:
+    for point in close_points:   # point[0] = x | point[1] = y
         if(point[0] >= 1250 and
            point[0] <= 1275 and
-           point[1] == 1613.5): # if y-value is equal to 1613.5
+           point[1] == 1613.5):
             continue
         close_vec2.append(point)
-        print("point = {}".format(point))
     return close_vec2
 
 
@@ -174,8 +173,6 @@ def main(reflections, dist=None):
 
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
-    #reflections['xy.px.close'] = close_vec2 this is an ex. of creating a new key->value pair
-    #return reflections
 
     return close_vec2
 
