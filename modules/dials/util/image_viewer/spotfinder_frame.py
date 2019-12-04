@@ -1476,6 +1476,8 @@ class SpotFrame(XrayFrame):
             # JAD 7 put this here
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
+                import time
+                start_time = time.time()
                 for i, reflection in enumerate(selected.rows()):
                     print("\n{}: reflection is {}\n".format(i, reflection))
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
@@ -1498,6 +1500,7 @@ class SpotFrame(XrayFrame):
                         (((xm1, y), (xp1, y)), close_spot_dict),
                     ]
                     close_spot_data.extend(lines)
+                print("time taken for close spots: {}".format(time.time() - start_time))
                 self.show_close_spots_timer.stop()
             # JAD 7 ended this here
 
