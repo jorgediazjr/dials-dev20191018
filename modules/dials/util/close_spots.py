@@ -98,13 +98,13 @@ def euclidean_distance(ordered_points, distance=7):
                     y2 = ordered_points[current][x2][0]
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
-                    new_distance = units_distance(point_a, point_b, distance)
+                    # new_distance = units_distance(point_a, point_b, distance)
                     # print below is helpful too see what is the avg value for distance
                     # print("dist = {}".format(dist))
-                    if dist <= new_distance:
+                    if dist <= distance:
                         pair = [point_a, point_b]
                         print("({:.2f},{:.2f})\t<-\t{:.2f}\t->\t({:.2f},{:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
-                                                                                    point_b[0], point_b[1], new_distance))
+                                                                                    point_b[0], point_b[1], distance))
                         close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
