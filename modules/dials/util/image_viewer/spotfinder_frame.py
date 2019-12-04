@@ -1486,7 +1486,7 @@ class SpotFrame(XrayFrame):
                         (((xm1, y), (xp1, y)), close_spot_dict),
                     ]
                     close_spot_data.extend(lines)
-                print("time taken for close spots: {}".format(time.time() - start_time))
+                print("time taken for close spots: {}ms".format((time.time() - start_time) * 1000))
                 self.show_close_spots_timer.stop()
             # JAD ended this here
 
