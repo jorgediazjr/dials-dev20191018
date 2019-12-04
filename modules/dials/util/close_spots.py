@@ -100,6 +100,7 @@ def euclidean_distance(ordered_points, distance=7):
                     point_b = [x2, y2]
                     dist = find_distance(point_a, point_b)
                     distance = units_distance(point_a, point_b, distance)
+                    print("Distance after calling function = {}".format(distance))
                     # print below is helpful too see what is the avg value for distance
                     # print("dist = {}".format(dist))
                     if dist <= distance:
