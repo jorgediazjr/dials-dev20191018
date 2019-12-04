@@ -103,7 +103,7 @@ def euclidean_distance(ordered_points, distance=7):
                     # print("dist = {}".format(dist))
                     if dist <= new_distance:
                         pair = [point_a, point_b]
-                        print("{}\t<--\t{:.2f}\t-->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
+                        print("{}\t<-\t{:.2f}\t->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
                         close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
@@ -145,14 +145,17 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     return close_vec2
 
 
-def main(reflections):
+def main(reflections, dist=None):
     xyz_coords = get_xyz_coords(reflections)
 
     ordered_points = order_dictionary(xyz_coords)
 
     ordered_points = add_index_to_pairs(ordered_points)
     
-    close_points, midpoints, closest_points = euclidean_distance(ordered_points)
+    if dist is None:
+        close_points, midpoints, closest_points = euclidean_distance(ordered_points)
+    else:
+        close_points, midpoints, closest_points = euclidean_distance(ordered_points, dist)
 
     closest_points = order_dictionary(closest_points)
 

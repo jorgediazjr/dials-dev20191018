@@ -1472,6 +1472,7 @@ class SpotFrame(XrayFrame):
                             print("Lines after processing centroid = {}\n".format(lines))
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
+            
             # JAD 7 put this here
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
@@ -1480,7 +1481,7 @@ class SpotFrame(XrayFrame):
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
                 from dials.util import close_spots
-                closest_points = close_spots.main(reflections_data)
+                closest_points = close_spots.main(reflections_data, dist=10)
 
                 for centroid in closest_points:
                     x, y = map_coords(
