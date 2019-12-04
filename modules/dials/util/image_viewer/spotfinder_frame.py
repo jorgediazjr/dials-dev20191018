@@ -92,7 +92,7 @@ class SpotFrame(XrayFrame):
         self.viewer.frames = self.imagesets
         self.dials_spotfinder_layers = []
         self.shoebox_layer = None
-        self.close_spots_layer = None # JAD7
+        self.close_spots_layer = None # JAD
         self.ctr_mass_layer = None
         self.max_pix_layer = None
         self.predictions_layer = None
@@ -109,7 +109,7 @@ class SpotFrame(XrayFrame):
 
         self.show_all_pix_timer = time_log("show_all_pix")
         self.show_shoebox_timer = time_log("show_shoebox")
-        self.show_close_spots_timer = time_log("show_close_spots") # JAD7
+        self.show_close_spots_timer = time_log("show_close_spots") # JAD
         self.show_max_pix_timer = time_log("show_max_pix")
         self.show_ctr_mass_timer = time_log("show_ctr_mass")
         self.draw_all_pix_timer = time_log("draw_all_pix")
@@ -1000,9 +1000,9 @@ class SpotFrame(XrayFrame):
             if self._resolution_text_layer is not None:
                 self.pyslip.DeleteLayer(self._resolution_text_layer, update=False)
                 self._resolution_text_layer = None
-            if self.close_spots_layer is not None:                                 #JAD7
-                self.pyslip.DeleteLayer(self.close_spots_layer, update=False)      #JAD7
-                self.close_spots_layer = None                                      #JAD7
+            if self.close_spots_layer is not None:                                 #JAD
+                self.pyslip.DeleteLayer(self.close_spots_layer, update=False)      #JAD
+                self.close_spots_layer = None                                      #JAD
 
             if self.settings.show_miller_indices and len(miller_indices_data):
                 self.miller_indices_layer = self.pyslip.AddTextLayer(
@@ -1095,23 +1095,7 @@ class SpotFrame(XrayFrame):
                                 update=False,
                             )
                         )
-                    print("len of all pix data = {}".format(len(all_pix_data)))
                 self.draw_all_pix_timer.stop()
-            # JAD7 added this below
-            if self.settings.show_close_spots and len(close_spot_data):
-                self.show_close_spots_timer.start()
-                print("We are inside the update for adding point layer")
-                self.close_spots_layer = self.pyslip.AddPolygonLayer(
-                    close_spot_data,
-                    map_rel=True,
-                    visible=True,
-                    show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
-                    selectable=False,
-                    name="<close_spot_layer>",
-                    update=False,
-                )
-                self.show_close_spots_timer.stop()
-            # JAD7 ended this above
             if self.settings.show_shoebox and len(shoebox_data):
                 self.draw_shoebox_timer.start()
                 self.shoebox_layer = self.pyslip.AddPolygonLayer(
@@ -1148,6 +1132,20 @@ class SpotFrame(XrayFrame):
                     update=False,
                 )
                 self.draw_max_pix_timer.stop()
+            # JAD added this below
+            if self.settings.show_close_spots and len(close_spot_data):
+                self.show_close_spots_timer.start()
+                self.close_spots_layer = self.pyslip.AddPolygonLayer(
+                    close_spot_data,
+                    map_rel=True,
+                    visible=True,
+                    show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
+                    selectable=False,
+                    name="<close_spot_layer>",
+                    update=False,
+                )
+                self.show_close_spots_timer.stop()
+            # JAD ended this above
             if len(vector_data) and len(vector_text_data):
                 self.vector_layer = self.pyslip.AddPolygonLayer(
                     vector_data,
@@ -1250,7 +1248,6 @@ class SpotFrame(XrayFrame):
         strong_code = MaskCode.Valid | MaskCode.Strong
 
         def map_coords(x, y, p):
-            #print("In map_coords.\nx={} | y={} | p={}".format(x, y, p))
             if len(self.pyslip.tiles.raw_image.get_detector()) > 1:
                 y, x = self.pyslip.tiles.flex_image.tile_readout_to_picture(
                     p, y - 0.5, x - 0.5
@@ -1275,9 +1272,9 @@ class SpotFrame(XrayFrame):
         miller_indices_data = []
         vector_data = []
         vector_text_data = []
-        close_spot_data = [] # JAD7
-        reflections_data = {} # JAD7
-        reflections_data['xyzobs.px.value'] = [] # JAD7
+        close_spot_data = [] # JAD
+        reflections_data = {} # JAD
+        reflections_data['xyzobs.px.value'] = [] # JAD
         detector = self.pyslip.tiles.raw_image.get_detector()
         scan = self.pyslip.tiles.raw_image.get_scan()
         to_degrees = 180 / math.pi
@@ -1298,11 +1295,6 @@ class SpotFrame(XrayFrame):
         ] * 10
 
         for ref_list_id, ref_list in enumerate(self.reflections):
-
-            print("REF LIST ID # = {}".format(ref_list_id))
-            print("ref_list = {}".format(ref_list))
-            print("ref_list[0] = {}".format(ref_list[0])) #JAD7
-            print("ref_list[0][xyzobs.px.value] = {}".format(ref_list[0]['xyzobs.px.value'])) #JAD7
 
             # If we have more than one imageset, then we could be on the wrong one
             if not self.have_one_imageset:
@@ -1326,7 +1318,6 @@ class SpotFrame(XrayFrame):
                 continue
 
             if "bbox" in ref_list:
-                print("We are inside because bbox in ref_list")
                 bbox = ref_list["bbox"]
                 x0, x1, y0, y1, z0, z1 = bbox.parts()
                 # ticket #107
@@ -1335,8 +1326,6 @@ class SpotFrame(XrayFrame):
                 selected = ref_list.select(bbox_sel)
                 index = 0
                 for reflection in selected.rows():
-                    print("selected.rows() = {}".format(selected.rows()))
-                    print("index = {}".format(index))
                     index += 1
                     x0, x1, y0, y1, z0, z1 = reflection["bbox"]
                     panel = reflection["panel"]
@@ -1454,8 +1443,6 @@ class SpotFrame(XrayFrame):
                         if centroid[2] >= i_frame and centroid[2] <= (
                             i_frame + self.params.sum_images
                         ):
-                            print("\nreflection[panel] = {}".format(reflection["panel"]))
-                            print("Centroid in ctr mass = {}".format(centroid))
                             x, y = map_coords(
                                 centroid[0], centroid[1], reflection["panel"]
                             )
@@ -1469,11 +1456,10 @@ class SpotFrame(XrayFrame):
                                 (((x, ym1), (x, yp1)), ctr_mass_dict),
                                 (((xm1, y), (xp1, y)), ctr_mass_dict),
                             ]
-                            print("Lines after processing centroid = {}\n".format(lines))
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
             
-            # JAD 7 put this here
+            # JAD put this here
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 import time
@@ -1502,7 +1488,7 @@ class SpotFrame(XrayFrame):
                     close_spot_data.extend(lines)
                 print("time taken for close spots: {}".format(time.time() - start_time))
                 self.show_close_spots_timer.stop()
-            # JAD 7 ended this here
+            # JAD ended this here
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
@@ -1657,7 +1643,7 @@ class SpotFrame(XrayFrame):
             miller_indices_data=miller_indices_data,
             vector_data=vector_data,
             vector_text_data=vector_text_data,
-            close_spot_data=close_spot_data #JAD7
+            close_spot_data=close_spot_data #JAD
         )
 
     def get_detector(self):
@@ -1721,9 +1707,7 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.brightness = self.params.brightness
         self.settings.color_scheme = self.params.color_scheme
         self.settings.show_spotfinder_spots = False
-        print("self.params = {}".format(self.params)) # JAD7
-        print("dir(PARAM) = {}".format(dir(self.params))) # JAD7
-        self.settings.show_close_spots = self.params.show_close_spots # JAD7
+        self.settings.show_close_spots = self.params.show_close_spots # JAD
         self.settings.show_dials_spotfinder_spots = True
         self.settings.show_resolution_rings = self.params.show_resolution_rings
         self.settings.untrusted = self.params.masking.untrusted
@@ -1861,10 +1845,10 @@ class SpotSettingsPanel(wx.Panel):
         self.indexed.SetValue(self.settings.show_indexed)
         grid.Add(self.indexed, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
-        # JAD7 Close spots points
-        self.close_spots = wx.CheckBox(self, -1, "Show close spots")        #JAD7
-        self.close_spots.SetValue(self.settings.show_close_spots)           #JAD7
-        grid.Add(self.close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5) #JAD7
+        # JAD Close spots points
+        self.close_spots = wx.CheckBox(self, -1, "Show close spots")        #JAD
+        self.close_spots.SetValue(self.settings.show_close_spots)           #JAD
+        grid.Add(self.close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5) #JAD
 
         # Integration shoeboxes only
         self.integrated = wx.CheckBox(self, -1, "Integrated only")
@@ -2034,7 +2018,7 @@ class SpotSettingsPanel(wx.Panel):
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.indexed)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.integrated)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.show_basis_vectors)
-        self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.close_spots) # JAD7
+        self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.close_spots) # JAD
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdateShowMask, self.show_mask)
 
         self.Bind(wx.EVT_UPDATE_UI, self.UpdateZoomCtrl)
@@ -2065,8 +2049,7 @@ class SpotSettingsPanel(wx.Panel):
             self.settings.show_max_pix = self.max_pix.GetValue()
             self.settings.show_all_pix = self.all_pix.GetValue()
             self.settings.show_shoebox = self.shoebox.GetValue()
-            self.settings.show_close_spots = self.close_spots.GetValue() # JAD7
-            print("self.settings.show_close_spots = {}".format(self.settings.show_close_spots)) # jAD7
+            self.settings.show_close_spots = self.close_spots.GetValue() # JAD
             self.settings.show_indexed = self.indexed.GetValue()
             self.settings.show_integrated = self.integrated.GetValue()
             self.settings.show_predictions = self.predictions.GetValue()
@@ -2124,7 +2107,7 @@ class SpotSettingsPanel(wx.Panel):
             self.max_pix,
             self.all_pix,
             self.shoebox,
-            self.close_spots, #JAD7
+            self.close_spots, #JAD
             self.predictions,
             self.miller_indices,
             self.show_mask,
