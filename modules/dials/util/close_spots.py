@@ -132,8 +132,10 @@ def save_spots_in_vec2(close_points):
     close_points = flatten_closest_points(close_points)
 
     for point in close_points:
-        print("point = {}".format(point))
+        if point in close_vec2:
+            continue
         close_vec2.append(point)
+        print("point = {}".format(point))
     return close_vec2
 
 
