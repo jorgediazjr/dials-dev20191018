@@ -140,7 +140,7 @@ def save_spots_in_vec2(close_points):
 
     for point in close_points:
         if(point[0] >= 1250 and
-           point[0] <= 1265 and
+           point[0] <= 1275 and
            point[1] == 1613.5): # if y-value is equal to 1613.5
             continue
         close_vec2.append(point)
