@@ -103,7 +103,7 @@ def euclidean_distance(ordered_points, distance=7):
                     # print("dist = {}".format(dist))
                     if dist <= new_distance:
                         pair = [point_a, point_b]
-                        print("{}\t<-\t{:.2f}\t->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, distance))
+                        print("{}\t<-\t{:.2f}\t->\t{}\tWITHIN\t{}".format(point_a, dist, point_b, new_distance))
                         close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
