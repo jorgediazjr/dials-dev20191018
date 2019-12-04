@@ -83,6 +83,7 @@ def units_distance(p, q, distance):
 
 
 def euclidean_distance(ordered_points, distance=7):
+    print("INSIDE EUCLIDEAN DISTANCE WHERE DISTANCE = {}".format(distance))
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x,y values that are closest
     midpoints = dict()      # the midpoints between the close pairs
