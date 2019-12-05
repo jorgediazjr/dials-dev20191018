@@ -99,6 +99,8 @@ def euclidean_distance(ordered_points, distance=7):
                     x2 = list(ordered_points[current].keys())[0]
                     y2 = ordered_points[current][x2][0]
                     point_b = [x2, y2]
+                    if point_a in close_points and point_b in close_points:
+                            continue
                     dist = find_distance(point_a, point_b)
                     # new_distance = units_distance(point_a, point_b, distance)
                     # print below is helpful too see what is the avg value for distance
@@ -107,7 +109,9 @@ def euclidean_distance(ordered_points, distance=7):
                         pair = [point_a, point_b]
                         print("({:.2f}, {:.2f})\t<-\t{:.2f}\t->\t({:.2f}, {:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
                                                                                                       point_b[0], point_b[1], distance))
-                        close_points.append(pair)
+                        close_points.append(point_a)
+                        close_points.append(point_b)
+                        # close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
                         midpoint_x = (point_a[0] + point_b[0]) / 2
@@ -138,12 +142,13 @@ def save_spots_in_vec2(close_points):
     from scitbx.array_family import flex
     close_vec2 = flex.vec2_double()
 
-    close_points = flatten_closest_points(close_points)
+    # close_points = flatten_closest_points(close_points)
 
     for point in close_points:   # point[0] = x | point[1] = y
         if(point[0] >= 1250 and
            point[0] <= 1275 and
-           point[1] == 1613.5):
+           point[1] >= 1612.5 and
+           point[1] <= 1613.5):
             continue
         close_vec2.append(point)
     return close_vec2
@@ -171,7 +176,7 @@ def main(reflections, dist=None):
     else:
         close_points, midpoints, closest_points = euclidean_distance(ordered_points, dist)
 
-    closest_points = order_dictionary(closest_points)
+    # closest_points = order_dictionary(closest_points)
 
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
