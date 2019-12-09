@@ -167,7 +167,7 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     return close_vec2
 
 
-def main(reflections, dist=None):
+def main(reflections, detector, dist=None):
     xyz_coords = get_xyz_coords(reflections)
 
     ordered_points = order_dictionary(xyz_coords)
