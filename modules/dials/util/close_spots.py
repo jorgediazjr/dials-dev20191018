@@ -157,6 +157,32 @@ def save_spots_in_vec2(close_points):
     return close_vec2
 
 
+def get_beam_centre(detector):
+    from dials.util.image_viewer import map_coords
+    if len(detector) == 1:
+        beam_centre = detector[0].get_ray_intersection(beam.get_s0())
+        beam_x, beam_y = detector[0].millimeter_to_pixel(beam_centre)
+        beam_x, beam_y = map_coords(beam_x, beam_y, 0)
+    else:
+        try:
+            panel, beam_centre = detector.get_ray_intersection(
+                beam.get_s0()
+            )
+        except RuntimeError as e:
+            if "DXTBX_ASSERT(w_max > 0)" in str(e):
+                # direct beam didn't hit a panel
+                panel = 0
+                beam_centre = detector[panel].get_ray_intersection(
+                    beam.get_s0()
+                )
+            else:
+                raise
+        beam_x, beam_y = detector[panel].millimeter_to_pixel(
+            beam_centre
+        )
+        beam_x, beam_y = map_coords(beam_x, beam_y, panel)
+
+
 def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     close_vec_len = len(close_vec2)
     reflections_len = len(reflections)
@@ -181,6 +207,8 @@ def main(reflections, detector, dist=None):
 
     # closest_points = order_dictionary(closest_points)
 
+    beam_centre = get_beam_centre(detector)
+    
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
 
