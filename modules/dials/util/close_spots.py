@@ -158,7 +158,7 @@ def save_spots_in_vec2(close_points):
 
 
 def get_beam_centre(detector):
-    from dials.util.image_viewer import map_coords
+    from dials.util.image_viewer.spotfinder_frame import map_coords
     if len(detector) == 1:
         beam_centre = detector[0].get_ray_intersection(beam.get_s0())
         beam_x, beam_y = detector[0].millimeter_to_pixel(beam_centre)
@@ -208,7 +208,7 @@ def main(reflections, detector, dist=None):
     # closest_points = order_dictionary(closest_points)
 
     beam_centre = get_beam_centre(detector)
-    
+
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
 
