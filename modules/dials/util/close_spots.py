@@ -157,7 +157,7 @@ def save_spots_in_vec2(close_points):
     return close_vec2
 
 
-def get_beam_centre(detector):
+def get_beam_centre(detector, beam):
     def map_coords(x, y, p):
             if len(self.pyslip.tiles.raw_image.get_detector()) > 1:
                 y, x = self.pyslip.tiles.flex_image.tile_readout_to_picture(
