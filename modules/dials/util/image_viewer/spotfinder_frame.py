@@ -1299,6 +1299,9 @@ class SpotFrame(XrayFrame):
             "#999999",
         ] * 10
 
+        beam_x = 0 # JAD
+        beam_y = 0 # JAD
+        # JAD - i moved this piece of code to this position to get beam_x and beam_y
         if (
             self.settings.show_basis_vectors
             and self.crystals is not None
