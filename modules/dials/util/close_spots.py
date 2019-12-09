@@ -158,7 +158,13 @@ def save_spots_in_vec2(close_points):
 
 
 def get_beam_centre(detector):
-    from dials.util.image_viewer.spotfinder_frame import map_coords
+    def map_coords(x, y, p):
+            if len(self.pyslip.tiles.raw_image.get_detector()) > 1:
+                y, x = self.pyslip.tiles.flex_image.tile_readout_to_picture(
+                    p, y - 0.5, x - 0.5
+                )
+            return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
+
     if len(detector) == 1:
         beam_centre = detector[0].get_ray_intersection(beam.get_s0())
         beam_x, beam_y = detector[0].millimeter_to_pixel(beam_centre)
