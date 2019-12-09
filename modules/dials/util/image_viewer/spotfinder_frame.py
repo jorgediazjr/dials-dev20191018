@@ -1299,8 +1299,8 @@ class SpotFrame(XrayFrame):
             "#999999",
         ] * 10
 
-        beam_x = 0 # JAD
-        beam_y = 0 # JAD
+        beam_x0 = 0 # JAD
+        beam_y0 = 0 # JAD
         # JAD - i moved this piece of code to this position to get beam_x and beam_y
         if (
             self.settings.show_basis_vectors
@@ -1376,6 +1376,8 @@ class SpotFrame(XrayFrame):
                                 {"placement": "ne", "fontsize": 20, "color": "#F62817"},
                             )
                         )
+            beam_x0 = beam_x
+            beam_y0 = beam_y
 
         for ref_list_id, ref_list in enumerate(self.reflections):
 
@@ -1552,7 +1554,7 @@ class SpotFrame(XrayFrame):
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
                 from dials.util import close_spots
-                closest_points = close_spots.main(reflections_data, beam_x, beam_y, dist=10)
+                closest_points = close_spots.main(reflections_data, beam_x0, beam_y0, dist=10)
 
                 for centroid in closest_points:
                     x, y = map_coords(
