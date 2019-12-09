@@ -199,7 +199,7 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     return close_vec2
 
 
-def main(reflections, detector, dist=None):
+def main(reflections, detector, beam, dist=None):
     xyz_coords = get_xyz_coords(reflections)
 
     ordered_points = order_dictionary(xyz_coords)
@@ -213,7 +213,7 @@ def main(reflections, detector, dist=None):
 
     # closest_points = order_dictionary(closest_points)
 
-    beam_centre = get_beam_centre(detector)
+    beam_centre = get_beam_centre(detector, beam)
 
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
