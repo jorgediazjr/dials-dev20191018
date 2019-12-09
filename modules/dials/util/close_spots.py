@@ -157,38 +157,6 @@ def save_spots_in_vec2(close_points):
     return close_vec2
 
 
-def get_beam_centre(detector, beam):
-    def map_coords(x, y, p):
-            if len(self.pyslip.tiles.raw_image.get_detector()) > 1:
-                y, x = self.pyslip.tiles.flex_image.tile_readout_to_picture(
-                    p, y - 0.5, x - 0.5
-                )
-            return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
-
-    if len(detector) == 1:
-        beam_centre = detector[0].get_ray_intersection(beam.get_s0())
-        beam_x, beam_y = detector[0].millimeter_to_pixel(beam_centre)
-        beam_x, beam_y = map_coords(beam_x, beam_y, 0)
-    else:
-        try:
-            panel, beam_centre = detector.get_ray_intersection(
-                beam.get_s0()
-            )
-        except RuntimeError as e:
-            if "DXTBX_ASSERT(w_max > 0)" in str(e):
-                # direct beam didn't hit a panel
-                panel = 0
-                beam_centre = detector[panel].get_ray_intersection(
-                    beam.get_s0()
-                )
-            else:
-                raise
-        beam_x, beam_y = detector[panel].millimeter_to_pixel(
-            beam_centre
-        )
-        beam_x, beam_y = map_coords(beam_x, beam_y, panel)
-
-
 def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     close_vec_len = len(close_vec2)
     reflections_len = len(reflections)
@@ -199,7 +167,7 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     return close_vec2
 
 
-def main(reflections, detector, beam, dist=None):
+def main(reflections, beam_x, beam_y, dist=None):
     xyz_coords = get_xyz_coords(reflections)
 
     ordered_points = order_dictionary(xyz_coords)
@@ -213,7 +181,7 @@ def main(reflections, detector, beam, dist=None):
 
     # closest_points = order_dictionary(closest_points)
 
-    beam_centre = get_beam_centre(detector, beam)
+    print("Beam centre is ({}, {})".format(beam_x, beam_y))
 
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))

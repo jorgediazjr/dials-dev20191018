@@ -1299,6 +1299,81 @@ class SpotFrame(XrayFrame):
             "#999999",
         ] * 10
 
+        if (
+            self.settings.show_basis_vectors
+            and self.crystals is not None
+            and self.crystals[0] is not None
+        ):
+            for experiments in self.experiments:
+                for experiment in experiments:
+                    if experiment.imageset != imageset:
+                        continue
+                    crystal_model = experiment.crystal
+                    cs = crystal.symmetry(
+                        unit_cell=crystal_model.get_unit_cell(),
+                        space_group=crystal_model.get_space_group(),
+                    )
+                    cb_op = cs.change_of_basis_op_to_reference_setting()
+                    crystal_model = crystal_model.change_basis(cb_op)
+                    A = matrix.sqr(crystal_model.get_A())
+                    scan = imageset.get_scan()
+                    beam = imageset.get_beam()
+                    gonio = imageset.get_goniometer()
+                    still = scan is None or gonio is None
+                    if not still:
+                        phi = scan.get_angle_from_array_index(
+                            i_frame - imageset.get_array_range()[0], deg=True
+                        )
+                        axis = matrix.col(imageset.get_goniometer().get_rotation_axis())
+                    if len(detector) == 1:
+                        beam_centre = detector[0].get_ray_intersection(beam.get_s0())
+                        beam_x, beam_y = detector[0].millimeter_to_pixel(beam_centre)
+                        beam_x, beam_y = map_coords(beam_x, beam_y, 0)
+                    else:
+                        try:
+                            panel, beam_centre = detector.get_ray_intersection(
+                                beam.get_s0()
+                            )
+                        except RuntimeError as e:
+                            if "DXTBX_ASSERT(w_max > 0)" in str(e):
+                                # direct beam didn't hit a panel
+                                panel = 0
+                                beam_centre = detector[panel].get_ray_intersection(
+                                    beam.get_s0()
+                                )
+                            else:
+                                raise
+                        beam_x, beam_y = detector[panel].millimeter_to_pixel(
+                            beam_centre
+                        )
+                        beam_x, beam_y = map_coords(beam_x, beam_y, panel)
+                    for i, h in enumerate(((10, 0, 0), (0, 10, 0), (0, 0, 10))):
+                        r = A * matrix.col(h)
+                        if still:
+                            s1 = matrix.col(beam.get_s0()) + r
+                        else:
+                            r_phi = r.rotate_around_origin(axis, phi, deg=True)
+                            s1 = matrix.col(beam.get_s0()) + r_phi
+                        if len(detector) == 1:
+                            x, y = detector[0].get_bidirectional_ray_intersection_px(s1)
+                            x, y = map_coords(x, y, 0)
+                        else:
+                            panel = detector.get_panel_intersection(s1)
+                            if panel < 0:
+                                continue
+                            x, y = detector[panel].get_ray_intersection_px(s1)
+                            x, y = map_coords(x, y, panel)
+                        vector_data.append((((beam_x, beam_y), (x, y)), vector_dict))
+
+                        vector_text_data.append(
+                            (
+                                x,
+                                y,
+                                ("a*", "b*", "c*")[i],
+                                {"placement": "ne", "fontsize": 20, "color": "#F62817"},
+                            )
+                        )
+
         for ref_list_id, ref_list in enumerate(self.reflections):
 
             # If we have more than one imageset, then we could be on the wrong one
@@ -1474,7 +1549,7 @@ class SpotFrame(XrayFrame):
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
                 from dials.util import close_spots
-                closest_points = close_spots.main(reflections_data, detector, imageset.get_beam(), dist=10)
+                closest_points = close_spots.main(reflections_data, beam_x, beam_y, dist=10)
 
                 for centroid in closest_points:
                     x, y = map_coords(
@@ -1564,80 +1639,7 @@ class SpotFrame(XrayFrame):
             # show overlapped pixels in a different color
             all_pix_data[max(all_pix_data.keys()) + 1] = overlapped_data
 
-        if (
-            self.settings.show_basis_vectors
-            and self.crystals is not None
-            and self.crystals[0] is not None
-        ):
-            for experiments in self.experiments:
-                for experiment in experiments:
-                    if experiment.imageset != imageset:
-                        continue
-                    crystal_model = experiment.crystal
-                    cs = crystal.symmetry(
-                        unit_cell=crystal_model.get_unit_cell(),
-                        space_group=crystal_model.get_space_group(),
-                    )
-                    cb_op = cs.change_of_basis_op_to_reference_setting()
-                    crystal_model = crystal_model.change_basis(cb_op)
-                    A = matrix.sqr(crystal_model.get_A())
-                    scan = imageset.get_scan()
-                    beam = imageset.get_beam()
-                    gonio = imageset.get_goniometer()
-                    still = scan is None or gonio is None
-                    if not still:
-                        phi = scan.get_angle_from_array_index(
-                            i_frame - imageset.get_array_range()[0], deg=True
-                        )
-                        axis = matrix.col(imageset.get_goniometer().get_rotation_axis())
-                    if len(detector) == 1:
-                        beam_centre = detector[0].get_ray_intersection(beam.get_s0())
-                        beam_x, beam_y = detector[0].millimeter_to_pixel(beam_centre)
-                        beam_x, beam_y = map_coords(beam_x, beam_y, 0)
-                    else:
-                        try:
-                            panel, beam_centre = detector.get_ray_intersection(
-                                beam.get_s0()
-                            )
-                        except RuntimeError as e:
-                            if "DXTBX_ASSERT(w_max > 0)" in str(e):
-                                # direct beam didn't hit a panel
-                                panel = 0
-                                beam_centre = detector[panel].get_ray_intersection(
-                                    beam.get_s0()
-                                )
-                            else:
-                                raise
-                        beam_x, beam_y = detector[panel].millimeter_to_pixel(
-                            beam_centre
-                        )
-                        beam_x, beam_y = map_coords(beam_x, beam_y, panel)
-                    for i, h in enumerate(((10, 0, 0), (0, 10, 0), (0, 0, 10))):
-                        r = A * matrix.col(h)
-                        if still:
-                            s1 = matrix.col(beam.get_s0()) + r
-                        else:
-                            r_phi = r.rotate_around_origin(axis, phi, deg=True)
-                            s1 = matrix.col(beam.get_s0()) + r_phi
-                        if len(detector) == 1:
-                            x, y = detector[0].get_bidirectional_ray_intersection_px(s1)
-                            x, y = map_coords(x, y, 0)
-                        else:
-                            panel = detector.get_panel_intersection(s1)
-                            if panel < 0:
-                                continue
-                            x, y = detector[panel].get_ray_intersection_px(s1)
-                            x, y = map_coords(x, y, panel)
-                        vector_data.append((((beam_x, beam_y), (x, y)), vector_dict))
-
-                        vector_text_data.append(
-                            (
-                                x,
-                                y,
-                                ("a*", "b*", "c*")[i],
-                                {"placement": "ne", "fontsize": 20, "color": "#F62817"},
-                            )
-                        )
+        
 
         return group_args(
             all_pix_data=all_pix_data,
