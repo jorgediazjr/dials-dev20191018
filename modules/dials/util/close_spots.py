@@ -242,7 +242,7 @@ def get_detector_distance_n_wavelength(filename=None):
         wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
     else:
         h5_path = base_path
-        wavelength, detector_distance = get_distance_n_wavelength_h5_version(base_path)
+        wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
 
 
 def main(reflections, beam_x, beam_y, dist=None):
