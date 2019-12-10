@@ -168,7 +168,14 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
 
 
 def get_detector_distance(beam_centre):
-    pass
+    import subprocess
+    process = subprocess.Popen(['dials.import',
+                                'detector.mosflm_beam_centre=({},{})'.format(beam_centre[0], beam_centre[1]),
+                                'detector.distance=1'],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    print("stdout = {}\nstderr={}".format(stdout, stderr))
 
 
 def get_detector_wavelength(filename=None):
@@ -201,6 +208,7 @@ def main(reflections, beam_x, beam_y, dist=None):
     # closest_points = order_dictionary(closest_points)
     beam_centre = (beam_x, beam_y)
     wavelength = get_detector_wavelength("imported.expt")
+    get_detector_distance(beam_centre)
     close_vec2 = save_spots_in_vec2(close_points)
 
     print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
