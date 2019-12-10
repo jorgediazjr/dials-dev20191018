@@ -8,7 +8,7 @@ and is used by dials.image_viewer
     - a checkbox allows the user to see any of the close spots
 
 '''
-import os, platform
+import os, platform, subprocess
 
 def read_in_file():
     from dials.array_family import flex
@@ -214,10 +214,10 @@ def get_distance_n_wavelength_h5_version(h5_path):
 
     cmd = "where" if platform.system() == "Windows" else "which"
     executable = "eiger2cbf"
-    #try: 
-    print(subprocess.getstatusoutput("{} {}".format(cmd, executable)))
-    #except: 
-    #    print("{} executable does not exist".format(executable))
+    try: 
+        print(subprocess.getstatusoutput("{} {}".format(cmd, executable)))
+    except: 
+        print("{} executable does not exist".format(executable))
     '''
     filename = get_file(filename)
 
