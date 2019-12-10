@@ -209,7 +209,8 @@ def get_distance_n_wavelength_h5_version(h5_path):
     for filename in os.listdir(h5_path):
         if filename.endswith("master.h5"):
             h5_file = filename
-    print("h5_file = {}".format(h5_file))
+            break
+    print("h5_file_path = {}".format(os.path.join(h5_path, h5_file)))
     '''
     filename = get_file(filename)
 
@@ -243,7 +244,8 @@ def get_detector_distance_n_wavelength(filename=None):
     else:
         h5_path = base_path
         print(h5_path)
-        wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
+        # wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
+        get_distance_n_wavelength_h5_version(h5_path)
 
 
 def main(reflections, beam_x, beam_y, dist=None):
