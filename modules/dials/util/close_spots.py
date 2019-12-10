@@ -180,7 +180,7 @@ def get_file(filename=None):
 
 
 def get_detector_distance(filename=None):
-    import os.path
+    import os.path, os.walk
     filename = get_file(filename)
     template = ""
     with open(filename, 'r') as f:
@@ -189,8 +189,13 @@ def get_detector_distance(filename=None):
                 print("Template in this line --> {}".format(line))
                 template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
                 break
-    base_path = os.path.dirname(template)
+    base_path = os.path.dirname(template) + "/"
     print("base_path = {}".format(base_path))
+
+    for subdir, dirs, files in os.walk(rootdir):
+        for file in files:
+            if file.endswith("cbf"):
+                print(os.path.join(subdir, file))
 
     '''
     filename = get_file(filename)
