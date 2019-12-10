@@ -8,7 +8,7 @@ and is used by dials.image_viewer
     - a checkbox allows the user to see any of the close spots
 
 '''
-
+import os
 
 def read_in_file():
     from dials.array_family import flex
@@ -169,7 +169,6 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
 
 def get_file(filename=None):
     if filename is None:
-        import os.path
         if os.path.isfile("imported.expt"):
             filename = "imported.expt"
         elif os.path.isfile("imported_experiments.json"):
@@ -189,7 +188,6 @@ def get_base_path(filename):
 
 
 def get_distance_n_wavelength_cbf_version(cbf_path):
-    import os
     wavelength = -1
     detector_distance = -1
     for subdir, dirs, files in os.walk(cbf_path):
@@ -207,8 +205,6 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
 
 
 def get_distance_n_wavelength_h5_version(h5_path):
-    import os
-
     h5_file = ""
     for filename in os.listdir(h5_path):
         if filename.endswith("master.h5"):
@@ -237,7 +233,7 @@ def get_distance_n_wavelength_h5_version(h5_path):
 
 
 def get_detector_distance_n_wavelength(filename=None):
-    import os
+    
     filename = get_file(filename)
     base_path = get_base_path(filename)
 
