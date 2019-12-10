@@ -206,7 +206,7 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
 
 def get_distance_n_wavelength_h5_version(h5_path):
     h5_file = ""
-    for filename in os.listdir([h5_path]):
+    for filename in os.listdir(h5_path):
         if filename.endswith("master.h5"):
             h5_file = filename
     print("h5_file = {}".format(h5_file))
