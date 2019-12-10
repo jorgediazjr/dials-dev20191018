@@ -180,6 +180,8 @@ def get_file(filename=None):
 
 
 def get_distance_n_wavelength_cbf_version(cbf_path):
+    wavelength = -1
+    detector_distance = -1
     for subdir, dirs, files in os.walk(cbf_path):
         for f in files:
             if f.endswith("cbf"):
@@ -191,35 +193,11 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
                             detector_distance = line.lower()
             break
     print("Wavelength = {}\nDetector distance = {}".format(wavelength.split(), detector_distance.split()))
-    #return (wavelength, detector_distance)
+    return wavelength, detector_distance
 
 
 def get_distance_n_wavelength_h5_version(h5_path):
-    pass
-
-
-def get_detector_distance_n_wavelength(filename=None):
-    import os
-    filename = get_file(filename)
-    template = ""
-    with open(filename, 'r') as f:
-        for line in f:
-            if "template" in line:
-                # print("Template in this line --> {}".format(line))
-                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
-                break
-    base_path = os.path.dirname(template)
-    print("base_path = {}".format(base_path))
-
-    if os.path.isdir(os.path.join(base_path, "cbf")):
-        cbf_path = os.path.join(base_path, "cbf")
-        get_distance_n_wavelength_cbf_version(cbf_path)
-    else:
-        h5_path = base_path
-        get_distance_n_wavelength_h5_version(filename)
-
     
-
     '''
     filename = get_file(filename)
 
@@ -240,6 +218,26 @@ def get_detector_distance_n_wavelength(filename=None):
     stdout, stderr = process.communicate()
     print("stdout = {}\nstderr={}".format(stdout, stderr))
     '''
+
+
+def get_detector_distance_n_wavelength(filename=None):
+    import os
+    filename = get_file(filename)
+    template = ""
+    with open(filename, 'r') as f:
+        for line in f:
+            if "template" in line:
+                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
+                break
+    base_path = os.path.dirname(template)
+    print("base_path = {}".format(base_path))
+
+    if os.path.isdir(os.path.join(base_path, "cbf")):
+        cbf_path = os.path.join(base_path, "cbf")
+        wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
+    else:
+        h5_path = base_path
+        wavelength, detector_distance = get_distance_n_wavelength_h5_version(filename)
 
 
 def main(reflections, beam_x, beam_y, dist=None):
