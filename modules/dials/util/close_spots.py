@@ -200,7 +200,7 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
                         if "detector_distance" in line.lower():
                             detector_distance = line.lower()
             break
-    print("Wavelength = {}\nDetector distance = {}".format(wavelength.split(), detector_distance.split()))
+    # print("Wavelength = {}\nDetector distance = {}".format(wavelength.split(), detector_distance.split()))
     return float(wavelength.split()[2]), float(detector_distance.split()[2])
 
 
@@ -211,6 +211,13 @@ def get_distance_n_wavelength_h5_version(h5_path):
             h5_file = filename
             break
     print("h5_file_path = {}".format(os.path.join(h5_path, h5_file)))
+
+    cmd = "where" if platform.system() == "Windows" else "which"
+    executable = "eiger2cbf"
+    try: 
+        subprocess.call([cmd, executable])
+    except: 
+        print("{} executable does not exist".format(executable))
     '''
     filename = get_file(filename)
 
@@ -237,7 +244,7 @@ def get_detector_distance_n_wavelength(filename=None):
     filename = get_file(filename)
     base_path = get_base_path(filename)
 
-    if os.path.isdir(os.path.join(base_path, "cbf")):
+    if os.path.isdir(os.path.join(base_path, "cbfj")):
         cbf_path = os.path.join(base_path, "cbf")
         wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
     else:
