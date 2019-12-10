@@ -184,7 +184,7 @@ def get_detector_wavelength(filename=None):
         for line in f:
             if "wavelength" in line:
                 print("Wavelength in this line --> {}".format(line))
-                return line.split(":")[1]
+                return float(line.split(":")[1].replace("\n", ""))
 
 
 
