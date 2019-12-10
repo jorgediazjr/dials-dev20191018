@@ -192,7 +192,7 @@ def get_detector_distance(beam_centre, filename=None):
     import subprocess
     process = subprocess.Popen(['dials.import',
                                 'detector.mosflm_beam_centre=({},{})'.format(beam_centre[0], beam_centre[1]),
-                                'detector.distance=1',
+                                'detector.distance=5',
                                 template],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
