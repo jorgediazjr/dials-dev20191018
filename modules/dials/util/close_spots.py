@@ -180,6 +180,7 @@ def get_file(filename=None):
 
 
 def get_distance_n_wavelength_cbf_version(cbf_path):
+    import os
     wavelength = -1
     detector_distance = -1
     for subdir, dirs, files in os.walk(cbf_path):
@@ -197,7 +198,7 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
 
 
 def get_distance_n_wavelength_h5_version(h5_path):
-    
+    import os
     '''
     filename = get_file(filename)
 
