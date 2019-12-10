@@ -179,7 +179,7 @@ def get_file(filename=None):
     return filename
 
 
-def get_detector_distance(beam_centre, filename):
+def get_detector_distance(beam_centre, filename=None):
     filename = get_file(filename)
 
     template = ""
