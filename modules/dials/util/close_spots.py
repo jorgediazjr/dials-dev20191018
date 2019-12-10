@@ -168,8 +168,8 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
 
 
 def get_file(filename=None):
-    import os.path
     if filename is None:
+        import os.path
         if os.path.isfile("imported.expt"):
             filename = "imported.expt"
         elif os.path.isfile("imported_experiments.json"):
@@ -179,7 +179,20 @@ def get_file(filename=None):
     return filename
 
 
-def get_detector_distance(beam_centre, filename=None):
+def get_detector_distance(filename=None):
+    import os.path
+    filename = get_file(filename)
+    template = ""
+    with open(filename, 'r') as f:
+        for line in f:
+            if "template" in line:
+                print("Template in this line --> {}".format(line))
+                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
+                break
+    base_path = os.path.dirname(template)
+    print("base_path")
+
+    '''
     filename = get_file(filename)
 
     template = ""
@@ -198,17 +211,19 @@ def get_detector_distance(beam_centre, filename=None):
                                 stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
     print("stdout = {}\nstderr={}".format(stdout, stderr))
+    '''
 
 
 def get_detector_wavelength(filename=None):
+    '''
     filename = get_file(filename)
-
     with open(filename, 'r') as f:
         for line in f:
             if "wavelength" in line:
                 print("Wavelength in this line --> {}".format(line))
                 return round(float(line.split(":")[1].replace("\n", "")), 17)
     return "Wavelength not found in file: {}".format(filename)
+    '''
 
 
 def main(reflections, beam_x, beam_y, dist=None):
@@ -223,12 +238,12 @@ def main(reflections, beam_x, beam_y, dist=None):
 
     # closest_points = order_dictionary(closest_points)
     beam_centre = (beam_x, beam_y)
-    wavelength = get_detector_wavelength("imported.expt")
-    get_detector_distance(beam_centre)
+    #wavelength = get_detector_wavelength("imported.expt")
+    get_detector_distance("imported.expt")
     close_vec2 = save_spots_in_vec2(close_points)
 
     print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
-    print("wavelength is {} of type {}".format(wavelength, type(wavelength)))
+    #print("wavelength is {} of type {}".format(wavelength, type(wavelength)))
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
 
     return close_vec2
