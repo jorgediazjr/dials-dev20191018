@@ -8,7 +8,7 @@ and is used by dials.image_viewer
     - a checkbox allows the user to see any of the close spots
 
 '''
-import os
+import os, platform
 
 def read_in_file():
     from dials.array_family import flex
