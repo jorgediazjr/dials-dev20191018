@@ -190,7 +190,7 @@ def get_detector_distance(filename=None):
                 template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
                 break
     base_path = os.path.dirname(template)
-    print("base_path")
+    print("base_path = {}".format(base_path))
 
     '''
     filename = get_file(filename)
