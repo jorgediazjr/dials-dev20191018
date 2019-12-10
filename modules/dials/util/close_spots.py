@@ -180,8 +180,8 @@ def main(reflections, beam_x, beam_y, dist=None):
         close_points, midpoints, closest_points = euclidean_distance(ordered_points, dist)
 
     # closest_points = order_dictionary(closest_points)
-
-    print("Beam centre is ({}, {})".format(beam_x, beam_y))
+    beam_centre = (beam_x, beam_y)
+    print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
 
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
