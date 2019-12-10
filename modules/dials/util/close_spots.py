@@ -167,6 +167,26 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     return close_vec2
 
 
+def get_detector_distance(beam_centre):
+    pass
+
+
+def get_detector_wavelength(filename=None):
+    import os.path
+    if filename is None:
+        if os.path.isfile("imported.expt"):
+            filename = "imported.expt"
+        elif os.path.isfile("imported_experiments.json"):
+            filename = "imported_experiments.json"
+        else:
+            print("No available file ...\nMake sure you imported the experiments using dials.import ...")
+    with open(filename, 'r') as f:
+        for line in f:
+            if "wavelength" in line:
+                print("Wavelength in this line --> {}".format(line))
+
+
+
 def main(reflections, beam_x, beam_y, dist=None):
     xyz_coords = get_xyz_coords(reflections)
 
