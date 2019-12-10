@@ -197,7 +197,7 @@ def get_detector_distance(filename=None):
     for subdir, dirs, files in os.walk(base_path):
         for f in files:
             if f.endswith("cbf"):
-                with open(f, 'r') as f_:
+                with open(os.path.join(subdir, f), 'r') as f_:
                     for line in f_:
                         if "wavelength" in line.lower():
                             wavelength = line.lower()
