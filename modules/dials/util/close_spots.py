@@ -179,22 +179,8 @@ def get_file(filename=None):
     return filename
 
 
-def get_detector_distance(filename=None):
-    import os
-    filename = get_file(filename)
-    template = ""
-    with open(filename, 'r') as f:
-        for line in f:
-            if "template" in line:
-                print("Template in this line --> {}".format(line))
-                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
-                break
-    base_path = os.path.dirname(template) + "/"
-    print("base_path = {}".format(base_path))
-
-    if os.path.isdir(base_path + "cbf"):
-        base_path = base_path + "cbf"
-    for subdir, dirs, files in os.walk(base_path):
+def get_distance_n_wavelength_cbf_version(cbf_path):
+    for subdir, dirs, files in os.walk(cbf_path):
         for f in files:
             if f.endswith("cbf"):
                 with open(os.path.join(subdir, f), 'r') as f_:
@@ -204,7 +190,35 @@ def get_detector_distance(filename=None):
                         if "detector_distance" in line.lower():
                             detector_distance = line.lower()
             break
-    print("Wavelength = {}\nDetector distance = {}".format(wavelength, detector_distance))
+    print("Wavelength = {}\nDetector distance = {}".format(wavelength.split(), detector_distance.split()))
+    #return (wavelength, detector_distance)
+
+
+def get_distance_n_wavelength_h5_version(h5_path):
+    pass
+
+
+def get_detector_distance_n_wavelength(filename=None):
+    import os
+    filename = get_file(filename)
+    template = ""
+    with open(filename, 'r') as f:
+        for line in f:
+            if "template" in line:
+                # print("Template in this line --> {}".format(line))
+                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
+                break
+    base_path = os.path.dirname(template)
+    print("base_path = {}".format(base_path))
+
+    if os.path.isdir(os.path.join(base_path, "cbf")):
+        cbf_path = os.path.join(base_path, "cbf")
+        get_distance_n_wavelength_cbf_version(cbf_path)
+    else:
+        h5_path = base_path
+        get_distance_n_wavelength_h5_version(filename)
+
+    
 
     '''
     filename = get_file(filename)
@@ -228,18 +242,6 @@ def get_detector_distance(filename=None):
     '''
 
 
-def get_detector_wavelength(filename=None):
-    '''
-    filename = get_file(filename)
-    with open(filename, 'r') as f:
-        for line in f:
-            if "wavelength" in line:
-                print("Wavelength in this line --> {}".format(line))
-                return round(float(line.split(":")[1].replace("\n", "")), 17)
-    return "Wavelength not found in file: {}".format(filename)
-    '''
-
-
 def main(reflections, beam_x, beam_y, dist=None):
     xyz_coords = get_xyz_coords(reflections)
     ordered_points = order_dictionary(xyz_coords)
@@ -252,12 +254,10 @@ def main(reflections, beam_x, beam_y, dist=None):
 
     # closest_points = order_dictionary(closest_points)
     beam_centre = (beam_x, beam_y)
-    #wavelength = get_detector_wavelength("imported.expt")
-    get_detector_distance("imported.expt")
+    get_detector_distance_n_wavelength("imported.expt")
     close_vec2 = save_spots_in_vec2(close_points)
 
     print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
-    #print("wavelength is {} of type {}".format(wavelength, type(wavelength)))
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
 
     return close_vec2
