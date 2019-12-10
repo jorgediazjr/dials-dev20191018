@@ -210,7 +210,8 @@ def get_distance_n_wavelength_h5_version(h5_path):
         if filename.endswith("master.h5"):
             h5_file = filename
             break
-    print("h5_file_path = {}".format(os.path.join(h5_path, h5_file)))
+    h5_full_path = os.path.join(h5_path, h5_file)
+    print("h5_file_path = {}".format(h5_full_path))
 
     cmd = "where" if platform.system() == "Windows" else "which"
     executable = "eiger2cbf"
@@ -219,6 +220,13 @@ def get_distance_n_wavelength_h5_version(h5_path):
         print("exec path = {}".format(exec_path))
     except: 
         print("{} executable does not exist".format(executable))
+        return
+
+    process = subprocess.Popen([executable, h5_full_path],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    print("stdout = {}\nstderr={}".format(stdout, stderr))
     '''
     filename = get_file(filename)
 
