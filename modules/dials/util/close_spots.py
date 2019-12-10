@@ -187,7 +187,7 @@ def get_detector_distance(beam_centre, filename=None):
         for line in f:
             if "template" in line:
                 print("Template in this line --> {}".format(line))
-                template = line.split(":")[1].strip().replace("\n","")
+                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", ""))
                 break
     import subprocess
     process = subprocess.Popen(['dials.import',
