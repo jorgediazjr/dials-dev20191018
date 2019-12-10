@@ -108,8 +108,8 @@ def euclidean_distance(ordered_points, distance=7):
                     # print("dist = {}".format(dist))
                     if dist <= distance:
                         pair = [point_a, point_b]
-                        print("({:.2f}, {:.2f})\t<-\t{:.2f}\t->\t({:.2f}, {:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
-                                                                                                      point_b[0], point_b[1], distance))
+                        #print("({:.2f}, {:.2f})\t<-\t{:.2f}\t->\t({:.2f}, {:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
+                        #                                                                              point_b[0], point_b[1], distance))
                         close_points.append(point_a)
                         close_points.append(point_b)
                         # close_points.append(pair)
