@@ -194,7 +194,7 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
                             detector_distance = line.lower()
             break
     print("Wavelength = {}\nDetector distance = {}".format(wavelength.split(), detector_distance.split()))
-    return wavelength, detector_distance
+    return float(wavelength.split()[2]), float(detector_distance.split()[2])
 
 
 def get_distance_n_wavelength_h5_version(h5_path):
@@ -236,6 +236,7 @@ def get_detector_distance_n_wavelength(filename=None):
     if os.path.isdir(os.path.join(base_path, "cbf")):
         cbf_path = os.path.join(base_path, "cbf")
         wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
+        print(" We got back -> WAVELENGTH = {} & DETECTOR DISTANCE = {}".format(wavelength, detector_distance))
     else:
         h5_path = base_path
         wavelength, detector_distance = get_distance_n_wavelength_h5_version(filename)
