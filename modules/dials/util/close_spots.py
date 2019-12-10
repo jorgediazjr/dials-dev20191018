@@ -167,18 +167,7 @@ def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
     return close_vec2
 
 
-def get_detector_distance(beam_centre):
-    import subprocess
-    process = subprocess.Popen(['dials.import',
-                                'detector.mosflm_beam_centre=({},{})'.format(beam_centre[0], beam_centre[1]),
-                                'detector.distance=1'],
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
-    stdout, stderr = process.communicate()
-    print("stdout = {}\nstderr={}".format(stdout, stderr))
-
-
-def get_detector_wavelength(filename=None):
+def get_file(filename=None):
     import os.path
     if filename is None:
         if os.path.isfile("imported.expt"):
@@ -187,6 +176,33 @@ def get_detector_wavelength(filename=None):
             filename = "imported_experiments.json"
         else:
             print("No available file ...\nMake sure you imported the experiments using dials.import ...")
+    return filename
+
+
+def get_detector_distance(beam_centre, filename):
+    filename = get_file(filename)
+
+    template = ""
+    with open(filename, 'r') as f:
+        for line in f:
+            if "template" in line:
+                print("Template in this line --> {}".format(line))
+                template = line.split(":")[1].strip()
+                break
+    import subprocess
+    process = subprocess.Popen(['dials.import',
+                                'detector.mosflm_beam_centre=({},{})'.format(beam_centre[0], beam_centre[1]),
+                                'detector.distance=1',
+                                template],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    print("stdout = {}\nstderr={}".format(stdout, stderr))
+
+
+def get_detector_wavelength(filename=None):
+    filename = get_file(filename)
+
     with open(filename, 'r') as f:
         for line in f:
             if "wavelength" in line:
