@@ -193,6 +193,9 @@ def get_detector_distance(filename=None):
     print("base_path = {}".format(base_path))
 
     for subdir, dirs, files in os.walk(base_path):
+        for dir_ in dirs:
+            if dir_ == "cbf":
+                print("dir_ = {}".format(dir_))
         for file in files:
             if file.endswith("cbf"):
                 print(os.path.join(subdir, file))
