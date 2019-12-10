@@ -184,6 +184,7 @@ def get_detector_wavelength(filename=None):
         for line in f:
             if "wavelength" in line:
                 print("Wavelength in this line --> {}".format(line))
+                return line.split(":")[1]
 
 
 
@@ -203,7 +204,8 @@ def main(reflections, beam_x, beam_y, dist=None):
     beam_centre = (beam_x, beam_y)
     print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
 
-    get_detector_wavelength("imported.expt")
+    wavelength = get_detector_wavelength("imported.expt")
+    print("wavelength is {} of type {}".format(wavelength, type(wavelength)))
 
     close_vec2 = save_spots_in_vec2(close_points)
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
