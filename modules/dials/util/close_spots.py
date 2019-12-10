@@ -179,6 +179,15 @@ def get_file(filename=None):
     return filename
 
 
+def get_base_path(filename):
+    with open(filename, 'r') as f:
+        for line in f:
+            if "template" in line:
+                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
+                return os.path.dirname(template)
+    return "There is not template in the file {} ...".format(filename)
+
+
 def get_distance_n_wavelength_cbf_version(cbf_path):
     import os
     wavelength = -1
@@ -199,6 +208,12 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
 
 def get_distance_n_wavelength_h5_version(h5_path):
     import os
+
+    h5_file = ""
+    for filename in os.listdir(h5_path):
+        if filename.endswith("master.h5"):
+            h5_file = filename
+    print("h5_file = {}".format(h5_file))
     '''
     filename = get_file(filename)
 
@@ -224,19 +239,11 @@ def get_distance_n_wavelength_h5_version(h5_path):
 def get_detector_distance_n_wavelength(filename=None):
     import os
     filename = get_file(filename)
-    template = ""
-    with open(filename, 'r') as f:
-        for line in f:
-            if "template" in line:
-                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
-                break
-    base_path = os.path.dirname(template)
-    print("base_path = {}".format(base_path))
+    base_path = get_base_path(filename)
 
-    if os.path.isdir(os.path.join(base_path, "cbf")):
+    if os.path.isdir(os.path.join(base_path, "cbfj")):
         cbf_path = os.path.join(base_path, "cbf")
         wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
-        print(" We got back -> WAVELENGTH = {} & DETECTOR DISTANCE = {}".format(wavelength, detector_distance))
     else:
         h5_path = base_path
         wavelength, detector_distance = get_distance_n_wavelength_h5_version(filename)
@@ -252,12 +259,10 @@ def main(reflections, beam_x, beam_y, dist=None):
     else:
         close_points, midpoints, closest_points = euclidean_distance(ordered_points, dist)
 
-    # closest_points = order_dictionary(closest_points)
     beam_centre = (beam_x, beam_y)
     get_detector_distance_n_wavelength("imported.expt")
     close_vec2 = save_spots_in_vec2(close_points)
 
-    print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
 
     return close_vec2
