@@ -180,7 +180,7 @@ def get_file(filename=None):
 
 
 def get_detector_distance(filename=None):
-    import os.path, os.walk
+    import os
     filename = get_file(filename)
     template = ""
     with open(filename, 'r') as f:
