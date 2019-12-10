@@ -1500,6 +1500,7 @@ class SpotFrame(XrayFrame):
 
                 closest_points = close_spots.main(reflections_data, beam_x, beam_y, dist=10)
 
+                print("self.filename = {}".format(self.file_name_or_data))
                 for centroid in closest_points:
                     x, y = map_coords(
                             centroid[0], centroid[1], 0
