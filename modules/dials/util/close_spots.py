@@ -234,21 +234,20 @@ def get_distance_n_wavelength_h5_version(h5_path):
 
 
 def get_detector_distance_n_wavelength(filename=None):
-    
     filename = get_file(filename)
     base_path = get_base_path(filename)
 
-    if os.path.isdir(os.path.join(base_path, "cbfj")):
+    if os.path.isdir(os.path.join(base_path, "cbf")):
         cbf_path = os.path.join(base_path, "cbf")
         wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
     else:
         h5_path = base_path
-        print(h5_path)
         # wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
         get_distance_n_wavelength_h5_version(h5_path)
 
 
 def main(reflections, beam_x, beam_y, dist=None):
+    print("\n")
     xyz_coords = get_xyz_coords(reflections)
     ordered_points = order_dictionary(xyz_coords)
     ordered_points = add_index_to_pairs(ordered_points)
