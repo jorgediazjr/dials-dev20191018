@@ -185,14 +185,12 @@ def get_detector_wavelength(filename=None):
             if "wavelength" in line:
                 print("Wavelength in this line --> {}".format(line))
                 return round(float(line.split(":")[1].replace("\n", "")), 17)
-
+    return "Wavelength not found in file: {}".format(filename)
 
 
 def main(reflections, beam_x, beam_y, dist=None):
     xyz_coords = get_xyz_coords(reflections)
-
     ordered_points = order_dictionary(xyz_coords)
-
     ordered_points = add_index_to_pairs(ordered_points)
     
     if dist is None:
@@ -202,12 +200,11 @@ def main(reflections, beam_x, beam_y, dist=None):
 
     # closest_points = order_dictionary(closest_points)
     beam_centre = (beam_x, beam_y)
-    print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
-
     wavelength = get_detector_wavelength("imported.expt")
-    print("wavelength is {} of type {}".format(wavelength, type(wavelength)))
-
     close_vec2 = save_spots_in_vec2(close_points)
+
+    print("Beam centre is ({}, {})".format(beam_centre[0], beam_centre[1]))
+    print("wavelength is {} of type {}".format(wavelength, type(wavelength)))
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
 
     return close_vec2
