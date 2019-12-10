@@ -215,7 +215,8 @@ def get_distance_n_wavelength_h5_version(h5_path):
     cmd = "where" if platform.system() == "Windows" else "which"
     executable = "eiger2cbf"
     try: 
-        print(subprocess.getstatusoutput("{} {}".format(cmd, executable)))
+        exec_path = subprocess.getstatusoutput("{} {}".format(cmd, executable))[1]
+        print("exec path = {}".format(exec_path))
     except: 
         print("{} executable does not exist".format(executable))
     '''
