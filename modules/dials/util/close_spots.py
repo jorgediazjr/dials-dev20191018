@@ -205,6 +205,8 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
 
 
 def get_distance_n_wavelength_h5_version(h5_path):
+    wavelength = -1
+    detector_distance = -1
     h5_file = ""
     for filename in os.listdir(h5_path):
         if filename.endswith("master.h5"):
@@ -227,6 +229,8 @@ def get_distance_n_wavelength_h5_version(h5_path):
                                 stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
     print("stdout = {}\nstderr={}".format(stdout, stderr))
+
+    return wavelength, detector_distance
     '''
     filename = get_file(filename)
 
@@ -253,27 +257,25 @@ def get_detector_distance_n_wavelength(filename=None):
     filename = get_file(filename)
     base_path = get_base_path(filename)
 
-    if os.path.isdir(os.path.join(base_path, "cbfj")):
+    if os.path.isdir(os.path.join(base_path, "cbfj")): # we check for cbf first since it's easier
         cbf_path = os.path.join(base_path, "cbf")
         wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
     else:
         h5_path = base_path
-        # wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
-        get_distance_n_wavelength_h5_version(h5_path)
+        wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
 
 
-def main(reflections, beam_x, beam_y, dist=None):
+def main(reflections, dist=None):
     print("\n")
     xyz_coords = get_xyz_coords(reflections)
     ordered_points = order_dictionary(xyz_coords)
     ordered_points = add_index_to_pairs(ordered_points)
     
-    if dist is None:
+    if dist is None: # user did not provide distance
         close_points, midpoints, closest_points = euclidean_distance(ordered_points)
     else:
         close_points, midpoints, closest_points = euclidean_distance(ordered_points, dist)
 
-    beam_centre = (beam_x, beam_y)
     get_detector_distance_n_wavelength("imported.expt")
     close_vec2 = save_spots_in_vec2(close_points)
 

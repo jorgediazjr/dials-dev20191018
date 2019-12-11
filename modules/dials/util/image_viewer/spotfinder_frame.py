@@ -1498,7 +1498,7 @@ class SpotFrame(XrayFrame):
 
                 from dials.util import close_spots
 
-                closest_points = close_spots.main(reflections_data, beam_x, beam_y, dist=10)
+                closest_points = close_spots.main(reflections_data, dist=10)
 
                 for centroid in closest_points:
                     x, y = map_coords(
