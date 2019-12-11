@@ -1259,7 +1259,7 @@ class SpotFrame(XrayFrame):
                 )
             return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
 
-        close_spot_dict = {"width": 2, "color": "#FF4C00", "closed": False}
+        close_spot_dict = {"width": 2, "color": "#FF4C00", "closed": False} # JAD
         shoebox_dict = {"width": 2, "color": "#0000FFA0", "closed": False}
         ctr_mass_dict = {"width": 2, "color": "#FF0000", "closed": False}
         vector_dict = {"width": 4, "color": "#F62817", "closed": False}
@@ -1278,8 +1278,7 @@ class SpotFrame(XrayFrame):
         vector_data = []
         vector_text_data = []
         close_spot_data = [] # JAD
-        reflections_data = {} # JAD
-        reflections_data['xyzobs.px.value'] = [] # JAD
+        reflections_data = {'xyzobs.px.value': []} # JAD
         detector = self.pyslip.tiles.raw_image.get_detector()
         scan = self.pyslip.tiles.raw_image.get_scan()
         to_degrees = 180 / math.pi
