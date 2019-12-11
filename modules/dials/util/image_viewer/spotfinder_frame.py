@@ -1480,17 +1480,6 @@ class SpotFrame(XrayFrame):
                     x, y = map_coords(
                             centroid[0], centroid[1], 0
                     )
-                    #xm1, ym1 = map_coords(
-                    #    centroid[0] - 1, centroid[1] - 1, 0
-                    #)
-                    #xp1, yp1 = map_coords(
-                    #    centroid[0] + 1, centroid[1] + 1, 0
-                    #)
-                    #lines = [
-                    #    (((x, ym1), (x, yp1)), close_spot_dict),
-                    #    (((xm1, y), (xp1, y)), close_spot_dict),
-                    #]
-                    # close_spot_data.extend(lines)
                     close_spot_data.append((x,y))
                 print("time taken for close spots: {:.2f}ms\n\n".format((time.time() - start_time) * 1000))
                 self.show_close_spots_timer.stop()
