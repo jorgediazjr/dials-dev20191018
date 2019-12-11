@@ -180,8 +180,8 @@ def euclidean_distance(ordered_points, distance=7):
                     # print below is helpful too see what is the avg value for distance
                     # print("dist = {}".format(dist))
                     if dist <= distance:
-                        #print("({:.2f}, {:.2f})\t<-\t{:.2f}\t->\t({:.2f}, {:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
-                        #                                                                              point_b[0], point_b[1], distance))
+                        print("({:.2f}, {:.2f})\t<-\t{:.2f}\t->\t({:.2f}, {:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
+                                                                                                      point_b[0], point_b[1], distance))
                         close_points.append(point_a)
                         close_points.append(point_b)
                         closest_points[point_b[0]] = [point_b[1]]
