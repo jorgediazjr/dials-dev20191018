@@ -1472,30 +1472,6 @@ class SpotFrame(XrayFrame):
                 for reflection in selected.rows():
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
-                beam = imageset.get_beam()
-                if len(detector) == 1:
-                    beam_centre = detector[0].get_ray_intersection(beam.get_s0())
-                    beam_x, beam_y = detector[0].millimeter_to_pixel(beam_centre)
-                    beam_x, beam_y = map_coords(beam_x, beam_y, 0)
-                else:
-                    try:
-                        panel, beam_centre = detector.get_ray_intersection(
-                            beam.get_s0()
-                        )
-                    except RuntimeError as e:
-                        if "DXTBX_ASSERT(w_max > 0)" in str(e):
-                            # direct beam didn't hit a panel
-                            panel = 0
-                            beam_centre = detector[panel].get_ray_intersection(
-                                beam.get_s0()
-                            )
-                        else:
-                            raise
-                    beam_x, beam_y = detector[panel].millimeter_to_pixel(
-                        beam_centre
-                    )
-                    beam_x, beam_y = map_coords(beam_x, beam_y, panel)
-
                 from dials.util import close_spots
 
                 closest_points = close_spots.main(reflections_data, dist=10)
