@@ -252,7 +252,7 @@ def save_spots_in_vec2(close_points):
 
     for point in close_points:
         # point[0] = x value | point[1] = y value
-        if( (point[0] >= 1250 and point[0] <= 1275 and
+        if( (point[0] >= 1250 and point[0] <= 1276 and
              point[1] >= 1612 and point[1] <= 1614)
              or
             (point[0] >= 1539 and point[0] <= 1546 and
