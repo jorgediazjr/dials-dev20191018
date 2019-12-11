@@ -260,6 +260,7 @@ def save_spots_in_vec2(close_points):
            ):
             print("point not good: {}".format(point))
             continue
+        print("point good: {}".format(point))
         close_vec2.append(point)
     return close_vec2
 
