@@ -219,18 +219,18 @@ def flatten_closest_points(close_points):
     list
         each element in this list is one list with two values
     """
-        points = []
-        final_points = []
-        for i in close_points:
-            points.append(i[0])
-            points.append(i[1])
+    points = []
+    final_points = []
+    for i in close_points:
+        points.append(i[0])
+        points.append(i[1])
 
-        for i in points:
-            if i in final_points:
-                continue
-            final_points.append(i)
+    for i in points:
+        if i in final_points:
+            continue
+        final_points.append(i)
 
-        return final_points
+    return final_points
 
 
 def save_spots_in_vec2(close_points):
