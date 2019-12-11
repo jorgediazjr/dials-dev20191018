@@ -253,11 +253,12 @@ def save_spots_in_vec2(close_points):
     for point in close_points:
         # point[0] = x value | point[1] = y value
         if( (point[0] >= 1250 and point[0] <= 1275 and
-             point[1] >= 1612.5 and point[1] <= 1613.5)
+             point[1] >= 1612 and point[1] <= 1614)
              or
             (point[0] >= 1539 and point[0] <= 1546 and
              point[1] >= 1603 and point[1] <= 1605)
            ):
+            print("point not good: {}".format(point))
             continue
         close_vec2.append(point)
     return close_vec2
