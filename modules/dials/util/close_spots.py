@@ -11,11 +11,27 @@ and is used by dials.image_viewer
 import os, platform, subprocess
 
 def read_in_file():
+    """
+    Parameters
+    ----------
+
+
+    Returns
+    -------
+    """
     from dials.array_family import flex
     return flex.reflection_table.from_file("strong.refl")
 
 
 def get_xyz_coords(result):
+    """
+    Parameters
+    ----------
+
+
+    Returns
+    -------
+    """
     xyz_coords = {}
     centroids = result['xyzobs.px.value']
 
@@ -32,11 +48,36 @@ def get_xyz_coords(result):
 
 
 def order_dictionary(dictionary):
+    """
+    Parameters
+    ----------
+
+
+    Returns
+    -------
+    """
     import collections
     return collections.OrderedDict(sorted(dictionary.items()))
 
 
 def add_index_to_pairs(ordered_pairs):
+    """
+    Creates a dictionary where each KEY is a integer index and
+    the VALUE is a dictionary of the x,y pairs
+
+    Parameters
+    ----------
+    ordered_pairs: dict
+        dictionary that has been ordered
+
+    Returns
+    -------
+    dict
+        this dictionary has
+        OUTER_KEY = integer index
+        INNER_KEY = x value
+        VALUE = y value
+    """
     new_dict = {}
     for i, x in enumerate(ordered_pairs):
         new_dict[i] = {x: ordered_pairs[x]}
@@ -44,6 +85,22 @@ def add_index_to_pairs(ordered_pairs):
 
 
 def find_distance(p, q):
+    """
+    Returns the distance between two points
+
+    Parameters
+    ----------
+    p: list
+        a two-value list where p[0] is the x_value and p[1] is the y_value of 2nd point
+
+    q: list
+        a two-value list where q[0] is the x_value and q[1] is the y_value of 2nd point
+
+    Returns
+    -------
+    float
+        the distance between points p and q
+    """
     import math
     dist = math.sqrt(((p[0] - q[0])*(p[0] - q[0])) +
                      ((p[1] - q[1])*(p[1] - q[1])))
@@ -51,6 +108,14 @@ def find_distance(p, q):
 
 
 def units_distance(p, q, distance):
+    """
+    Parameters
+    ----------
+
+
+    Returns
+    -------
+    """
     a = 1600
     b = 1600
     rad_0 = 50
@@ -85,9 +150,17 @@ def units_distance(p, q, distance):
 
 
 def euclidean_distance(ordered_points, distance=7):
+    """
+    Parameters
+    ----------
+
+
+    Returns
+    -------
+    """
     close_points = []        # these are pairs of points that are close together
-    closest_points = dict()  # this has x,y values that are closest
-    midpoints = dict()      # the midpoints between the close pairs
+    closest_points = dict()  # this has x, y values that are closest
+    midpoints = dict()       # the midpoints between the close pairs
     for index in ordered_points:
         for x_coord in ordered_points[index]:
             x1 = x_coord
@@ -107,12 +180,10 @@ def euclidean_distance(ordered_points, distance=7):
                     # print below is helpful too see what is the avg value for distance
                     # print("dist = {}".format(dist))
                     if dist <= distance:
-                        pair = [point_a, point_b]
                         #print("({:.2f}, {:.2f})\t<-\t{:.2f}\t->\t({:.2f}, {:.2f})\tWITHIN\t{}".format(point_a[0], point_a[1], dist,
                         #                                                                              point_b[0], point_b[1], distance))
                         close_points.append(point_a)
                         close_points.append(point_b)
-                        # close_points.append(pair)
                         closest_points[point_b[0]] = [point_b[1]]
                         # save the midpoints of the close pairs
                         midpoint_x = (point_a[0] + point_b[0]) / 2
@@ -125,6 +196,29 @@ def euclidean_distance(ordered_points, distance=7):
 
 
 def flatten_closest_points(close_points):
+    """
+    Flattens a multi-dimensional list. Specific only to a list of lists with two values each
+
+    E.g.: [ [ [1, 2],
+              [3, 4] ],
+            [ [5, 6],
+              [7, 8] ] ]
+        would become
+           [ [1, 2],
+             [3, 4],
+             [5, 6],
+             [7, 8] ]
+
+    Parameters
+    ----------
+    close_points: list
+        usually a list where each element is a list with two lists
+
+    Returns
+    -------
+    list
+        each element in this list is one list with two values
+    """
         points = []
         final_points = []
         for i in close_points:
@@ -140,12 +234,24 @@ def flatten_closest_points(close_points):
 
 
 def save_spots_in_vec2(close_points):
+    """
+    Saves all the spots in a vec2_double object from flex module
+
+    Parameters
+    ----------
+    close_points: list
+        each element in this list is a list of two values, x and y
+
+    Returns
+    -------
+    flex.vec2_double() object
+        each element is a tuple of x,y pairs
+    """
     from scitbx.array_family import flex
     close_vec2 = flex.vec2_double()
 
-    # close_points = flatten_closest_points(close_points)
-
-    for point in close_points:   # point[0] = x | point[1] = y
+    for point in close_points:
+        # point[0] = x value | point[1] = y value
         if( (point[0] >= 1250 and point[0] <= 1275 and
              point[1] >= 1612.5 and point[1] <= 1613.5)
              or
@@ -157,17 +263,20 @@ def save_spots_in_vec2(close_points):
     return close_vec2
 
 
-def make_vec2_same_num_rows_for_reflections(close_vec2, reflections):
-    close_vec_len = len(close_vec2)
-    reflections_len = len(reflections)
-    while close_vec_len < reflections_len:
-        close_vec2.append([-float(0), -float(0)])
-        close_vec_len += 1
-    print("len(reflections) = {} and len(close_vec2) = {}".format(len(reflections), len(close_vec2)))
-    return close_vec2
-
-
 def get_file(filename=None):
+    """
+    Returns either imported.expt or imported_experiments.json as filename
+
+    Parameters
+    ----------
+    filename: str, optional
+        user can provide which of the imported file to use or program does the searching for you
+
+    Returns
+    -------
+    str
+        the actual filename of the file we will be using to extract data from
+    """
     if filename is None:
         if os.path.isfile("imported.expt"):
             filename = "imported.expt"
@@ -179,6 +288,19 @@ def get_file(filename=None):
 
 
 def get_base_path(filename):
+    """
+    Opens filename and extracts the template value, which is the path to the file used in dials.import
+
+    Parameters
+    ----------
+    filename: str
+        this is the name of the file that has the metadata/info about experiment
+
+    Returns
+    -------
+    str
+        the path to the file without the filename in the string
+    """
     with open(filename, 'r') as f:
         for line in f:
             if "template" in line:
@@ -188,6 +310,22 @@ def get_base_path(filename):
 
 
 def get_distance_n_wavelength_cbf_version(cbf_path):
+    """
+    Uses a cbf file from the cbf_path to extract the wavelength and detector distance
+
+    Parameters
+    ----------
+    cbf_path: str
+        full path to where the cbf files for the experiments can be found
+
+    Returns
+    -------
+    wavelength: float
+        wavelength of experiment
+
+    detector_distance: float
+        distance from sample to detector of experiment
+    """
     wavelength = -1
     detector_distance = -1
     for subdir, dirs, files in os.walk(cbf_path):
@@ -200,11 +338,26 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
                         if "detector_distance" in line.lower():
                             detector_distance = line.lower()
             break
-    # print("Wavelength = {}\nDetector distance = {}".format(wavelength.split(), detector_distance.split()))
     return float(wavelength.split()[2]), float(detector_distance.split()[2])
 
 
 def get_distance_n_wavelength_h5_version(h5_path):
+    """
+    Converts master.h5 file using eiger2cbf and extracts wavelength and detector distance
+
+    Parameters
+    ----------
+    h5_path: str
+        full path to where the files for the experiments can be found
+
+    Returns
+    -------
+    wavelength: float
+        wavelength of experiment
+
+    detector_distance: float
+        distance from sample to detector of experiment
+    """
     wavelength = -1
     detector_distance = -1
     h5_file = ""
@@ -231,29 +384,23 @@ def get_distance_n_wavelength_h5_version(h5_path):
     print("stdout = {}\nstderr={}".format(stdout, stderr))
 
     return wavelength, detector_distance
-    '''
-    filename = get_file(filename)
-
-    template = ""
-    with open(filename, 'r') as f:
-        for line in f:
-            if "template" in line:
-                print("Template in this line --> {}".format(line))
-                template = str(line.split(":")[1].strip().replace("\n","").replace("\"", "").replace(",",""))
-                break
-    import subprocess
-    process = subprocess.Popen(['dials.import',
-                                'detector.mosflm_beam_centre=({},{})'.format(beam_centre[0], beam_centre[1]),
-                                'detector.distance=5',
-                                template],
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
-    stdout, stderr = process.communicate()
-    print("stdout = {}\nstderr={}".format(stdout, stderr))
-    '''
 
 
 def get_detector_distance_n_wavelength(filename=None):
+    """
+    Parameters
+    ----------
+    filename: str, optional
+        the name of the file where the metadata/info about experiments is located
+
+    Returns
+    -------
+    wavelength: float
+        wavelength of experiment
+
+    detector_distance: float
+        distance from sample to detector of experiment
+    """
     filename = get_file(filename)
     base_path = get_base_path(filename)
 
@@ -264,8 +411,25 @@ def get_detector_distance_n_wavelength(filename=None):
         h5_path = base_path
         wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
 
+    print("Wavelength = {}\nDetector distance = {}".format(wavelength, detector_distance))
+
 
 def main(reflections, dist=None):
+    """
+    Parameters
+    ----------
+    reflections: dict
+        the KEY in the dictionary is xyzobs.px.value and
+        the VALUE is a list of all reflections in tuple format
+
+    dist: integer or float, optional
+        the desired distance user wants program to use
+
+    Returns
+    -------
+    flex.vec2_double() object
+        each element in this object is a tuple of size 2 => (x_val, y_val)
+    """
     print("\n")
     xyz_coords = get_xyz_coords(reflections)
     ordered_points = order_dictionary(xyz_coords)
@@ -282,17 +446,3 @@ def main(reflections, dist=None):
     print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
 
     return close_vec2
-
-    '''
-    KEYS FROM READING IN PICKLE REFLECTIONS
-        bbox
-        flags
-        id
-        intensity.sum.value
-        intensity.sum.variance
-        panel
-        shoebox
-        xyzobs.px.value
-        xyzobs.px.variance
-    '''
-    

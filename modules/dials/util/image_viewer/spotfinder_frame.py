@@ -1463,7 +1463,7 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
             
-            # JAD put this here
+            # JAD PUT THIS HERE
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 import time
@@ -1482,7 +1482,7 @@ class SpotFrame(XrayFrame):
                     close_spot_data.append((x,y))
                 print("time taken for close spots: {:.2f}ms\n\n".format((time.time() - start_time) * 1000))
                 self.show_close_spots_timer.stop()
-            # JAD ended this here
+            # JAD ENDED THIS HERE
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
