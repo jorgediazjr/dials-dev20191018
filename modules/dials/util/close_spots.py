@@ -379,7 +379,7 @@ def get_distance_n_wavelength_h5_version(h5_path):
         print("{} executable does not exist".format(executable))
         return
 
-    process = subprocess.Popen([executable, h5_full_path],
+    process = subprocess.Popen([executable, h5_full_path, 1, "out.cbf"],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
