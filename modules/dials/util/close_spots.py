@@ -258,9 +258,9 @@ def save_spots_in_vec2(close_points):
             (point[0] >= 1539 and point[0] <= 1546 and
              point[1] >= 1603 and point[1] <= 1605)
            ):
-            print("point not good: {}".format(point))
+            # print("point not good: {}".format(point))
             continue
-        print("point good: {}".format(point))
+        # print("point good: {}".format(point))
         close_vec2.append(point)
     return close_vec2
 
@@ -333,6 +333,7 @@ def get_distance_n_wavelength_cbf_version(cbf_path):
     for subdir, dirs, files in os.walk(cbf_path):
         for f in files:
             if f.endswith("cbf"):
+                print("\ncbf file path: {}".format(os.path.join(subdir, f)))
                 with open(os.path.join(subdir, f), 'r') as f_:
                     for line in f_:
                         if "wavelength" in line.lower():
@@ -350,7 +351,7 @@ def get_distance_n_wavelength_h5_version(h5_path):
     Parameters
     ----------
     h5_path: str
-        full path to where the files for the experiments can be found
+        full path to where the files for the experiments can be found, not the files themselves
 
     Returns
     -------
@@ -368,7 +369,7 @@ def get_distance_n_wavelength_h5_version(h5_path):
             h5_file = filename
             break
     h5_full_path = os.path.join(h5_path, h5_file)
-    print("h5_file_path = {}".format(h5_full_path))
+    print("\nh5_file_path = {}".format(h5_full_path))
 
     cmd = "where" if platform.system() == "Windows" else "which"
     executable = "eiger2cbf"
@@ -379,13 +380,13 @@ def get_distance_n_wavelength_h5_version(h5_path):
         print("{} executable does not exist".format(executable))
         return
 
-    process = subprocess.Popen([executable, h5_full_path, 1, "out.cbf"],
+    process = subprocess.Popen([executable, h5_full_path, "1", "out.cbf"],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
-    print("stdout = {}\nstderr={}".format(stdout, stderr))
+    # print("stdout = {}\nstderr={}".format(stdout, stderr))
 
-    return wavelength, detector_distance
+    return get_distance_n_wavelength_cbf_version(h5_path)
 
 
 def get_detector_distance_n_wavelength(filename=None):
@@ -406,14 +407,14 @@ def get_detector_distance_n_wavelength(filename=None):
     filename = get_file(filename)
     base_path = get_base_path(filename)
 
-    if os.path.isdir(os.path.join(base_path, "cbfj")): # we check for cbf first since it's easier
+    if os.path.isdir(os.path.join(base_path, "cbf")): # we check for cbf first since it's easier
         cbf_path = os.path.join(base_path, "cbf")
         wavelength, detector_distance = get_distance_n_wavelength_cbf_version(cbf_path)
     else:
         h5_path = base_path
         wavelength, detector_distance = get_distance_n_wavelength_h5_version(h5_path)
 
-    print("Wavelength = {}\nDetector distance = {}".format(wavelength, detector_distance))
+    print("Wavelength = {} A\nDetector distance = {} mm".format(wavelength, detector_distance))
 
 
 def main(reflections, dist=None):
