@@ -27,10 +27,13 @@ def get_xyz_coords(result):
     """
     Parameters
     ----------
-
+    result: dict
+        holds the centroids of the experiment
 
     Returns
     -------
+    dict:
+        xyz coordinates are saved in dictionary
     """
     xyz_coords = {}
     centroids = result['xyzobs.px.value']
@@ -51,10 +54,13 @@ def order_dictionary(dictionary):
     """
     Parameters
     ----------
-
+    dictionary: dict
+        all x and y pairs
 
     Returns
     -------
+    ordered_dict:
+        the dictionary has been ordered
     """
     import collections
     return collections.OrderedDict(sorted(dictionary.items()))
@@ -111,10 +117,17 @@ def units_distance(p, q, distance):
     """
     Parameters
     ----------
-
+    p: list
+        first element is x1 val and second element is y1 value
+    q: list
+        first element is x2 val and second element is y2 value
+    distance: float
+        what is going to be the upper threshold to calculating distance between p and q
 
     Returns
     -------
+    float:
+        distance between p and q
     """
     a = 1600
     b = 1600
@@ -153,10 +166,20 @@ def euclidean_distance(ordered_points, distance=7):
     """
     Parameters
     ----------
+    ordered_points: dict
+        OUTER KEY is an integer index
+        INNER KEY = x value
+        VALUE = y value
 
 
     Returns
     -------
+    list:
+        pairs of points that are close together
+    dict:
+        x,y values that are closes to each other
+    dict:
+        midpoint between close points
     """
     close_points = []        # these are pairs of points that are close together
     closest_points = dict()  # this has x, y values that are closest

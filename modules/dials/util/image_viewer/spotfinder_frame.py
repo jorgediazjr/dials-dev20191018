@@ -1466,6 +1466,7 @@ class SpotFrame(XrayFrame):
             # JAD PUT THIS HERE
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
+                print("JAD: self.experiments = {}".format(self.experiments))
                 import time
                 start_time = time.time()
                 for reflection in selected.rows():
