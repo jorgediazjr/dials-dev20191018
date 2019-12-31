@@ -1467,6 +1467,7 @@ class SpotFrame(XrayFrame):
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 print("JAD: self.experiments = {}".format(self.experiments))
+
                 import time
                 start_time = time.time()
                 for reflection in selected.rows():
@@ -1482,6 +1483,8 @@ class SpotFrame(XrayFrame):
                     )
                     close_spot_data.append((x,y))
                 print("time taken for close spots: {:.2f}ms\n\n".format((time.time() - start_time) * 1000))
+
+                self.reflections.map_centroids_to_reciprocal_space(self.experiments)
                 self.show_close_spots_timer.stop()
             # JAD ENDED THIS HERE
 
