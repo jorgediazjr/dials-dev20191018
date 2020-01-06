@@ -41,5 +41,6 @@ Main functions that are used:
         ordered_points: dict
                 this object was the output of function 3 above
 
-        returns a dictionary where the key is an integer for indexing, the inner key is the x-value and the value is the y, z coordinates
+        returns a dictionary where the key is an integer for indexing,
+                the inner key is the x-value and the value is the y, z coordinates
 5. 
