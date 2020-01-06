@@ -150,8 +150,9 @@ class Script(object):
                 logger.info(ascii_plot)
 
         # JAD thinks we can call map_centroids_to_reciprocal_space here
+        reflections.centroid_px_to_mm(experiments) # this must go first to add a column needed for next step
         reflections.map_centroids_to_reciprocal_space(experiments)
-        
+
         # Save the reflections to file
         logger.info("\n" + "-" * 80)
         reflections.as_file(params.output.reflections)
