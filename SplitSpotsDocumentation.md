@@ -1,6 +1,6 @@
 # Documentation for Split Spots Program
 
-# Main File: close_spots.py
+## Main File: close_spots.py
 
 There are a total of 15 functions in this file.
 
@@ -9,9 +9,11 @@ further analysis and processing of data.
 
 Main functions that are used:
 1. main(reflections, dist=None)
+
         reflections: dict
                 the key in this dictionary is xyzobs.px.value and the
                 value is a list of all reflections in tuple format
+
         dist: integer or float, optional
                 the desired distance user wants program to use
 
