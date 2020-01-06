@@ -8,7 +8,7 @@ and is used by dials.image_viewer
     - a checkbox allows the user to see any of the close spots
 
 '''
-import os, platform, subprocess
+import os, platform, subprocess, sys
 
 def read_in_file():
     """
@@ -175,26 +175,22 @@ def euclidean_distance(ordered_points, distance=7):
     Returns
     -------
     list:
-        pairs of points that are close together
-    dict:
-        x,y values that are closes to each other
-    dict:
-        midpoint between close points
+        pairs of points that are close together 2D-based
     """
     close_points = []        # these are pairs of points that are close together
-    closest_points = dict()  # this has x, y values that are closest
-    midpoints = dict()       # the midpoints between the close pairs
     for index in ordered_points:
         for x_coord in ordered_points[index]:
             x1 = x_coord
             y1 = ordered_points[index][x_coord][0]
-            point_a = [x1, y1]
+            z1 = ordered_points[index][x_coord][1]
+            point_a = [x1, y1, z1]
             current = 0
             while current < len(ordered_points):
                 if current != index:
                     x2 = list(ordered_points[current].keys())[0]
                     y2 = ordered_points[current][x2][0]
-                    point_b = [x2, y2]
+                    z2 = ordered_points[current][x2][1]
+                    point_b = [x2, y2, z2]
                     if point_a in close_points and point_b in close_points:
                         current += 1
                         continue
@@ -207,15 +203,10 @@ def euclidean_distance(ordered_points, distance=7):
                                                                                                       point_b[0], point_b[1], distance))
                         close_points.append(point_a)
                         close_points.append(point_b)
-                        closest_points[point_b[0]] = [point_b[1]]
-                        # save the midpoints of the close pairs
-                        midpoint_x = (point_a[0] + point_b[0]) / 2
-                        midpoint_y = (point_a[1] + point_b[1]) / 2
-                        midpoints[midpoint_x] = midpoint_y
                     current += 1
                     continue
                 current += 1
-    return close_points, midpoints, closest_points
+    return close_points
 
 
 def flatten_closest_points(close_points):
@@ -256,7 +247,7 @@ def flatten_closest_points(close_points):
     return final_points
 
 
-def save_spots_in_vec2(close_points):
+def save_spots_in_vec3(close_points):
     """
     Saves all the spots in a vec2_double object from flex module
 
@@ -271,7 +262,8 @@ def save_spots_in_vec2(close_points):
         each element is a tuple of x,y pairs
     """
     from scitbx.array_family import flex
-    close_vec2 = flex.vec2_double()
+    #close_vec2 = flex.vec2_double()
+    close_vec3 = flex.vec3_double()
 
     for point in close_points:
         # point[0] = x value | point[1] = y value
@@ -284,8 +276,8 @@ def save_spots_in_vec2(close_points):
             # print("point not good: {}".format(point))
             continue
         # print("point good: {}".format(point))
-        close_vec2.append(point)
-    return close_vec2
+        close_vec3.append(point)
+    return close_vec3
 
 
 def get_file(filename=None):
@@ -462,13 +454,17 @@ def main(reflections, dist=None):
     ordered_points = add_index_to_pairs(ordered_points)
     
     if dist is None: # user did not provide distance
-        close_points, midpoints, closest_points = euclidean_distance(ordered_points)
+        close_points = euclidean_distance(ordered_points)
     else:
-        close_points, midpoints, closest_points = euclidean_distance(ordered_points, dist)
+        close_points = euclidean_distance(ordered_points, dist)
 
     get_detector_distance_n_wavelength("imported.expt")
-    close_vec2 = save_spots_in_vec2(close_points)
+    close_vec3 = save_spots_in_vec3(close_points)
 
-    print("Number of spots: {}/{}".format(len(close_vec2), len(ordered_points)))
+    print("Number of spots: {}/{}".format(len(close_vec3), len(ordered_points)))
 
-    return close_vec2
+    for i, point in enumerate(close_vec3):
+        print("{}: point = {}".format(i, point))
+
+    sys.exit()
+    return close_vec3
