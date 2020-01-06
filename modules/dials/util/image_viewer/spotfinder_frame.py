@@ -1486,6 +1486,8 @@ class SpotFrame(XrayFrame):
                         print("reflection in closest points !!!!!!!")
                         print("reflection {} => {}".format((i+1), reflection))
                         count += 1
+                    else:
+                        reflection = (0,0,0)
                 print("count is {}".format(count))
 
                 for centroid in closest_points:
