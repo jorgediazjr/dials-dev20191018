@@ -464,7 +464,6 @@ def main(reflections, dist=None):
     print("Number of spots: {}/{}".format(len(close_vec3), len(ordered_points)))
 
     for i, point in enumerate(close_vec3):
-        print("{}: point = {}".format(i, point))
+        print("{}: point = {}".format(i+1, point))
 
-    sys.exit()
     return close_vec3
