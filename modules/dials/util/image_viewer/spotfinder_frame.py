@@ -1480,11 +1480,13 @@ class SpotFrame(XrayFrame):
                 reflections = self.reflections[0]
                 print("reflection object was made = {}".format(reflections))
 
+                count = 0
                 for i, reflection in enumerate(reflections['xyzobs.px.value']):
-                    print("reflection {} => {}".format((i+1), reflection))
                     if reflection in closest_points:
                         print("reflection in closest points !!!!!!!")
-                
+                        print("reflection {} => {}".format((i+1), reflection))
+                        count += 1
+                print("count is {}".format(count))
 
                 for centroid in closest_points:
                     x, y = map_coords(
