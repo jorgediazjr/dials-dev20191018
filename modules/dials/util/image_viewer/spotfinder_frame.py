@@ -1500,6 +1500,9 @@ class SpotFrame(XrayFrame):
                 for key in dict(reflections):
                     print("key = {}".format(key))
 
+                for val in reflections['rlp']:
+                    print('value of rlp = {}'.format(val))
+
                 for centroid in closest_points:
                     x, y = map_coords(
                             centroid[0], centroid[1], 0
