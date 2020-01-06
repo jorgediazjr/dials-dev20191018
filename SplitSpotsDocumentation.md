@@ -10,6 +10,9 @@ further analysis and processing of data.
 Main functions that are used:
 1. main(reflections, dist=None)
 
+        this is where all the functions are called in order to find
+        the spots that are close to each other
+
         reflections: dict
                 the key in this dictionary is xyzobs.px.value and the
                 value is a list of all reflections in tuple format
@@ -21,6 +24,9 @@ Main functions that are used:
                 is a tuple of size 2 => (x_val, y_val)
 
 2. get_xyz_coords(reflections)
+
+        this function extracts the xyz values from the reflections object
+        and saves it in a dictionary
         
         reflections: dict
                 the key in this dictionary is xyzobs.px.value and the
@@ -31,16 +37,31 @@ Main functions that are used:
 
 3. order_dictionary(dictionary)
 
+        this function orders the points by x-value
+
         dictionary: dict
                 dictionary that was the output from function 2 above
 
         returns an ordered dictionary where the ordering based on x-values
 
 4. add_index_to_pairs(ordered_points)
+        
+        this function adds an integer index to each reflection for
+        the euclidean_distance() function 
 
         ordered_points: dict
                 this object was the output of function 3 above
 
         returns a dictionary where the key is an integer for indexing,
                 the inner key is the x-value and the value is the y, z coordinates
-5. 
+5. euclidean_distance(ordered_points, distance=7)
+
+        this is the function where the algorithm for seeing if two spots are close
+        is used. The algorithm is simple and checks to see if two points are within
+        the user-specified or default distance using the euclidean distance formula
+
+        ordered_points: dict
+                this object is the output from function 4 above
+        
+        distance: default 7, optional
+                if user does not specify the distance, it will use 7 as a distance
