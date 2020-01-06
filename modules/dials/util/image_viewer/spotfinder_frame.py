@@ -1493,7 +1493,7 @@ class SpotFrame(XrayFrame):
                 for refl in reflections['xyzobs.px.value']:
                     print("refl = {}".format(refl))
                 
-                print("self.experiments".format(self.experiments))
+                print("self.experiments = {}".format(self.experiments))
                 reflections.centroid_px_to_mm(self.experiments[0])
 
                 for centroid in closest_points:
