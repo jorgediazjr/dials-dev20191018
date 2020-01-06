@@ -1489,6 +1489,10 @@ class SpotFrame(XrayFrame):
                     else:
                         reflection = (0,0,0)
                 print("count is {}".format(count))
+                
+                for refl in reflections['xyzobs.px.value']:
+                    print("refl = {}".format(refl))
+                
 
                 for centroid in closest_points:
                     x, y = map_coords(
