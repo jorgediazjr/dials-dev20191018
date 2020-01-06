@@ -154,7 +154,10 @@ class Script(object):
         reflections.map_centroids_to_reciprocal_space(experiments)
         for val in reflections['xyzobs.mm.value']:
             print("reflections[xyzobs.mm.value] => {}".format(val))
-        print("reflections[rlp] => {}".format(reflections['rlp']))
+        print("\n\n")
+
+        for val in reflections['rlp']:
+            print("reflections[rlp] => {}".format(val))
 
         # Save the reflections to file
         logger.info("\n" + "-" * 80)
