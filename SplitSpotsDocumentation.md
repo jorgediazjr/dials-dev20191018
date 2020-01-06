@@ -32,6 +32,14 @@ Main functions that are used:
 3. order_dictionary(dictionary)
 
         dictionary: dict
-                dictionary that was received from function 2 above
+                dictionary that was the output from function 2 above
 
-        returns an ordered dictionary
+        returns an ordered dictionary where the ordering based on x-values
+
+4. add_index_to_pairs(ordered_points)
+
+        ordered_points: dict
+                this object was the output of function 3 above
+
+        returns a dictionary where the key is an integer for indexing, the inner key is the x-value and the value is the y, z coordinates
+5. 
