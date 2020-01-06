@@ -150,7 +150,9 @@ class Script(object):
                 logger.info(ascii_plot)
 
         # JAD thinks we can call map_centroids_to_reciprocal_space here
-        print("reflections keys {}".format(dict(reflections)))
+        for val in reflections['xyzobs.px.value']:
+            print("reflections[xyzobs.pz.value = {}".format(reflections['xyzobs.px.value']))
+
         reflections.centroid_px_to_mm(experiments) # this must go first to add a column needed for next step
         reflections.map_centroids_to_reciprocal_space(experiments)
         for i, val in enumerate(reflections['xyzobs.mm.value']):
