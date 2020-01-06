@@ -151,7 +151,7 @@ class Script(object):
 
         # JAD thinks we can call map_centroids_to_reciprocal_space here
         for i, val in enumerate(reflections['xyzobs.px.value']):
-            print("{}: reflection => ".format(val))
+            print("{}: reflection => {}".format(i, val))
 
         reflections.centroid_px_to_mm(experiments) # this must go first to add a column needed for next step
         reflections.map_centroids_to_reciprocal_space(experiments)
