@@ -139,7 +139,7 @@ class SpotFrame(XrayFrame):
                             )
                         refl.centroid_px_to_mm(ExperimentList([expt]))
                         refl.map_centroids_to_reciprocal_space(ExperimentList([expt]))
-
+                        print("DOES it get this far to map centroids to reciprocal space!!!???")
                 d_spacings = 1 / refl["rlp"].norms()
                 refl = refl.select(d_spacings > self.params.d_min)
                 reflections.append(refl)
@@ -1484,7 +1484,7 @@ class SpotFrame(XrayFrame):
                     close_spot_data.append((x,y))
                 print("time taken for close spots: {:.2f}ms\n\n".format((time.time() - start_time) * 1000))
 
-                self.reflections.map_centroids_to_reciprocal_space(self.experiments)
+                # self.reflections.map_centroids_to_reciprocal_space(self.experiments)
                 self.show_close_spots_timer.stop()
             # JAD ENDED THIS HERE
 
