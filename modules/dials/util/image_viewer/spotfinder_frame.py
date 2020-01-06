@@ -1480,7 +1480,7 @@ class SpotFrame(XrayFrame):
                 reflections = self.reflections[0]
                 print("reflection object was made = {}".format(reflections))
 
-                for reflection in reflections:
+                for reflection in reflections['xyzobs.px.value']:
                     print("This is a reflection => {}".format(reflection))
                 
 
