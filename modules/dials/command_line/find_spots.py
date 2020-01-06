@@ -128,6 +128,9 @@ class Script(object):
         # Loop through all the imagesets and find the strong spots
         reflections = flex.reflection_table.from_observations(experiments, params)
 
+        # JAD thinks we can call map_centroids_to_reciprocal_space here
+        reflections.map_centroids_to_reciprocal_space(experiments)
+         
         # Add n_signal column - before deleting shoeboxes
         from dials.algorithms.shoebox import MaskCode
 
