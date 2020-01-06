@@ -1476,6 +1476,9 @@ class SpotFrame(XrayFrame):
 
                 closest_points = close_spots.main(reflections_data, dist=10)
 
+                reflections = flex.reflection_table.empty_standard(len(closest_points))
+                print("reflection object was made = {}".format(reflections))
+
                 for centroid in closest_points:
                     x, y = map_coords(
                             centroid[0], centroid[1], 0
