@@ -1487,9 +1487,9 @@ class SpotFrame(XrayFrame):
                         print("reflection {} => {}".format((i+1), reflection))
                         count += 1
                     else:
-                        reflection = (0,0,0)
+                        reflections['xyzobs.px.value'][i] = (0,0,0)
                 print("count is {}".format(count))
-                
+
                 for refl in reflections['xyzobs.px.value']:
                     print("refl = {}".format(refl))
                 
