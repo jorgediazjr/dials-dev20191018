@@ -1476,8 +1476,8 @@ class SpotFrame(XrayFrame):
 
                 closest_points = close_spots.main(reflections_data, dist=10)
 
-                print("type of selected.rows() = {}".format(type(selected.rows())))
-                reflections = flex.reflection_table.empty_standard(len(closest_points))
+                #reflections = flex.reflection_table.empty_standard(len(closest_points))
+                reflections = self.reflections
                 print("reflection object was made = {}".format(reflections))
                 for key in dict(reflections):
                     print("{} => {}".format(key, reflections[key]))
