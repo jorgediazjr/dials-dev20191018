@@ -158,6 +158,7 @@ class Script(object):
 
         for val in reflections['rlp']:
             print("reflections[rlp] => {}".format(val))
+        print("Length of reflections[rlp] = {}".format(len(reflections['rlp'])))
 
         # Save the reflections to file
         logger.info("\n" + "-" * 80)
