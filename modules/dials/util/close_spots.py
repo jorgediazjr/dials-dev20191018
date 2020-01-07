@@ -378,6 +378,35 @@ def get_detector_distance_n_wavelength(filename=None):
     print("Wavelength = {} A\nDetector distance = {} mm".format(wavelength, detector_distance))
 
 
+def get_reciprocal_lattice_points(reflections, closest_points):
+    count = 0
+    for i, reflection in enumerate(reflections['xyzobs.px.value']):
+        if reflection in closest_points:
+            count += 1
+        else:
+            reflections['xyzobs.px.value'][i] = (-10000000000,-10000000000,-10000000000)
+    print("count is {}".format(count))
+
+    refl_dict = {}
+    for i, refl in enumerate(reflections['xyzobs.px.value']):
+        if refl == (-10000000000,-10000000000,-10000000000):
+            continue
+        refl_dict[i] = refl
+
+    reflections.centroid_px_to_mm(self.experiments[0])
+    reflections.map_centroids_to_reciprocal_space(self.experiments[0])
+
+    rlp_dict = {}
+    for i, val in enumerate(reflections['rlp']):
+        if val == (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
+            continue
+        rlp_dict[i] = val
+
+    for key in rlp_dict:
+        print("{}  => rlp => {}".format(refl_dict[key], rlp_dict[key]))
+    return reflections
+
+
 def main(reflections, dist=None):
     """
     Parameters

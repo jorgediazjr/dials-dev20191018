@@ -1475,11 +1475,11 @@ class SpotFrame(XrayFrame):
                 reflections = self.reflections[0]
                 print("reflection object was made = {}".format(reflections))
 
+                reflections = close_spots.get_reciprocal_lattice_points(reflections, closest_points)
+                """
                 count = 0
                 for i, reflection in enumerate(reflections['xyzobs.px.value']):
                     if reflection in closest_points:
-                        print("reflection in closest points !!!!!!!")
-                        print("reflection {} => {}".format((i+1), reflection))
                         count += 1
                     else:
                         reflections['xyzobs.px.value'][i] = (-10000000000,-10000000000,-10000000000)
@@ -1503,6 +1503,7 @@ class SpotFrame(XrayFrame):
                 for key in rlp_dict:
                     print("{}  => rlp => {}".format(refl_dict[key], rlp_dict[key]))
 
+                """
                 for centroid in closest_points:
                     x, y = map_coords(
                             centroid[0], centroid[1], 0
