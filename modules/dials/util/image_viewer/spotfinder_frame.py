@@ -1486,6 +1486,8 @@ class SpotFrame(XrayFrame):
                 print("count is {}".format(count))
 
                 for i, refl in enumerate(reflections['xyzobs.px.value']):
+                    if refl == (-10000000000,-10000000000,-10000000000):
+                        continue
                     print("{}: refl = {}".format(i, refl))
                 
                 print("self.experiments = {}".format(self.experiments[0]))
