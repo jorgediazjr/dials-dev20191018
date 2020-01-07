@@ -8,10 +8,9 @@ All functions are not necessary to be used but some functions can be used for
 further analysis and processing of data.
 
 ### Main functions that are used:
-
-1.  
+  
 ```python
-   main(reflections, dist=None)  
+def main(reflections, dist=None)  
 ```
 
         this is where all the functions are called in order to find
@@ -27,7 +26,9 @@ further analysis and processing of data.
         returns flex.vec2_double() where each element in this object
                 is a tuple of size 2 => (x_val, y_val)
 
-2. get_xyz_coords(reflections)
+```python
+get_xyz_coords(reflections)
+```
 
         this function extracts the xyz values from the reflections object
         and saves it in a dictionary
@@ -39,7 +40,9 @@ further analysis and processing of data.
         returns a dictionary where the key is the X-VALUE and the
                 value are the y and z coordinates
 
-3. order_dictionary(dictionary)
+```python
+order_dictionary(dictionary)
+```
 
         this function orders the points by x-value
 
@@ -48,7 +51,9 @@ further analysis and processing of data.
 
         returns an ordered dictionary where the ordering based on x-values
 
-4. add_index_to_pairs(ordered_points)
+```python
+add_index_to_pairs(ordered_points)
+```
         
         this function adds an integer index to each reflection for
         the euclidean_distance() function 
@@ -58,7 +63,10 @@ further analysis and processing of data.
 
         returns a dictionary where the key is an integer for indexing,
                 the inner key is the x-value and the value is the y, z coordinates
-5. euclidean_distance(ordered_points, distance=7)
+
+```python
+euclidean_distance(ordered_points, distance=7)
+```
 
         this is the function where the algorithm for seeing if two spots are close
         is used. The algorithm is simple and checks to see if two points are within
@@ -70,8 +78,9 @@ further analysis and processing of data.
         distance: default 7, optional
                 if user does not specify the distance, it will use 7 as a distance
 
-6. save_spots_in_vec3(close_points)
-
+```python
+save_spots_in_vec3(close_points)
+```
         this function saves the list of points as a flex.vec3_double() object
 
         close_points: list
@@ -81,15 +90,18 @@ further analysis and processing of data.
 
 ### Other functions used in program:
 
-7. get_detector_distance_n_wavelength(filename=None)
-
+```python
+get_detector_distance_n_wavelength(filename=None)
+```
         this function works to extract the sample-detector distance and wavelength of experiment
         and prints out the results
 
         filename: optional, str
                 the filename should be the one outputted from dials.import ( import.expt or imported_experiments.json )
 
-8. get_file(filename=None)
+```python
+get_file(filename=None)
+```
 
         this function finds the correct file outputted from dials.import if filename is equal to None
 
@@ -98,5 +110,6 @@ further analysis and processing of data.
 
         returns the correct filename to use for extraction of data
 
-9. 
+```python
+``` 
 
