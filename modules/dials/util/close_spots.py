@@ -404,7 +404,7 @@ def main(reflections, dist=None):
     else:
         close_points = euclidean_distance(ordered_points, dist)
 
-    get_detector_distance_n_wavelength("imported.expt")
+    # get_detector_distance_n_wavelength("imported.expt")
     close_vec3 = save_spots_in_vec3(close_points)
 
     print("Number of spots: {}/{}".format(len(close_vec3), len(ordered_points)))

@@ -1,8 +1,14 @@
 # Documentation for Split Spots Program
 
+This program runs live when user executes dials.image_viewer.
+
+There is a checkbox for showing close spots and when it is checked, the main 
+file is executed and the results are displayed on the diffraction image.
+
+
 ## Main File: close_spots.py
 
-There are a total of 15 functions in this file.
+There are a total of 13 functions in this file.
 
 All functions are not necessary to be used but some functions can be used for
 further analysis and processing of data.
@@ -183,3 +189,13 @@ def units_distance(p, q, distance)
 
 ### spotfinder_frame.py was also modified
 ##### the following shows where I inserted lines of code and in what functions
+
+```python
+class SpotFrame(XrayFrame):
+        def __init__(self, *args, **kwds):
+                ...
+                self.shoebox_layer = None
+                self.close_spots_layer = None # <-- THIS I ADDED
+                self.ctr_mass_layer = None
+                ...
+```
