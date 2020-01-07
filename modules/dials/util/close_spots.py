@@ -419,9 +419,21 @@ def find_distance_3d(p, q):
 
 
 def euclidean_distance_for_reciprocal_lattice_pts(reflections):
-    for rlp in reflections['rlp']:
+    good_rlp = []
+    for i, rlp in enumerate(reflections['rlp']):
         if rlp != (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
-            print("RLP = {}".format(rlp))
+            good_rlp.append(rlp)
+
+    for i, rlp in enumerate(good_rlp):
+        index = 0
+        p1 = rlp
+        while index < len(good_rlp):
+            if index != i:
+                p2 = good_rlp[index]
+                dist = find_distance_3d(p1, p2)
+                print("{}\t<=\t{}\t=>{}".format(p1, dist, p2))
+            index += 1
+
 
 
 def main(reflections, dist=None):
