@@ -84,7 +84,16 @@ further analysis and processing of data.
         and prints out the results
 
         filename: optional, str
-                the filename should be the one outputted from dials.import
+                the filename should be the one outputted from dials.import ( import.expt or imported_experiments.json )
 
-8. 
+8. get_file(filename=None)
+
+        this function finds the correct file outputted from dials.import if filename is equal to None
+
+        filename: optional
+                this could be imported.expt or imported_experiments.json
+
+        returns the correct filename to use for extraction of data
+
+9. 
 
