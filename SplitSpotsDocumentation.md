@@ -140,10 +140,43 @@ def get_distance_n_wavelength_cbf_version(cbf_path)
 def get_distance_n_wavelength_h5_version(h5_path)
 
         this function searches for the master h5 file and converts it into a cbf
-        user eiger2cbf and extracts data from the cbf
+        by using eiger2cbf and extracts data from the cbf
 
         h5_path: str
                 full path to master h5 file related to experiment in current context
 
         returns wavelength and sample-detector distance
+```
+
+```python
+def find_distance(p, q)
+
+        this function finds the distance between two points using the euclidean distance
+        formula
+
+        p: list
+                two elements x1, y1
+
+        q: list
+                two elements x2, y2
+
+        returns the calculated distance between points p and q
+```
+
+```python
+def units_distance(p, q, distance)
+
+        checks to see if points p and q are within a specific radius
+
+        Note: this function is here for future purposes. The reflections are further apart
+        as one walks outward
+
+        p: list
+                two elements x1, y1
+
+        q: list
+                two elements x2, y2
+
+        distance: float
+                the upper threshold to calculating distance between p and q
 ```

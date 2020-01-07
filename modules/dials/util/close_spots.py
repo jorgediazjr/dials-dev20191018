@@ -10,18 +10,6 @@ and is used by dials.image_viewer
 '''
 import os, platform, subprocess, sys
 
-def read_in_file():
-    """
-    Parameters
-    ----------
-
-
-    Returns
-    -------
-    """
-    from dials.array_family import flex
-    return flex.reflection_table.from_file("strong.refl")
-
 
 def get_xyz_coords(result):
     """
