@@ -7,7 +7,8 @@ There are a total of 15 functions in this file.
 All functions are not necessary to be used but some functions can be used for
 further analysis and processing of data.
 
-Main functions that are used:
+### Main functions that are used:
+
 1. main(reflections, dist=None)
 
         this is where all the functions are called in order to find
@@ -74,3 +75,16 @@ Main functions that are used:
                 each element is a list with 3 coordinates [x, y, z]
 
         returns vec3 object with all the points saved
+
+### Other functions used in program:
+
+7. get_detector_distance_n_wavelength(filename=None)
+
+        this function works to extract the sample-detector distance and wavelength of experiment
+        and prints out the results
+
+        filename: optional, str
+                the filename should be the one outputted from dials.import
+
+8. 
+
