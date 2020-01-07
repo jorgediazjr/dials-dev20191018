@@ -78,7 +78,7 @@ def add_index_to_pairs(ordered_pairs):
     return new_dict
 
 
-def find_distance(p, q):
+def find_distance_2d(p, q):
     """
     Returns the distance between two points
 
@@ -182,7 +182,7 @@ def euclidean_distance(ordered_points, distance=7):
                     if point_a in close_points and point_b in close_points:
                         current += 1
                         continue
-                    dist = find_distance(point_a, point_b)
+                    dist = find_distance_2d(point_a, point_b)
                     # new_distance = units_distance(point_a, point_b, distance)
                     # print below is helpful too see what is the avg value for distance
                     # print("dist = {}".format(dist))
@@ -379,6 +379,9 @@ def get_detector_distance_n_wavelength(filename=None):
 
 
 def get_reciprocal_lattice_points(experiments, reflections, closest_points):
+    """
+    add DOCUMENTATION later
+    """
     count = 0
     for i, reflection in enumerate(reflections['xyzobs.px.value']):
         if reflection in closest_points:
@@ -405,6 +408,19 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
     for key in rlp_dict:
         print("{}  => rlp => {}".format(refl_dict[key], rlp_dict[key]))
     return reflections
+
+
+def find_distance_3d(p, q):
+    import math
+    dist = math.sqrt( ( (p[0] - q[0])*(p[0] - q[0]) ) +
+                      ( (p[1] - q[1])*(p[1] - q[1]) ) +
+                      ( (p[2] - q[2])*(p[2] - q[2]) ) )
+    return dist
+
+
+def euclidean_distance_for_reciprocal_lattice_pts(reflections):
+    for rlp in reflections['rlp']:
+        print("RLP = {}".format(rlp))
 
 
 def main(reflections, dist=None):
