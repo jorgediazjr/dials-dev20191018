@@ -431,7 +431,8 @@ def euclidean_distance_for_reciprocal_lattice_pts(reflections):
             if index != i:
                 p2 = good_rlp[index]
                 dist = find_distance_3d(p1, p2)
-                print("{}\t<=\t{:.9f}\t=>\t{}".format(p1, dist, p2))
+                if dist <= 0.001:
+                    print("{}\t<=\t{:.9f}\t=>\t{}".format(p1, dist, p2))
             index += 1
 
 
