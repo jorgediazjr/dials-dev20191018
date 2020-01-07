@@ -180,3 +180,6 @@ def units_distance(p, q, distance)
         distance: float
                 the upper threshold to calculating distance between p and q
 ```
+
+### spotfinder_frame.py was also modified
+##### the following shows where I inserted lines of code and in what functions
