@@ -205,10 +205,7 @@ class SpotFrame(XrayFrame):
                 self.draw_shoebox_timer = time_log("draw_shoebox")
                 self.draw_close_spots_timer = time_log("draw_close_spots") # <-- THIS I ADDED - JAD
                 self.draw_max_pix_timer = time_log("draw_max_pix")
-```
 
-```python
-class SpotFrame(XrayFrame):
         def update_settings(self, layout=True):
                 ...
                 if self.close_spots_layer is not None:                         # <-- THIS I ADDED - JAD
@@ -228,5 +225,105 @@ class SpotFrame(XrayFrame):
                                 update=False,
                         )
                         self.draw_close_spots_timer.stop()
-            # I ENDED THIS ABOVE - JAD
+                # I ENDED THIS ABOVE - JAD
+
+        def get_spotfinder_data(self):
+                ...
+                close_spot_dict = {"width": 2, "color": "#FF4C00", "closed": False} # <-- THIS I ADDED - JAD
+                shoebox_dict = {"width": 2, "color": "#0000FFA0", "closed": False}
+                ...
+                vector_text_data = []
+                close_spot_data = [] # <-- THIS I ADDED - JAD
+                reflections_data = {'xyzobs.px.value': []} # <-- THIS I ADDED - JAD
+                detector = self.pyslip.tiles.raw_image.get_detector()
+                ...
+                # I ADDED THIS BELOW - JAD
+                if self.settings.show_close_spots:
+                        self.show_close_spots_timer.start()
+                        print("JAD: self.experiments = {}".format(self.experiments))
+
+                        import time
+                        start_time = time.time()
+                        for reflection in selected.rows():
+                                reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
+
+                        from dials.util import close_spots
+                        closest_points = close_spots.main(reflections_data, dist=10)
+
+                        #reflections = flex.reflection_table.empty_standard(len(closest_points))
+                        reflections = self.reflections[0]
+                        print("reflection object was made = {}".format(reflections))
+
+                        count = 0
+                        for i, reflection in enumerate(reflections['xyzobs.px.value']):
+                                if reflection in closest_points:
+                                        print("reflection in closest points !!!!!!!")
+                                        print("reflection {} => {}".format((i+1), reflection))
+                                        count += 1
+                                else:
+                                        reflections['xyzobs.px.value'][i] = (0,0,0)
+                        print("count is {}".format(count))
+
+                        for refl in reflections['xyzobs.px.value']:
+                                print("refl = {}".format(refl))
+                
+                        print("self.experiments = {}".format(self.experiments[0]))
+                        reflections.centroid_px_to_mm(self.experiments[0])
+                        reflections.map_centroids_to_reciprocal_space(self.experiments[0])
+
+                        for key in dict(reflections):
+                                print("key = {}".format(key))
+
+                        for val in reflections['rlp']:
+                                print('value of rlp = {}'.format(val))
+
+                        for centroid in closest_points:
+                                x, y = map_coords(
+                                        centroid[0], centroid[1], 0
+                                )
+                                close_spot_data.append((x,y))
+                        print("time taken for close spots: {:.2f}ms\n\n".format((time.time() - start_time) * 1000))
+
+                        # self.reflections.map_centroids_to_reciprocal_space(self.experiments)
+                        self.show_close_spots_timer.stop()
+                # I ENDED THIS ABOVE - JAD
+                ...
+                return group_args(
+                        ...
+                        vector_text_data=vector_text_data,
+                        close_spot_data=close_spot_data # <-- THIS I ADDED - JAD
+                )
+
+class SpotSettingsPanel(wx.Panel):
+        def __init__(self, *args, **kwargs):
+                ...
+                self.settings.show_spotfinder_spots = False
+                self.settings.show_close_spots = self.params.show_close_spots # <-- THIS I ADDED - JAD
+                self.settings.show_dials_spotfinder_spots = True
+                ...
+                # JAD Close spots points
+                self.close_spots = wx.CheckBox(self, -1, "Show close spots")        # <-- THIS I ADDED - JAD
+                self.close_spots.SetValue(self.settings.show_close_spots)           # <-- THIS I ADDED - JAD
+                grid.Add(self.close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5) # <-- THIS I ADDED - JAD
+                ...
+                self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.show_basis_vectors)
+                self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.close_spots) # <-- THIS I ADDED - JAD
+                self.Bind(wx.EVT_CHECKBOX, self.OnUpdateShowMask, self.show_mask)
+
+        def collect_values(self):
+                ...
+                self.settings.show_shoebox = self.shoebox.GetValue()
+                self.settings.show_close_spots = self.close_spots.GetValue() # <-- THIS I ADDED - JAD
+                self.settings.show_indexed = self.indexed.GetValue()
+        
+        def OnClearAll(self, event):
+                ...
+                for btn in (
+                        ...
+                        self.shoebox,
+                        self.close_spots, # <-- THIS I ADDED - JAD
+                        self.predictions,
+                        ...
+                ):
+                
 ```

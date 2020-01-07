@@ -1458,7 +1458,7 @@ class SpotFrame(XrayFrame):
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
             
-            # JAD PUT THIS HERE
+            # ADDED THIS BELOW - JAD
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
                 print("JAD: self.experiments = {}".format(self.experiments))
@@ -1469,7 +1469,6 @@ class SpotFrame(XrayFrame):
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
                 from dials.util import close_spots
-
                 closest_points = close_spots.main(reflections_data, dist=10)
 
                 #reflections = flex.reflection_table.empty_standard(len(closest_points))
@@ -1508,7 +1507,7 @@ class SpotFrame(XrayFrame):
 
                 # self.reflections.map_centroids_to_reciprocal_space(self.experiments)
                 self.show_close_spots_timer.stop()
-            # JAD ENDED THIS HERE
+            # ENDED THIS ABOVE - JAD
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
