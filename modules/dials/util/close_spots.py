@@ -393,8 +393,8 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
             continue
         refl_dict[i] = refl
 
-    reflections.centroid_px_to_mm(self.experiments[0])
-    reflections.map_centroids_to_reciprocal_space(self.experiments[0])
+    reflections.centroid_px_to_mm(experiments)
+    reflections.map_centroids_to_reciprocal_space(experiments)
 
     rlp_dict = {}
     for i, val in enumerate(reflections['rlp']):
