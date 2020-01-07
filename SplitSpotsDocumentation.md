@@ -100,7 +100,8 @@ def get_detector_distance_n_wavelength(filename=None)
         and prints out the results
 
         filename: optional, str
-                the filename should be the one outputted from dials.import ( import.expt or imported_experiments.json )
+                the filename should be the one outputted from dials.import
+                        import.expt or imported_experiments.json
 ```
 
 ```python
@@ -116,5 +117,11 @@ def get_file(filename=None)
 ```
 
 ```python
+def get_base_path(filename)
+
+        this function gets the directory where the file imported.expt or imported_experiments.json
+        are found
+
+        returns a string of the base directory to file for processing
 ``` 
 
