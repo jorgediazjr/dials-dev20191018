@@ -378,7 +378,7 @@ def get_detector_distance_n_wavelength(filename=None):
     print("Wavelength = {} A\nDetector distance = {} mm".format(wavelength, detector_distance))
 
 
-def get_reciprocal_lattice_points(reflections, closest_points):
+def get_reciprocal_lattice_points(experiments, reflections, closest_points):
     count = 0
     for i, reflection in enumerate(reflections['xyzobs.px.value']):
         if reflection in closest_points:

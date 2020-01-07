@@ -1475,7 +1475,8 @@ class SpotFrame(XrayFrame):
                 reflections = self.reflections[0]
                 print("reflection object was made = {}".format(reflections))
 
-                reflections = close_spots.get_reciprocal_lattice_points(reflections, closest_points)
+                experiments = self.experiments[0]
+                reflections = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
                 """
                 count = 0
                 for i, reflection in enumerate(reflections['xyzobs.px.value']):
