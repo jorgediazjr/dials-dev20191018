@@ -405,6 +405,7 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
             continue
         rlp_dict[i] = val
 
+    print("\n\n")
     for key in rlp_dict:
         print("{}\t=>\trlp\t=>\t{}".format(refl_dict[key], rlp_dict[key]))
     return reflections
@@ -424,6 +425,7 @@ def euclidean_distance_for_reciprocal_lattice_pts(reflections):
         if rlp != (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
             good_rlp.append(rlp)
 
+    print("\n\n")
     for i, rlp in enumerate(good_rlp):
         index = 0
         p1 = rlp
@@ -431,8 +433,8 @@ def euclidean_distance_for_reciprocal_lattice_pts(reflections):
             if index != i:
                 p2 = good_rlp[index]
                 dist = find_distance_3d(p1, p2)
-                if dist <= 0.000005:
-                    print("{}\t<=\t{:.9f}\t=>\t{}".format(p1, dist, p2))
+                #if dist <= 0.000005:
+                print("{}\t<=\t{:.9f}\t=>\t{}".format(p1, dist, p2))
             index += 1
 
 
