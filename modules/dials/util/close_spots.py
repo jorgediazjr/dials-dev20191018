@@ -420,7 +420,8 @@ def find_distance_3d(p, q):
 
 def euclidean_distance_for_reciprocal_lattice_pts(reflections):
     for rlp in reflections['rlp']:
-        print("RLP = {}".format(rlp))
+        if rlp != (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
+            print("RLP = {}".format(rlp))
 
 
 def main(reflections, dist=None):
