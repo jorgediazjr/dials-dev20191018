@@ -119,9 +119,16 @@ def get_file(filename=None)
 ```python
 def get_base_path(filename)
 
-        this function gets the directory where the file imported.expt or imported_experiments.json
-        are found
+        this function gets the directory to where the master h5 or cbf files are to be found
 
-        returns a string of the base directory to file for processing
+        returns a string
 ``` 
 
+```python
+def get_distance_n_wavelength_cbf_version(cbf_path)
+
+        this function searches for the cbf file that contains info on the experiment
+        and finds the wavelength and sample-detector distance
+
+        returns wavelength and sample-detector distance
+```
