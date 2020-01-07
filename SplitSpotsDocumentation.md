@@ -130,5 +130,20 @@ def get_distance_n_wavelength_cbf_version(cbf_path)
         this function searches for the cbf file that contains info on the experiment
         and finds the wavelength and sample-detector distance
 
+        cbf_path: str
+                full path to cbf file related to experiment in current context
+
+        returns wavelength and sample-detector distance
+```
+
+```python
+def get_distance_n_wavelength_h5_version(h5_path)
+
+        this function searches for the master h5 file and converts it into a cbf
+        user eiger2cbf and extracts data from the cbf
+
+        h5_path: str
+                full path to master h5 file related to experiment in current context
+
         returns wavelength and sample-detector distance
 ```
