@@ -9,9 +9,10 @@ further analysis and processing of data.
 
 ### Main functions that are used:
 
-1.      ```python
-        main(reflections, dist=None)
-        ```
+1.  
+```python
+   main(reflections, dist=None)  
+```
 
         this is where all the functions are called in order to find
         the spots that are close to each other
