@@ -177,7 +177,7 @@ def euclidean_distance(ordered_points, distance=7):
     list:
         pairs of points that are close together 2D-based
     """
-    close_points = []        # these are pairs of points that are close together
+    close_points = []        # each element is a point that was found to be close to another point
     for index in ordered_points:
         for x_coord in ordered_points[index]:
             x1 = x_coord
@@ -209,44 +209,6 @@ def euclidean_distance(ordered_points, distance=7):
     return close_points
 
 
-def flatten_closest_points(close_points):
-    """
-    Flattens a multi-dimensional list. Specific only to a list of lists with two values each
-
-    E.g.: [ [ [1, 2],
-              [3, 4] ],
-            [ [5, 6],
-              [7, 8] ] ]
-        would become
-           [ [1, 2],
-             [3, 4],
-             [5, 6],
-             [7, 8] ]
-
-    Parameters
-    ----------
-    close_points: list
-        usually a list where each element is a list with two lists
-
-    Returns
-    -------
-    list
-        each element in this list is one list with two values
-    """
-    points = []
-    final_points = []
-    for i in close_points:
-        points.append(i[0])
-        points.append(i[1])
-
-    for i in points:
-        if i in final_points:
-            continue
-        final_points.append(i)
-
-    return final_points
-
-
 def save_spots_in_vec3(close_points):
     """
     Saves all the spots in a vec2_double object from flex module
@@ -262,20 +224,17 @@ def save_spots_in_vec3(close_points):
         each element is a tuple of x,y pairs
     """
     from scitbx.array_family import flex
-    #close_vec2 = flex.vec2_double()
     close_vec3 = flex.vec3_double()
 
     for point in close_points:
-        # point[0] = x value | point[1] = y value
+        # NOTE: point[0] = x value | point[1] = y value | point[2] = z value
         if( (point[0] >= 1250 and point[0] <= 1276 and
              point[1] >= 1612 and point[1] <= 1614)
              or
             (point[0] >= 1539 and point[0] <= 1546 and
              point[1] >= 1603 and point[1] <= 1605)
            ):
-            # print("point not good: {}".format(point))
             continue
-        # print("point good: {}".format(point))
         close_vec3.append(point)
     return close_vec3
 
@@ -399,7 +358,6 @@ def get_distance_n_wavelength_h5_version(h5_path):
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
-    # print("stdout = {}\nstderr={}".format(stdout, stderr))
 
     return get_distance_n_wavelength_cbf_version(h5_path)
 
