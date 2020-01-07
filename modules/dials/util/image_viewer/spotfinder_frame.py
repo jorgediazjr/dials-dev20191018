@@ -1482,11 +1482,11 @@ class SpotFrame(XrayFrame):
                         print("reflection {} => {}".format((i+1), reflection))
                         count += 1
                     else:
-                        reflections['xyzobs.px.value'][i] = (0,0,0)
+                        reflections['xyzobs.px.value'][i] = (-10000000000,-10000000000,-10000000000)
                 print("count is {}".format(count))
 
-                for refl in reflections['xyzobs.px.value']:
-                    print("refl = {}".format(refl))
+                for i, refl in enumerate(reflections['xyzobs.px.value']):
+                    print("{}: refl = {}".format(i, refl))
                 
                 print("self.experiments = {}".format(self.experiments[0]))
                 reflections.centroid_px_to_mm(self.experiments[0])
