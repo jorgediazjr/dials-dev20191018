@@ -65,3 +65,12 @@ Main functions that are used:
         
         distance: default 7, optional
                 if user does not specify the distance, it will use 7 as a distance
+
+6. save_spots_in_vec3(close_points)
+
+        this function saves the list of points as a flex.vec3_double() object
+
+        close_points: list
+                each element is a list with 3 coordinates [x, y, z]
+
+        returns vec3 object with all the points saved
