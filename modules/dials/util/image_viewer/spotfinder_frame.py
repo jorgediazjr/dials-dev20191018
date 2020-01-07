@@ -1496,7 +1496,7 @@ class SpotFrame(XrayFrame):
                     print("key = {}".format(key))
 
                 for i, val in enumerate(reflections['rlp']):
-                    if val == (0.7618677907716246, -0.7750541351371999, 1.0866060126358634):
+                    if val == (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
                         continue
                     print('{}: value of rlp = {}'.format(i, val))
 
