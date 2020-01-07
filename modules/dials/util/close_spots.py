@@ -388,7 +388,6 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
             count += 1
         else:
             reflections['xyzobs.px.value'][i] = (-10000000000,-10000000000,-10000000000)
-    print("count is {}".format(count))
 
     refl_dict = {}
     for i, refl in enumerate(reflections['xyzobs.px.value']):

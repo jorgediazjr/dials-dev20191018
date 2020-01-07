@@ -1461,7 +1461,6 @@ class SpotFrame(XrayFrame):
             # ADDED THIS BELOW - JAD
             if self.settings.show_close_spots:
                 self.show_close_spots_timer.start()
-                print("JAD: self.experiments = {}".format(self.experiments))
 
                 import time
                 start_time = time.time()
@@ -1473,7 +1472,6 @@ class SpotFrame(XrayFrame):
 
                 #reflections = flex.reflection_table.empty_standard(len(closest_points))
                 reflections = self.reflections[0]
-                print("reflection object was made = {}".format(reflections))
 
                 experiments = self.experiments[0]
                 reflections = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
