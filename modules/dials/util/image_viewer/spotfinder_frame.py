@@ -1485,22 +1485,23 @@ class SpotFrame(XrayFrame):
                         reflections['xyzobs.px.value'][i] = (-10000000000,-10000000000,-10000000000)
                 print("count is {}".format(count))
 
+                refl_dict = {}
                 for i, refl in enumerate(reflections['xyzobs.px.value']):
                     if refl == (-10000000000,-10000000000,-10000000000):
                         continue
-                    print("{}: refl = {}".format(i, refl))
-                
-                print("self.experiments = {}".format(self.experiments[0]))
+                    refl_dict[i] = refl
+
                 reflections.centroid_px_to_mm(self.experiments[0])
                 reflections.map_centroids_to_reciprocal_space(self.experiments[0])
 
-                for key in dict(reflections):
-                    print("key = {}".format(key))
-
+                rlp_dict = {}
                 for i, val in enumerate(reflections['rlp']):
                     if val == (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
                         continue
-                    print('{}: value of rlp = {}'.format(i, val))
+                    rlp[i] = val
+
+                for key in rlp_dict:
+                    print("{}  => rlp => {}".format(refl_dict[key], rlp_dict[key]))
 
                 for centroid in closest_points:
                     x, y = map_coords(
