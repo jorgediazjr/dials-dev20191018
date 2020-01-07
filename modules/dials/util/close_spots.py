@@ -406,7 +406,7 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
         rlp_dict[i] = val
 
     for key in rlp_dict:
-        print("{}  => rlp => {}".format(refl_dict[key], rlp_dict[key]))
+        print("{}\t=>\trlp\t=>\t{}".format(refl_dict[key], rlp_dict[key]))
     return reflections
 
 
