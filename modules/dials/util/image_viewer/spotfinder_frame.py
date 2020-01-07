@@ -1498,7 +1498,7 @@ class SpotFrame(XrayFrame):
                 for i, val in enumerate(reflections['rlp']):
                     if val == (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
                         continue
-                    rlp[i] = val
+                    rlp_dict[i] = val
 
                 for key in rlp_dict:
                     print("{}  => rlp => {}".format(refl_dict[key], rlp_dict[key]))
