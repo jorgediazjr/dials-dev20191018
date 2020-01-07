@@ -1477,7 +1477,7 @@ class SpotFrame(XrayFrame):
 
                 experiments = self.experiments[0]
                 reflections = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
-                euclidean_distance_for_reciprocal_lattice_pts(reflections)
+                close_spots.euclidean_distance_for_reciprocal_lattice_pts(reflections)
                 """
                 count = 0
                 for i, reflection in enumerate(reflections['xyzobs.px.value']):
