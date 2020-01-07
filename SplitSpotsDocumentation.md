@@ -195,7 +195,38 @@ class SpotFrame(XrayFrame):
         def __init__(self, *args, **kwds):
                 ...
                 self.shoebox_layer = None
-                self.close_spots_layer = None # <-- THIS I ADDED
+                self.close_spots_layer = None # <-- THIS I ADDED - JAD
                 self.ctr_mass_layer = None
                 ...
+                self.show_shoebox_timer = time_log("show_shoebox")
+                self.show_close_spots_timer = time_log("show_close_spots") # <-- THIS I ADDED - JAD
+                self.show_max_pix_timer = time_log("show_max_pix")
+                ...
+                self.draw_shoebox_timer = time_log("draw_shoebox")
+                self.draw_close_spots_timer = time_log("draw_close_spots") # <-- THIS I ADDED - JAD
+                self.draw_max_pix_timer = time_log("draw_max_pix")
+```
+
+```python
+class SpotFrame(XrayFrame):
+        def update_settings(self, layout=True):
+                ...
+                if self.close_spots_layer is not None:                         # <-- THIS I ADDED - JAD
+                self.pyslip.DeleteLayer(self.close_spots_layer, update=False)  # <-- THIS I ADDED - JAD
+                self.close_spots_layer = None                                  # <-- THIS I ADDED - JAD
+                ...
+                # I ADDED THIS BELOW - JAD
+                if self.settings.show_close_spots and len(close_spot_data):
+                        self.draw_close_spots_timer.start()
+                        self.close_spots_layer = self.pyslip.AddPointLayer(
+                                close_spot_data,
+                                color="orange",
+                                radius=2,
+                                renderer=self.pyslip.LightweightDrawPointLayer,
+                                show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
+                                name="<close_spot_layer>",
+                                update=False,
+                        )
+                        self.draw_close_spots_timer.stop()
+            # I ENDED THIS ABOVE - JAD
 ```

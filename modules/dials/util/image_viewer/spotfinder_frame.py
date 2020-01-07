@@ -1135,12 +1135,8 @@ class SpotFrame(XrayFrame):
             # JAD added this below
             if self.settings.show_close_spots and len(close_spot_data):
                 self.draw_close_spots_timer.start()
-                # self.close_spots_layer = self.pyslip.AddPolygonLayer(
                 self.close_spots_layer = self.pyslip.AddPointLayer(
                     close_spot_data,
-                    #map_rel=True,
-                    #visible=True,
-                    #selectable=False,
                     color="orange",
                     radius=2,
                     renderer=self.pyslip.LightweightDrawPointLayer,
