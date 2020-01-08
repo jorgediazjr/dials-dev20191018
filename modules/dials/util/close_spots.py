@@ -463,7 +463,7 @@ def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
         q2 = 0
         for key in refl_dict:
             if p1 == refl_dict[key]:
-                print("{} and {}".format(p1, refl_dict[key]))
+                print("{}".format(key))
                 q1 = rlp_dict[key]
             if p2 == refl_dict[key]:
                 q2 = rlp_dict[key]
