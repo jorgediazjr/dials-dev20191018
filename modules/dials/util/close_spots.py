@@ -192,7 +192,7 @@ def euclidean_distance(ordered_points, distance=7):
                                                                                                       point_b[0], point_b[1], distance))
                         close_points.append(point_a)
                         close_points.append(point_b)
-                        pairs.append([point_a, point_b])
+                        pairs.append([tuple(point_a), tuple(point_b)])
                     current += 1
                     continue
                 current += 1
