@@ -452,6 +452,7 @@ def find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict):
 
     for i in new_close_spots:
         print("new close spot = {}".format(i))
+    return new_close_spots
 
 
 def main(reflections, dist=None):
