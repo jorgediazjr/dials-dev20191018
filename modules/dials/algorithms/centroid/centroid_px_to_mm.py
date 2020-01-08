@@ -13,6 +13,7 @@ def centroid_px_to_mm_panel(panel, scan, position, variance, sd_error):
     """Convenience function to calculate centroid in mm/rad from px"""
     # Get the pixel to millimeter function
     pixel_size = panel.get_pixel_size()
+    print("!!!!!!!PIXEL SIZE!!!!!!! {}".format(pixel_size))
     if scan is None:
         oscillation = (0, 0)
     else:
