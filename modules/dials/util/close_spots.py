@@ -402,7 +402,6 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
         if val != (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
             rlp_dict[i] = val
 
-    print("\n\n")
     for key in rlp_dict:
         print("{}\t\t=>\trlp\t=>\t\t{}".format(refl_dict[key], rlp_dict[key]))
     return reflections, refl_dict, rlp_dict
@@ -462,7 +461,7 @@ def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
         rlp_pairs.append([tuple(q1), tuple(q2), find_distance_3d(q1, q2)])
 
     for pair in zip(pairs, rlp_pairs):
-        print("{}".format(pair))
+        print("{}\n".format(pair))
 
 
 
