@@ -1468,7 +1468,7 @@ class SpotFrame(XrayFrame):
                     reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
 
                 from dials.util import close_spots
-                closest_points = close_spots.main(reflections_data, dist=10)
+                closest_points, pairs = close_spots.main(reflections_data, dist=10)
 
                 #reflections = flex.reflection_table.empty_standard(len(closest_points))
                 reflections = self.reflections[0]
@@ -1477,7 +1477,9 @@ class SpotFrame(XrayFrame):
                 reflections, refl_dict, rlp_dict = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
                 closest_rlps = close_spots.euclidean_distance_for_reciprocal_lattice_pts(reflections)
                 close_spots = close_spots.find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict)
-                
+                close_spots.find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict)
+
+
                 for centroid in closest_points:
                     x, y = map_coords(
                             centroid[0], centroid[1], 0

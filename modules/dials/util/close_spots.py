@@ -453,6 +453,24 @@ def find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict):
             new_close_spots.append(refl_dict[key])
 
 
+def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
+    rlp_pairs = []
+    for pair in pairs:
+        print(pairs)
+        p1 = pair[0]
+        p2 = pair[1]
+        q1 = 0
+        q2 = 0
+        for key in refl_dict:
+            if p1 == refl_dict[key]:
+                q1 = rlp_dict[key]
+            if p2 == refl_dict[key]:
+                q2 = rlp_dict[key]
+        rlp_pairs.append([tuple(q1), tuple(q2), find_distance_3d(q1, q2)])
+
+
+
+
 def main(reflections, dist=None):
     """
     Parameters
@@ -487,4 +505,4 @@ def main(reflections, dist=None):
 
     print("Number of spots: {}/{}".format(len(close_vec3), len(ordered_points)))
 
-    return close_vec3
+    return close_vec3, pairs
