@@ -25,6 +25,7 @@ def centroid_px_to_mm_panel(panel, scan, position, variance, sd_error):
         # Convert Pixel coordinate into mm/rad
         x, y, z = position
         xy_mm = panel.pixel_to_millimeter((x, y))
+        print("x,y = ({}, {})".format(x, y))
         print("!!!!!!!!!! xy_mm !!!!!!!!!! --> ({}, {})".format(xy_mm[0], xy_mm[1]))
 
         if scan is None:
