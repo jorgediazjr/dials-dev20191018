@@ -454,15 +454,16 @@ def find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict):
 
 
 def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
+    print("\n\nfind_rlp_pairs_from_refl...\n")
     rlp_pairs = []
     for pair in pairs:
-        print(pairs)
         p1 = pair[0]
         p2 = pair[1]
         q1 = 0
         q2 = 0
         for key in refl_dict:
             if p1 == refl_dict[key]:
+                print("{} and {}".format(p1, refl_dict[key]))
                 q1 = rlp_dict[key]
             if p2 == refl_dict[key]:
                 q2 = rlp_dict[key]
@@ -470,7 +471,6 @@ def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
 
     for pair in rlp_pairs:
         print("RLP pair => {}".format(pair))
-
 
 
 
