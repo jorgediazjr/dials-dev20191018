@@ -165,6 +165,7 @@ def euclidean_distance(ordered_points, distance=7):
     list:
         pairs of points that are close together 2D-based
     """
+    print("\nIn close_spots.euclidean_distance()...")
     close_points = []        # each element is a point that was found to be close to another point
     pairs = []
     for index in ordered_points:
@@ -213,6 +214,7 @@ def save_spots_in_vec3(close_points):
     flex.vec2_double() object
         each element is a tuple of x,y pairs
     """
+    print("\nIn close_spots.save_spots_in_vec3()...")
     from scitbx.array_family import flex
     close_vec3 = flex.vec3_double()
 
@@ -384,6 +386,7 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
     """
     add DOCUMENTATION later
     """
+    print("\nIn close_spots.get_reciprocal_lattice_points()...")
     refl_dict = {}
     for i, reflection in enumerate(reflections['xyzobs.px.value']):
         if reflection not in closest_points:
@@ -401,7 +404,7 @@ def get_reciprocal_lattice_points(experiments, reflections, closest_points):
 
     print("\n\n")
     for key in rlp_dict:
-        print("{}\t=>\trlp\t=>\t{}".format(refl_dict[key], rlp_dict[key]))
+        print("{}\t\t=>\trlp\t=>\t\t{}".format(refl_dict[key], rlp_dict[key]))
     return reflections, refl_dict, rlp_dict
 
 
@@ -420,7 +423,7 @@ def euclidean_distance_for_reciprocal_lattice_pts(reflections):
     """
     DOCUMENTATION later
     """
-    print("\n\n")
+    print("\nIn close_spots.euclidean_distance_for_reciprocal_lattice_pts()...")
     good_rlp = []
     for i, rlp in enumerate(reflections['rlp']):
         if rlp != (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
@@ -443,18 +446,8 @@ def euclidean_distance_for_reciprocal_lattice_pts(reflections):
     return closest_rlps
 
 
-def find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict):
-    """
-    DOCUMENTATION later
-    """
-    new_close_spots = []
-    for key in rlp_dict:
-        if rlp_dict[key] in closest_rlps:
-            new_close_spots.append(refl_dict[key])
-
-
 def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
-    print("\n\nfind_rlp_pairs_from_refl...\n")
+    print("\n\nIn close_spots.find_rlp_pairs_from_refl()...\n")
     rlp_pairs = []
     for pair in pairs:
         p1 = pair[0]
@@ -463,14 +456,13 @@ def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
         q2 = 0
         for key in refl_dict:
             if p1 == refl_dict[key]:
-                print("{}".format(key))
                 q1 = rlp_dict[key]
             if p2 == refl_dict[key]:
                 q2 = rlp_dict[key]
         rlp_pairs.append([tuple(q1), tuple(q2), find_distance_3d(q1, q2)])
 
-    for pair in rlp_pairs:
-        print("RLP pair => {}".format(pair))
+    for pair in zip(pairs, rlp_pairs):
+        print("{}".format(pair))
 
 
 
@@ -490,7 +482,7 @@ def main(reflections, dist=None):
     flex.vec2_double() object
         each element in this object is a tuple of size 2 => (x_val, y_val)
     """
-    print("\n")
+    print("\nIn close_spots.main()...")
     xyz_coords = get_xyz_coords(reflections)
     ordered_points = order_dictionary(xyz_coords)
     ordered_points = add_index_to_pairs(ordered_points)
