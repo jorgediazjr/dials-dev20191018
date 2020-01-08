@@ -1474,36 +1474,10 @@ class SpotFrame(XrayFrame):
                 reflections = self.reflections[0]
 
                 experiments = self.experiments[0]
-                reflections = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
-                close_spots.euclidean_distance_for_reciprocal_lattice_pts(reflections)
-                """
-                count = 0
-                for i, reflection in enumerate(reflections['xyzobs.px.value']):
-                    if reflection in closest_points:
-                        count += 1
-                    else:
-                        reflections['xyzobs.px.value'][i] = (-10000000000,-10000000000,-10000000000)
-                print("count is {}".format(count))
-
-                refl_dict = {}
-                for i, refl in enumerate(reflections['xyzobs.px.value']):
-                    if refl == (-10000000000,-10000000000,-10000000000):
-                        continue
-                    refl_dict[i] = refl
-
-                reflections.centroid_px_to_mm(self.experiments[0])
-                reflections.map_centroids_to_reciprocal_space(self.experiments[0])
-
-                rlp_dict = {}
-                for i, val in enumerate(reflections['rlp']):
-                    if val == (-0.7684894267425115, 0.3341246142735701, -1.288443906247419):
-                        continue
-                    rlp_dict[i] = val
-
-                for key in rlp_dict:
-                    print("{}  => rlp => {}".format(refl_dict[key], rlp_dict[key]))
-
-                """
+                reflections, refl_dict, rlp_dict = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
+                closest_rlps = close_spots.euclidean_distance_for_reciprocal_lattice_pts(reflections)
+                close_spots = close_spots.find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict)
+                
                 for centroid in closest_points:
                     x, y = map_coords(
                             centroid[0], centroid[1], 0
