@@ -461,7 +461,7 @@ def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
         rlp_pairs.append([tuple(q1), tuple(q2), find_distance_3d(q1, q2)])
 
     for pair in zip(pairs, rlp_pairs):
-        print("{}\n".format(pair))
+        print("refl pair = {}\nrlp pair = {}\n\n".format(pair[0], pair[1]))
 
 
 
