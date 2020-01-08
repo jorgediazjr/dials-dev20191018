@@ -166,6 +166,7 @@ def euclidean_distance(ordered_points, distance=7):
         pairs of points that are close together 2D-based
     """
     close_points = []        # each element is a point that was found to be close to another point
+    pairs = []
     for index in ordered_points:
         for x_coord in ordered_points[index]:
             x1 = x_coord
@@ -191,10 +192,11 @@ def euclidean_distance(ordered_points, distance=7):
                                                                                                       point_b[0], point_b[1], distance))
                         close_points.append(point_a)
                         close_points.append(point_b)
+                        pairs.append([point_a, point_b])
                     current += 1
                     continue
                 current += 1
-    return close_points
+    return close_points, pairs
 
 
 def save_spots_in_vec3(close_points):
@@ -408,9 +410,9 @@ def find_distance_3d(p, q):
     DOCUMENTATION later
     """
     import math
-    dist = math.sqrt( ( (p[0] - q[0])*(p[0] - q[0]) ) +
-                      ( (p[1] - q[1])*(p[1] - q[1]) ) +
-                      ( (p[2] - q[2])*(p[2] - q[2]) ) )
+    dist = math.sqrt( ( (p[0] - q[0]) * (p[0] - q[0]) ) +
+                      ( (p[1] - q[1]) * (p[1] - q[1]) ) +
+                      ( (p[2] - q[2]) * (p[2] - q[2]) ) )
     return dist
 
 
@@ -450,10 +452,6 @@ def find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict):
         if rlp_dict[key] in closest_rlps:
             new_close_spots.append(refl_dict[key])
 
-    for i in new_close_spots:
-        print("new close spot = {}".format(i))
-    return new_close_spots
-
 
 def main(reflections, dist=None):
     """
@@ -477,9 +475,12 @@ def main(reflections, dist=None):
     ordered_points = add_index_to_pairs(ordered_points)
     
     if dist is None: # user did not provide distance
-        close_points = euclidean_distance(ordered_points)
+        close_points, pairs = euclidean_distance(ordered_points)
     else:
-        close_points = euclidean_distance(ordered_points, dist)
+        close_points, pairs = euclidean_distance(ordered_points, dist)
+
+    for i, p in enumerate(pairs):
+        print("pair {} : {}".format(i, p))
 
     # get_detector_distance_n_wavelength("imported.expt")
     close_vec3 = save_spots_in_vec3(close_points)

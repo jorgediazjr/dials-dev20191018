@@ -1478,8 +1478,7 @@ class SpotFrame(XrayFrame):
                 closest_rlps = close_spots.euclidean_distance_for_reciprocal_lattice_pts(reflections)
                 close_spots = close_spots.find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict)
                 
-                #for centroid in closest_points:
-                for centroid in close_spots:
+                for centroid in closest_points:
                     x, y = map_coords(
                             centroid[0], centroid[1], 0
                     )
