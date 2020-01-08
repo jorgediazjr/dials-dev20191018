@@ -1476,7 +1476,7 @@ class SpotFrame(XrayFrame):
                 experiments = self.experiments[0]
                 reflections, refl_dict, rlp_dict = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
                 closest_rlps = close_spots.euclidean_distance_for_reciprocal_lattice_pts(reflections)
-                close_spots = close_spots.find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict)
+                closest_spots = close_spots.find_match_refl_rlp(close_spots, closest_rlps, refl_dict, rlp_dict)
                 close_spots.find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict)
 
 
