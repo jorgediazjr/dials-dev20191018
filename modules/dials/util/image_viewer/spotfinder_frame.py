@@ -92,6 +92,7 @@ class SpotFrame(XrayFrame):
         self.viewer.frames = self.imagesets
         self.dials_spotfinder_layers = []
         self.shoebox_layer = None
+        self.close_spots_layer = None # JAD
         self.ctr_mass_layer = None
         self.max_pix_layer = None
         self.predictions_layer = None
@@ -108,10 +109,12 @@ class SpotFrame(XrayFrame):
 
         self.show_all_pix_timer = time_log("show_all_pix")
         self.show_shoebox_timer = time_log("show_shoebox")
+        self.show_close_spots_timer = time_log("show_close_spots") # JAD
         self.show_max_pix_timer = time_log("show_max_pix")
         self.show_ctr_mass_timer = time_log("show_ctr_mass")
         self.draw_all_pix_timer = time_log("draw_all_pix")
         self.draw_shoebox_timer = time_log("draw_shoebox")
+        self.draw_close_spots_timer = time_log("draw_close_spots") # JAD
         self.draw_max_pix_timer = time_log("draw_max_pix")
         self.draw_ctr_mass_timer = time_log("draw_ctr_mass_pix")
 
@@ -136,7 +139,6 @@ class SpotFrame(XrayFrame):
                             )
                         refl.centroid_px_to_mm(ExperimentList([expt]))
                         refl.map_centroids_to_reciprocal_space(ExperimentList([expt]))
-
                 d_spacings = 1 / refl["rlp"].norms()
                 refl = refl.select(d_spacings > self.params.d_min)
                 reflections.append(refl)
@@ -966,6 +968,7 @@ class SpotFrame(XrayFrame):
             miller_indices_data = spotfinder_data.miller_indices_data
             vector_data = spotfinder_data.vector_data
             vector_text_data = spotfinder_data.vector_text_data
+            close_spot_data = spotfinder_data.close_spot_data
             if len(self.dials_spotfinder_layers) > 0:
                 for layer in self.dials_spotfinder_layers:
                     self.pyslip.DeleteLayer(layer, update=False)
@@ -997,6 +1000,9 @@ class SpotFrame(XrayFrame):
             if self._resolution_text_layer is not None:
                 self.pyslip.DeleteLayer(self._resolution_text_layer, update=False)
                 self._resolution_text_layer = None
+            if self.close_spots_layer is not None:                                 #JAD
+                self.pyslip.DeleteLayer(self.close_spots_layer, update=False)      #JAD
+                self.close_spots_layer = None                                      #JAD
 
             if self.settings.show_miller_indices and len(miller_indices_data):
                 self.miller_indices_layer = self.pyslip.AddTextLayer(
@@ -1126,6 +1132,20 @@ class SpotFrame(XrayFrame):
                     update=False,
                 )
                 self.draw_max_pix_timer.stop()
+            # JAD added this below
+            if self.settings.show_close_spots and len(close_spot_data):
+                self.draw_close_spots_timer.start()
+                self.close_spots_layer = self.pyslip.AddPointLayer(
+                    close_spot_data,
+                    color="orange",
+                    radius=2,
+                    renderer=self.pyslip.LightweightDrawPointLayer,
+                    show_levels=[-3, -2, -1, 0, 1, 2, 3, 4, 5],
+                    name="<close_spot_layer>",
+                    update=False,
+                )
+                self.draw_close_spots_timer.stop()
+            # JAD ended this above
             if len(vector_data) and len(vector_text_data):
                 self.vector_layer = self.pyslip.AddPolygonLayer(
                     vector_data,
@@ -1234,6 +1254,7 @@ class SpotFrame(XrayFrame):
                 )
             return self.pyslip.tiles.picture_fast_slow_to_map_relative(x, y)
 
+        close_spot_dict = {"width": 2, "color": "#FF4C00", "closed": False} # JAD
         shoebox_dict = {"width": 2, "color": "#0000FFA0", "closed": False}
         ctr_mass_dict = {"width": 2, "color": "#FF0000", "closed": False}
         vector_dict = {"width": 4, "color": "#F62817", "closed": False}
@@ -1251,6 +1272,8 @@ class SpotFrame(XrayFrame):
         miller_indices_data = []
         vector_data = []
         vector_text_data = []
+        close_spot_data = [] # JAD
+        reflections_data = {'xyzobs.px.value': []} # JAD
         detector = self.pyslip.tiles.raw_image.get_detector()
         scan = self.pyslip.tiles.raw_image.get_scan()
         to_degrees = 180 / math.pi
@@ -1300,7 +1323,9 @@ class SpotFrame(XrayFrame):
                 n = self.params.sum_images - 1
                 bbox_sel = ~((i_frame >= z1) | ((i_frame + n) < z0))
                 selected = ref_list.select(bbox_sel)
+                index = 0
                 for reflection in selected.rows():
+                    index += 1
                     x0, x1, y0, y1, z0, z1 = reflection["bbox"]
                     panel = reflection["panel"]
                     nx = x1 - x0  # size of reflection box in x-direction
@@ -1432,6 +1457,37 @@ class SpotFrame(XrayFrame):
                             ]
                             ctr_mass_data.extend(lines)
                         self.show_ctr_mass_timer.stop()
+            
+            # ADDED THIS BELOW - JAD
+            if self.settings.show_close_spots:
+                self.show_close_spots_timer.start()
+
+                import time
+                start_time = time.time()
+                for reflection in selected.rows():
+                    reflections_data['xyzobs.px.value'].append(reflection['xyzobs.px.value'])
+
+                from dials.util import close_spots
+                closest_points, pairs = close_spots.main(reflections_data, dist=10)
+
+                #reflections = flex.reflection_table.empty_standard(len(closest_points))
+                reflections = self.reflections[0]
+
+                experiments = self.experiments[0]
+                reflections, refl_dict, rlp_dict = close_spots.get_reciprocal_lattice_points(experiments, reflections, closest_points)
+                # closest_rlps = close_spots.euclidean_distance_for_reciprocal_lattice_pts(reflections)
+                close_spots.find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict)
+
+
+                for centroid in closest_points:
+                    x, y = map_coords(
+                            centroid[0], centroid[1], 0
+                    )
+                    close_spot_data.append((x,y))
+                print("time taken for close spots: {:.2f}ms\n\n".format((time.time() - start_time) * 1000))
+
+                self.show_close_spots_timer.stop()
+            # ENDED THIS ABOVE - JAD
 
             if ("xyzcal.px" in ref_list or "xyzcal.mm" in ref_list) and (
                 self.settings.show_predictions
@@ -1575,6 +1631,7 @@ class SpotFrame(XrayFrame):
                                 {"placement": "ne", "fontsize": 20, "color": "#F62817"},
                             )
                         )
+        
 
         return group_args(
             all_pix_data=all_pix_data,
@@ -1586,6 +1643,7 @@ class SpotFrame(XrayFrame):
             miller_indices_data=miller_indices_data,
             vector_data=vector_data,
             vector_text_data=vector_text_data,
+            close_spot_data=close_spot_data #JAD
         )
 
     def get_detector(self):
@@ -1649,6 +1707,7 @@ class SpotSettingsPanel(wx.Panel):
         self.settings.brightness = self.params.brightness
         self.settings.color_scheme = self.params.color_scheme
         self.settings.show_spotfinder_spots = False
+        self.settings.show_close_spots = self.params.show_close_spots # JAD
         self.settings.show_dials_spotfinder_spots = True
         self.settings.show_resolution_rings = self.params.show_resolution_rings
         self.settings.untrusted = self.params.masking.untrusted
@@ -1785,6 +1844,11 @@ class SpotSettingsPanel(wx.Panel):
         self.indexed = wx.CheckBox(self, -1, "Indexed only")
         self.indexed.SetValue(self.settings.show_indexed)
         grid.Add(self.indexed, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+
+        # JAD Close spots points
+        self.close_spots = wx.CheckBox(self, -1, "Show close spots")        #JAD
+        self.close_spots.SetValue(self.settings.show_close_spots)           #JAD
+        grid.Add(self.close_spots, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5) #JAD
 
         # Integration shoeboxes only
         self.integrated = wx.CheckBox(self, -1, "Integrated only")
@@ -1954,6 +2018,7 @@ class SpotSettingsPanel(wx.Panel):
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.indexed)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.integrated)
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.show_basis_vectors)
+        self.Bind(wx.EVT_CHECKBOX, self.OnUpdate, self.close_spots) # JAD
         self.Bind(wx.EVT_CHECKBOX, self.OnUpdateShowMask, self.show_mask)
 
         self.Bind(wx.EVT_UPDATE_UI, self.UpdateZoomCtrl)
@@ -1984,6 +2049,7 @@ class SpotSettingsPanel(wx.Panel):
             self.settings.show_max_pix = self.max_pix.GetValue()
             self.settings.show_all_pix = self.all_pix.GetValue()
             self.settings.show_shoebox = self.shoebox.GetValue()
+            self.settings.show_close_spots = self.close_spots.GetValue() # JAD
             self.settings.show_indexed = self.indexed.GetValue()
             self.settings.show_integrated = self.integrated.GetValue()
             self.settings.show_predictions = self.predictions.GetValue()
@@ -2041,6 +2107,7 @@ class SpotSettingsPanel(wx.Panel):
             self.max_pix,
             self.all_pix,
             self.shoebox,
+            self.close_spots, #JAD
             self.predictions,
             self.miller_indices,
             self.show_mask,

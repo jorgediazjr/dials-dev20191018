@@ -149,6 +149,22 @@ class Script(object):
                 logger.info("\nHistogram of per-image spot count for imageset %i:" % i)
                 logger.info(ascii_plot)
 
+        # JAD thinks we can call map_centroids_to_reciprocal_space here
+        #for i, val in enumerate(reflections['xyzobs.px.value']):
+        #    print("{}: reflection => {}".format(i, val))
+        print("type(reflections) in find_spots = {}".format(type(reflections)))
+        reflections.centroid_px_to_mm(experiments) # this must go first to add a column needed for next step
+        reflections.map_centroids_to_reciprocal_space(experiments)
+        #for i, val in enumerate(reflections['xyzobs.mm.value']):
+        #    print("{}: reflections[xyzobs.mm.value] => {}".format(i, val))
+        #print("\n\n")
+
+        #for i, val in enumerate(reflections['rlp']):
+        #    print("{}: reflections[rlp] => {}".format(i, val))
+        #print("Length of reflections[rlp] = {}".format(len(reflections['rlp'])))
+        # END JAD
+
+
         # Save the reflections to file
         logger.info("\n" + "-" * 80)
         reflections.as_file(params.output.reflections)

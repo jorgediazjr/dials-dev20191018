@@ -73,14 +73,24 @@ class ReflectionListDecoder(H5PYDecoder):
             name = item.attrs["flex_type"]
             if name == "shoebox":
                 flex_type = getattr(flex, name)
+                print("JAD7: item => {}".format(item))
+                print("JAD7: type(item) => {}".format(type(item)))
+                print("JAD7: dir(item) => {}".format(dir(item)))
+                print("JAD7: item.values() => {}".format(item.values()))
                 data = item["data"]
                 mask = item["mask"]
                 background = item["background"]
                 col = flex_type(len(rl))
                 for i in range(len(rl)):
-                    col[i].data = flex.double(data["%d" % i].value)
-                    col[i].mask = flex.int(mask["%d" % i].value)
-                    col[i].background = flex.double(background["%d" % i].value)
+                    # col[i].data = flex.double(data["%d" % i].value)
+                    print("JAD7: dir(data) => {}".format(dir(data)))
+                    print("JAD7: data.values() => {}".format(data.values()))
+                    # print("JAD7: data[0] => {}".format(data.get()))
+                    # col[i].data = flex.double(data.values()[int("{}".format(i))])
+                    # col[i].data = flex.double(data["%d" % i].value)
+                    col[i].data = flex.double(data["%d" % i])
+                    col[i].mask = flex.int(mask["{}".format(i)].value)
+                    col[i].background = flex.double(background["{}".format(i)].value)
 
             else:
                 flex_type = getattr(flex, name)

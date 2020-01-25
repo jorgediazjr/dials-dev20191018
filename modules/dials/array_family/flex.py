@@ -194,7 +194,6 @@ class _(object):
             experiments=experiments, params=params
         )
 
-        # Find the spots
         return find_spots(experiments)
 
     @staticmethod
@@ -401,6 +400,7 @@ class _(object):
         self.clean_experiment_identifiers_map()
         handle.set_reflections(self)
         handle.close()
+        print("WROTE H5")
 
     def as_miller_array(self, experiment, intensity="sum"):
         """Return a miller array with the chosen intensities.
