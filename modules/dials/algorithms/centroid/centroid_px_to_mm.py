@@ -13,7 +13,6 @@ def centroid_px_to_mm_panel(panel, scan, position, variance, sd_error):
     """Convenience function to calculate centroid in mm/rad from px"""
     # Get the pixel to millimeter function
     pixel_size = panel.get_pixel_size()
-    print("!!!!!!!PIXEL SIZE!!!!!!! {}".format(pixel_size))
     if scan is None:
         oscillation = (0, 0)
     else:
@@ -25,8 +24,6 @@ def centroid_px_to_mm_panel(panel, scan, position, variance, sd_error):
         # Convert Pixel coordinate into mm/rad
         x, y, z = position
         xy_mm = panel.pixel_to_millimeter((x, y))
-        print("x,y = ({}, {})".format(x, y))
-        print("!!!!!!!!!! xy_mm !!!!!!!!!! --> ({}, {})".format(xy_mm[0], xy_mm[1]))
 
         if scan is None:
             z_rad = 0
@@ -46,8 +43,6 @@ def centroid_px_to_mm_panel(panel, scan, position, variance, sd_error):
         # Convert Pixel coordinate into mm/rad
         x, y, z = position.parts()
         xy_mm = panel.pixel_to_millimeter(flex.vec2_double(x, y))
-        print("x,y = ({}, {})".format(x, y))
-        print("!!!!!!!!!! xy_mm !!!!!!!!!! --> ({}, {})".format(xy_mm[0], xy_mm[1]))
 
         if scan is None:
             z_rad = flex.double(z.size(), 0)
