@@ -462,7 +462,7 @@ def find_rlp_pairs_from_refl(pairs, refl_dict, rlp_dict):
 
     for pair in zip(pairs, rlp_pairs):
         print("refl pair: {}\t{}\t{}".format(pair[0][0], pair[0][2], pair[0][1]))
-        print("repl pair: {}\t{}\t{}\n\n".format(pair[1][0], pair[1][2], pair[1][1]))
+        print("rpl pair: {}\t{}\t{}\n\n".format(pair[1][0], pair[1][2], pair[1][1]))
 
 
 
